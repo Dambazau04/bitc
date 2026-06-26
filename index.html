@@ -6,6 +6,10 @@
     <meta name="description" content="BITCAGS LTD — Premium Technology Academy at OH17 Janbulo 2nd Gate, Gwarzo Road, Kano State, Nigeria. Self-paced, AI-assisted tech courses with verified certifications.">
     <title>BITCAGS LTD - Premium Tech Academy</title>
 
+    <!-- FAVICON -->
+    <link rel="icon" type="image/png" href="https://i.postimg.cc/FRGyRzS0/Chat-GPT-Image-Jun-25-2026-07-36-21-PM.png">
+    <link rel="apple-touch-icon" href="https://i.postimg.cc/FRGyRzS0/Chat-GPT-Image-Jun-25-2026-07-36-21-PM.png">
+
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -33,7 +37,7 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@600;700;800&family=Open+Sans:wght@400;600&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@600;700;800;900&family=Open+Sans:wght@400;600&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://unpkg.com/lucide@latest"></script>
@@ -45,25 +49,541 @@
     <script src="https://js.paystack.co/v1/inline.js"></script>
 
     <style>
-        body { font-family: 'Inter', sans-serif; background-color: #FFFFFF; }
-        h1, h2, h3, h4, h5, h6 { font-family: 'Montserrat', sans-serif; }
-        .bg-navy-brand { background-color: #0B2E6D; }
-        .text-navy-brand { color: #0B2E6D; }
-        .bg-red-brand { background-color: #B01217; }
-        .text-red-brand { color: #B01217; }
-        .border-red-brand { border-color: #B01217; }
-        ::-webkit-scrollbar { width: 6px; height: 6px; }
-        ::-webkit-scrollbar-track { background: #f1f1f1; }
-        ::-webkit-scrollbar-thumb { background: #0B2E6D; border-radius: 3px; }
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #FFFFFF;
+        }
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: 'Montserrat', sans-serif;
+        }
+        .bg-navy-brand {
+            background-color: #0B2E6D;
+        }
+        .text-navy-brand {
+            color: #0B2E6D;
+        }
+        .bg-red-brand {
+            background-color: #B01217;
+        }
+        .text-red-brand {
+            color: #B01217;
+        }
+        .border-red-brand {
+            border-color: #B01217;
+        }
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #0B2E6D;
+            border-radius: 3px;
+        }
         .certificate-watermark {
             background-image: radial-gradient(#0B2E6D 0.5px, transparent 0.5px), radial-gradient(#0B2E6D 0.5px, #ffffff 0.5px);
             background-size: 20px 20px;
             background-position: 0 0, 10px 10px;
             opacity: 0.03;
         }
-        /* FIX: certificate complete banner — use flex only when not hidden */
-        #syllabus-complete-celebration { display: none; }
-        #syllabus-complete-celebration.visible { display: flex; }
+        #syllabus-complete-celebration {
+            display: none;
+        }
+        #syllabus-complete-celebration.visible {
+            display: flex;
+        }
+
+        /* Admission Letter Print Styles */
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+            #printable-admission-card,
+            #printable-admission-card * {
+                visibility: visible;
+            }
+            #printable-admission-card {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 20px;
+                border: none !important;
+                box-shadow: none !important;
+                border-radius: 0 !important;
+                background: white !important;
+            }
+            #admission-print-actions {
+                display: none !important;
+            }
+            .no-print {
+                display: none !important;
+            }
+        }
+
+        /* Responsive Video with Cover - FIXED */
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-radius: 16px;
+            background: #0a0a0a;
+            cursor: pointer;
+        }
+        .video-wrapper iframe,
+        .video-wrapper video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+        .video-cover {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.3s;
+            z-index: 2;
+            border-radius: 16px;
+        }
+        .video-cover .play-icon {
+            width: 80px;
+            height: 80px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: #B01217;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+            transition: transform 0.2s;
+        }
+        .video-wrapper:hover .play-icon {
+            transform: scale(1.1);
+        }
+        .video-wrapper.playing .video-cover {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        /* Enhanced Lesson Content - Step by Step */
+        .lesson-prose {
+            font-size: 1rem;
+            line-height: 1.8;
+            color: #1e293b;
+        }
+        .lesson-prose .step-container {
+            margin: 1.5rem 0;
+            padding: 1.5rem;
+            background: #f8fafc;
+            border-radius: 12px;
+            border-left: 4px solid #B01217;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        }
+        .lesson-prose .step-container .step-number {
+            display: inline-block;
+            font-weight: 700;
+            color: #B01217;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.5rem;
+        }
+        .lesson-prose .step-container h3 {
+            font-size: 1.25rem;
+            margin-top: 0;
+            margin-bottom: 0.5rem;
+        }
+        .lesson-prose .step-container p {
+            margin-bottom: 0.5rem;
+        }
+        .lesson-prose .step-container ul, 
+        .lesson-prose .step-container ol {
+            padding-left: 1.5rem;
+        }
+        .lesson-prose .step-container code {
+            background: #e2e8f0;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            color: #B01217;
+        }
+        .lesson-prose .step-container pre {
+            background: #0f172a;
+            color: #e2e8f0;
+            padding: 1rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-size: 0.85rem;
+            margin: 1rem 0;
+        }
+        .lesson-prose .step-container pre code {
+            background: transparent;
+            color: inherit;
+            padding: 0;
+        }
+        .lesson-prose .highlight-box {
+            background: #fef9c3;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            border: 1px solid #fde68a;
+            margin: 1rem 0;
+        }
+        .lesson-prose .lesson-progress {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            padding: 0.75rem 1.5rem;
+            background: #f1f5f9;
+            border-radius: 50px;
+            font-size: 0.9rem;
+        }
+        .lesson-prose .lesson-progress .progress-bar {
+            flex: 1;
+            height: 6px;
+            background: #e2e8f0;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+        .lesson-prose .lesson-progress .progress-bar .fill {
+            height: 100%;
+            background: #B01217;
+            border-radius: 3px;
+            transition: width 0.3s;
+        }
+        .lesson-prose .lesson-toc {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        .lesson-prose .lesson-toc h4 {
+            font-weight: 700;
+            color: #0B2E6D;
+            margin-bottom: 0.75rem;
+            font-size: 1rem;
+        }
+        .lesson-prose .lesson-toc ul {
+            list-style: none;
+            padding: 0;
+        }
+        .lesson-prose .lesson-toc li {
+            padding: 0.3rem 0;
+            border-bottom: 1px solid #f1f5f9;
+        }
+        .lesson-prose .lesson-toc li a {
+            color: #0B2E6D;
+            text-decoration: none;
+        }
+        .lesson-prose .lesson-toc li a:hover {
+            color: #B01217;
+        }
+        .lesson-prose h1, .lesson-prose h2, .lesson-prose h3, .lesson-prose h4 {
+            font-family: 'Montserrat', sans-serif;
+            color: #0B2E6D;
+            margin-top: 2rem;
+            margin-bottom: 0.75rem;
+            font-weight: 700;
+        }
+        .lesson-prose h1 {
+            font-size: 2rem;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+        }
+        .lesson-prose h2 {
+            font-size: 1.75rem;
+        }
+        .lesson-prose h3 {
+            font-size: 1.4rem;
+        }
+        .lesson-prose h4 {
+            font-size: 1.2rem;
+        }
+        .lesson-prose p {
+            margin-bottom: 1.25rem;
+            line-height: 1.9;
+        }
+        .lesson-prose ul, .lesson-prose ol {
+            margin-bottom: 1.25rem;
+            padding-left: 1.75rem;
+        }
+        .lesson-prose li {
+            margin-bottom: 0.5rem;
+        }
+        .lesson-prose code {
+            background: #f1f5f9;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            color: #B01217;
+        }
+        .lesson-prose pre {
+            background: #0f172a;
+            color: #e2e8f0;
+            padding: 1.25rem;
+            border-radius: 12px;
+            overflow-x: auto;
+            font-size: 0.85rem;
+            margin: 1.5rem 0;
+            border: 1px solid #1e293b;
+        }
+        .lesson-prose pre code {
+            background: transparent;
+            color: inherit;
+            padding: 0;
+            font-size: inherit;
+        }
+        .lesson-prose blockquote {
+            border-left: 4px solid #B01217;
+            padding-left: 1.25rem;
+            margin: 1.5rem 0;
+            color: #475569;
+            font-style: italic;
+            background: #f8fafc;
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+        }
+        .lesson-prose img {
+            max-width: 100%;
+            border-radius: 12px;
+            margin: 1.5rem 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+        .lesson-prose table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            font-size: 0.9rem;
+        }
+        .lesson-prose table th,
+        .lesson-prose table td {
+            border: 1px solid #e2e8f0;
+            padding: 0.5rem 1rem;
+            text-align: left;
+        }
+        .lesson-prose table th {
+            background: #f1f5f9;
+            font-weight: 600;
+        }
+        .lesson-prose a {
+            color: #B01217;
+            text-decoration: underline;
+        }
+        .lesson-prose a:hover {
+            color: #0B2E6D;
+        }
+        .lesson-prose hr {
+            border: 0;
+            border-top: 2px solid #e2e8f0;
+            margin: 2rem 0;
+        }
+
+        /* Mobile friendly */
+        @media (max-width: 640px) {
+            .lesson-prose .lesson-progress {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 0.5rem;
+                border-radius: 12px;
+            }
+            .lesson-prose .step-container {
+                padding: 1rem;
+            }
+        }
+
+        /* Admin table responsive */
+        @media (max-width: 768px) {
+            .admin-table-wrap {
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+            .admin-table-wrap table {
+                min-width: 600px;
+            }
+            .dash-mobile-stack {
+                flex-direction: column;
+                align-items: stretch !important;
+            }
+        }
+
+        /* Mobile menu animation */
+        #mobile-menu {
+            transition: all 0.3s ease;
+        }
+        #mobile-menu.hidden {
+            display: none !important;
+        }
+
+        /* Quiz styling */
+        .quiz-option label {
+            transition: all 0.2s;
+        }
+        .quiz-option input:checked+span {
+            background: #0B2E6D;
+            color: white;
+            border-color: #0B2E6D;
+        }
+
+        /* Admission letter A4 */
+        .admission-a4 {
+            width: 210mm;
+            min-height: 297mm;
+            margin: 0 auto;
+            background: white;
+            padding: 15mm 12mm;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+            border-radius: 8px;
+            position: relative;
+            font-family: 'Inter', sans-serif;
+        }
+        @media screen and (max-width: 800px) {
+            .admission-a4 {
+                width: 100%;
+                min-height: auto;
+                padding: 20px;
+                border-radius: 0;
+                box-shadow: none;
+            }
+        }
+        @media print {
+            .admission-a4 {
+                box-shadow: none !important;
+                border-radius: 0 !important;
+                padding: 15mm 12mm !important;
+            }
+        }
+
+        /* Certificate verification */
+        .verify-result-card {
+            transition: all 0.3s ease;
+        }
+        .verify-result-card.verified {
+            border-color: #22c55e;
+            background: #f0fdf4;
+        }
+        .verify-result-card.not-found {
+            border-color: #ef4444;
+            background: #fef2f2;
+        }
+
+        /* Course card tutor avatar */
+        .tutor-avatar-group {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        .tutor-avatar-group .avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #0B2E6D;
+            flex-shrink: 0;
+        }
+
+        /* Admin course edit inline */
+        .edit-inline-form {
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 16px;
+            border: 1px solid #e2e8f0;
+            margin-top: 8px;
+        }
+        .edit-inline-form input,
+        .edit-inline-form textarea,
+        .edit-inline-form select {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            margin-bottom: 8px;
+        }
+        .edit-inline-form .btn-row {
+            display: flex;
+            gap: 8px;
+            justify-content: flex-end;
+        }
+        .edit-inline-form .btn-row button {
+            padding: 6px 16px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.8rem;
+            border: none;
+            cursor: pointer;
+        }
+        .edit-inline-form .btn-row .save-btn {
+            background: #0B2E6D;
+            color: white;
+        }
+        .edit-inline-form .btn-row .cancel-btn {
+            background: #e2e8f0;
+            color: #475569;
+        }
+        .edit-inline-form .btn-row .save-btn:hover {
+            background: #1a3a7a;
+        }
+        .edit-inline-form .btn-row .cancel-btn:hover {
+            background: #cbd5e1;
+        }
+
+        /* Rating stars */
+        .stars {
+            display: inline-flex;
+            gap: 0.25rem;
+            color: #e2e8f0;
+            font-size: 1.25rem;
+            cursor: pointer;
+        }
+        .stars .star {
+            transition: color 0.2s;
+        }
+        .stars .star.active {
+            color: #f59e0b;
+        }
+        .stars .star.hover {
+            color: #fbbf24;
+        }
+        .course-rating-display {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .course-rating-display .stars-static {
+            color: #f59e0b;
+            font-size: 1rem;
+        }
+        .course-rating-display .stars-static .empty {
+            color: #e2e8f0;
+        }
+        .course-rating-display .rating-text {
+            font-size: 0.8rem;
+            color: #475569;
+        }
     </style>
 </head>
 <body class="flex flex-col min-h-screen text-slate-800">
@@ -89,6 +609,7 @@
                         <button onclick="scrollToSection('courses-section')" class="text-slate-600 hover:text-navy-brand font-medium text-sm transition">Our Courses</button>
                         <button onclick="scrollToSection('contact-section')" class="text-slate-600 hover:text-navy-brand font-medium text-sm transition">Visit Us</button>
                         <button onclick="navigateTo('chat-container')" class="text-slate-600 hover:text-navy-brand font-medium text-sm transition">AI Bot Helper</button>
+                        <button onclick="navigateTo('verify-certificate')" class="text-slate-600 hover:text-navy-brand font-medium text-sm transition"><i class="fa-solid fa-certificate mr-1"></i>Verify</button>
                         <div class="border-l border-slate-200 h-6 mx-2"></div>
                         <div id="nav-auth-buttons" class="flex items-center gap-3">
                             <button onclick="navigateTo('student-login')" class="px-4 py-2 border border-navy-700 text-navy-700 rounded-lg text-sm font-semibold hover:bg-navy-50 transition">Student Login</button>
@@ -110,6 +631,7 @@
                 <button onclick="scrollToSection('courses-section'); closeMobileMenu()" class="block w-full text-left py-2 text-slate-700 hover:text-navy-brand font-medium">Our Courses</button>
                 <button onclick="scrollToSection('contact-section'); closeMobileMenu()" class="block w-full text-left py-2 text-slate-700 hover:text-navy-brand font-medium">Visit Us</button>
                 <button onclick="navigateTo('chat-container'); closeMobileMenu()" class="block w-full text-left py-2 text-slate-700 hover:text-navy-brand font-medium">AI Learning Assistant</button>
+                <button onclick="navigateTo('verify-certificate'); closeMobileMenu()" class="block w-full text-left py-2 text-slate-700 hover:text-navy-brand font-medium"><i class="fa-solid fa-certificate mr-1"></i>Verify Certificate</button>
                 <hr class="border-slate-100">
                 <div id="mobile-auth-buttons" class="space-y-2">
                     <button onclick="navigateTo('student-login'); closeMobileMenu()" class="block w-full text-center py-2.5 border border-navy-700 text-navy-700 rounded-lg font-semibold">Student Login</button>
@@ -214,10 +736,31 @@
         <!-- COURSE DETAIL MODAL -->
         <div id="course-detail-modal" class="hidden fixed inset-0 z-50 bg-slate-900/60 flex items-center justify-center p-4">
             <div class="bg-white rounded-2xl max-w-3xl w-full max-h-[85vh] overflow-y-auto shadow-2xl relative border border-slate-100">
-                <button onclick="closeCourseModal()" class="absolute top-4 right-4 bg-slate-100 hover:bg-slate-200 text-slate-600 w-10 h-10 rounded-full flex items-center justify-center transition">
+                <button onclick="closeCourseModal()" class="absolute top-4 right-4 bg-slate-100 hover:bg-slate-200 text-slate-600 w-10 h-10 rounded-full flex items-center justify-center transition z-10">
                     <i class="fa-solid fa-times"></i>
                 </button>
                 <div class="p-6 sm:p-8" id="course-modal-content"></div>
+            </div>
+        </div>
+
+        <!-- PAYMENT SELECTION MODAL -->
+        <div id="payment-select-modal" class="hidden fixed inset-0 z-50 bg-slate-900/70 flex items-center justify-center p-4">
+            <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl border border-slate-200 space-y-6">
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-navy-50 rounded-full flex items-center justify-center text-navy-brand text-3xl mx-auto"><i class="fa-solid fa-wallet"></i></div>
+                    <h3 class="text-xl font-bold text-navy-brand mt-2">Choose Payment Method</h3>
+                    <p class="text-sm text-slate-500">Select how you would like to complete your course enrollment.</p>
+                </div>
+                <div class="space-y-3">
+                    <button onclick="selectPaystackPayment()" class="w-full py-3 bg-red-brand hover:bg-brandRed-900 text-white font-bold rounded-lg transition shadow flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-credit-card"></i> Pay with Paystack (Online)
+                    </button>
+                    <button onclick="selectLocalPayment()" class="w-full py-3 bg-green-600 hover:bg-green-700 text-white font-bold rounded-lg transition shadow flex items-center justify-center gap-2">
+                        <i class="fa-brands fa-whatsapp"></i> Request Local Payment (WhatsApp)
+                    </button>
+                    <button onclick="closePaymentSelectModal()" class="w-full py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 text-sm font-semibold rounded-lg">Cancel</button>
+                </div>
+                <p class="text-[10px] text-slate-400 text-center">For local payment, you will receive a template message to send to the admin via WhatsApp.</p>
             </div>
         </div>
 
@@ -431,6 +974,7 @@
                     <div class="flex flex-wrap gap-2">
                         <button onclick="switchDashTab('courses')" class="dash-tab-btn px-4 py-2 bg-navy-brand text-white rounded-xl text-sm font-bold transition">Enrolled Courses</button>
                         <button onclick="switchDashTab('certificates')" class="dash-tab-btn px-4 py-2 bg-slate-100 text-slate-700 rounded-xl text-sm font-semibold transition">My Certifications</button>
+                        <button onclick="switchDashTab('admission')" class="dash-tab-btn px-4 py-2 bg-slate-100 text-slate-700 rounded-xl text-sm font-semibold transition">Admission Letter</button>
                         <button onclick="switchDashTab('settings')" class="dash-tab-btn px-4 py-2 bg-slate-100 text-slate-700 rounded-xl text-sm font-semibold transition">Settings</button>
                         <button onclick="logoutSession()" class="px-4 py-2 bg-red-50 text-red-600 border border-red-200 rounded-xl text-sm font-bold hover:bg-red-100 transition"><i class="fa-solid fa-sign-out-alt"></i></button>
                     </div>
@@ -457,6 +1001,23 @@
                 <div id="student-tab-certificates" class="student-tab-panel hidden space-y-6">
                     <h3 class="text-xl font-bold text-navy-brand">Earned Professional Certifications</h3>
                     <div id="student-cert-list" class="grid grid-cols-1 md:grid-cols-2 gap-6"></div>
+                </div>
+
+                <div id="student-tab-admission" class="student-tab-panel hidden space-y-6">
+                    <h3 class="text-xl font-bold text-navy-brand">Your Admission Letter</h3>
+                    <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
+                        <p class="text-sm text-slate-600 mb-4">Generate your official BITCAGS LTD Admission Letter. This document confirms your enrollment in a specific course and includes a secure QR code for verification.</p>
+                        <div id="admission-letter-selector" class="space-y-4">
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Select Course for Admission Letter</label>
+                                <select id="admission-course-select" class="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:ring-navy-700 focus:border-navy-700">
+                                    <option value="">-- Select a course --</option>
+                                </select>
+                            </div>
+                            <button onclick="generateAdmissionLetter()" class="px-6 py-3 bg-navy-brand text-white font-bold rounded-lg hover:bg-navy-950 transition shadow"><i class="fa-solid fa-file-pdf mr-2"></i> Generate Admission Letter</button>
+                        </div>
+                        <div id="admission-letter-preview" class="mt-6 hidden"></div>
+                    </div>
                 </div>
 
                 <div id="student-tab-settings" class="student-tab-panel hidden space-y-6">
@@ -515,7 +1076,7 @@
             </div>
         </div>
 
-        <!-- LESSON CLASSROOM -->
+        <!-- LESSON CLASSROOM (Enhanced Lesson View & Video) -->
         <main id="view-lesson-classroom" class="view-panel hidden flex-grow bg-slate-100">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex flex-col lg:flex-row gap-6">
                 <div class="w-full lg:w-80 bg-white border border-slate-200 rounded-2xl p-4 h-fit max-h-[85vh] overflow-y-auto">
@@ -533,7 +1094,20 @@
                             </div>
                             <span class="px-3 py-1 bg-navy-50 text-navy-700 rounded-lg text-xs font-mono" id="lesson-duration">Duration: -- min</span>
                         </div>
-                        <div id="lesson-content-view" class="prose max-w-none text-slate-700 border-t border-slate-100 pt-4 leading-relaxed">
+
+                        <!-- VIDEO SECTION - FIXED -->
+                        <div id="lesson-video-container" class="hidden">
+                            <div class="video-wrapper" id="video-wrapper">
+                                <div class="video-cover" id="video-cover" style="background-image: url('https://i.postimg.cc/FRGyRzS0/Chat-GPT-Image-Jun-25-2026-07-36-21-PM.png');">
+                                    <div class="play-icon"><i class="fa-solid fa-play"></i></div>
+                                </div>
+                                <iframe id="lesson-video-iframe" src="" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
+                            </div>
+                            <p class="text-xs text-slate-400 mt-2"><i class="fa-solid fa-video mr-1"></i> Video lecture companion</p>
+                        </div>
+
+                        <!-- ENHANCED LESSON CONTENT - Step by Step -->
+                        <div id="lesson-content-view" class="lesson-prose border-t border-slate-100 pt-4 leading-relaxed">
                             Please select a lesson from the left syllabus to start your education module.
                         </div>
 
@@ -564,7 +1138,6 @@
                             </div>
                         </div>
 
-                        <!-- FIX: Certificate banner uses visibility class instead of conflicting display/hidden classes -->
                         <div id="syllabus-complete-celebration" class="bg-gradient-to-r from-green-600 to-emerald-800 text-white rounded-xl p-6 shadow-lg flex-col sm:flex-row justify-between items-center gap-4">
                             <div>
                                 <h3 class="text-xl font-bold font-heading">Course Complete!</h3>
@@ -579,7 +1152,107 @@
             </div>
         </main>
 
-        <!-- CERTIFICATE MODAL -->
+        <!-- ADMISSION LETTER MODAL -->
+        <div id="admission-letter-modal" class="hidden fixed inset-0 z-50 bg-slate-900/70 flex items-center justify-center p-4 overflow-y-auto">
+            <div class="max-w-4xl w-full my-8">
+                <div id="admission-print-actions" class="mb-4 flex justify-between items-center bg-white/10 p-3 rounded-xl backdrop-blur">
+                    <span class="text-white text-xs font-bold"><i class="fa-solid fa-file-alt mr-2"></i> BITCAGS Admission Letter</span>
+                    <div class="flex gap-2">
+                        <button onclick="printAdmissionLetter()" class="px-4 py-1.5 bg-green-600 hover:bg-green-700 text-white text-xs font-bold rounded-lg transition"><i class="fa-solid fa-print mr-1"></i> Print A4</button>
+                        <button onclick="closeAdmissionModal()" class="px-4 py-1.5 bg-red-brand hover:bg-brandRed-900 text-white text-xs font-bold rounded-lg transition">Close</button>
+                    </div>
+                </div>
+                <div id="printable-admission-card" class="admission-a4 bg-white border-4 border-navy-700 relative">
+                    <div class="absolute inset-0 certificate-watermark pointer-events-none"></div>
+                    <div class="absolute inset-4 border border-dashed border-red-brand/30 pointer-events-none"></div>
+
+                    <!-- Header -->
+                    <div class="flex items-center justify-between border-b-2 border-navy-700 pb-4 mb-6">
+                        <div class="flex items-center gap-3">
+                            <img src="https://i.postimg.cc/FRGyRzS0/Chat-GPT-Image-Jun-25-2026-07-36-21-PM.png" alt="BITCAGS" class="h-16 w-auto object-contain rounded" onerror="this.src='https://placehold.co/80x80?text=BITCAGS'">
+                            <div>
+                                <span class="text-2xl font-black text-navy-brand tracking-tight">BITCAGS</span>
+                                <span class="text-red-brand font-bold text-xs block -mt-1 tracking-widest">LTD</span>
+                                <span class="text-[10px] text-slate-400 block">Premium Technology Academy</span>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <span class="text-xs font-bold text-red-brand font-mono block">ADMISSION NO:</span>
+                            <span id="admission-ref-number" class="text-sm font-mono text-navy-700 font-bold uppercase">BTC-ADM-XXXXX</span>
+                            <span class="text-[9px] text-slate-400 block mt-1">OH17 Janbulo 2nd Gate, Gwarzo Road, Kano State</span>
+                        </div>
+                    </div>
+
+                    <!-- Title -->
+                    <div class="text-center mb-6">
+                        <h1 class="text-3xl font-extrabold text-navy-brand font-heading uppercase tracking-wider">Official Admission Letter</h1>
+                        <div class="w-24 h-1 bg-red-brand mx-auto mt-2"></div>
+                        <p class="text-sm text-slate-500 mt-1 font-medium">This certifies that the following student has been formally admitted</p>
+                    </div>
+
+                    <!-- Body -->
+                    <div class="space-y-4 text-sm leading-relaxed">
+                        <div class="grid grid-cols-2 gap-2 border-b border-slate-100 pb-3">
+                            <span class="text-slate-500 font-semibold">Student Full Name:</span>
+                            <span id="admission-student-name" class="font-bold text-navy-brand uppercase">STUDENT NAME</span>
+                        </div>
+                        <div class="grid grid-cols-2 gap-2 border-b border-slate-100 pb-3">
+                            <span class="text-slate-500 font-semibold">Date of Birth:</span>
+                            <span id="admission-student-dob" class="font-medium">--</span>
+                        </div>
+                        <div class="grid grid-cols-2 gap-2 border-b border-slate-100 pb-3">
+                            <span class="text-slate-500 font-semibold">Enrolled Course:</span>
+                            <span id="admission-course-name" class="font-bold text-red-brand uppercase">COURSE TITLE</span>
+                        </div>
+                        <div class="grid grid-cols-2 gap-2 border-b border-slate-100 pb-3">
+                            <span class="text-slate-500 font-semibold">Course Duration:</span>
+                            <span id="admission-course-duration" class="font-medium">-- Weeks</span>
+                        </div>
+                        <div class="grid grid-cols-2 gap-2 border-b border-slate-100 pb-3">
+                            <span class="text-slate-500 font-semibold">Tuition Fee:</span>
+                            <span id="admission-course-fee" class="font-bold text-navy-brand">₦ --</span>
+                        </div>
+                        <div class="grid grid-cols-2 gap-2 border-b border-slate-100 pb-3">
+                            <span class="text-slate-500 font-semibold">Registration Date:</span>
+                            <span id="admission-reg-date" class="font-medium">--</span>
+                        </div>
+                        <div class="grid grid-cols-2 gap-2 border-b border-slate-100 pb-3">
+                            <span class="text-slate-500 font-semibold">Admission Status:</span>
+                            <span class="font-bold text-green-600"><i class="fa-solid fa-check-circle mr-1"></i> ACTIVE</span>
+                        </div>
+                        <div class="grid grid-cols-2 gap-2">
+                            <span class="text-slate-500 font-semibold">App ID:</span>
+                            <span id="admission-app-id" class="font-mono font-bold text-navy-700">--</span>
+                        </div>
+                    </div>
+
+                    <!-- Footer with Signature and QR -->
+                    <div class="mt-8 pt-6 border-t-2 border-navy-700 flex flex-col sm:flex-row justify-between items-end gap-6">
+                        <div>
+                            <div class="flex items-center gap-3">
+                                <img id="admission-ceo-signature" src="https://placehold.co/120x40/ffffff/000000?text=CEO+Signature" alt="CEO Signature" class="h-12 w-auto object-contain border-b-2 border-navy-700 pb-1">
+                            </div>
+                            <div class="mt-1">
+                                <p class="text-sm font-bold text-navy-brand">C.tp Abdukadir Shehu Bari</p>
+                                <p class="text-[10px] text-slate-500">Chief Executive Officer, BITCAGS LTD</p>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <div class="bg-white p-1 border border-slate-200 rounded inline-block">
+                                <img id="admission-qr-code" src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://bitcags.ltd/verify" alt="QR Verify" class="w-20 h-20">
+                            </div>
+                            <span class="text-[8px] text-slate-400 font-semibold block mt-1 uppercase">Scan QR to Verify Admission</span>
+                        </div>
+                    </div>
+
+                    <div class="mt-4 text-center text-[8px] text-slate-400 border-t border-slate-200 pt-2">
+                        This is a system-generated document. Verification can be done at <span class="font-mono">https://bitcags.ltd/verify</span> using the Admission Number.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CERTIFICATE MODAL (with CEO signature) -->
         <div id="certificate-preview-modal" class="hidden fixed inset-0 z-50 bg-slate-900/80 flex items-center justify-center p-4 overflow-y-auto">
             <div class="max-w-4xl w-full my-8">
                 <div class="mb-4 flex justify-between items-center bg-white/10 p-2 rounded-xl backdrop-blur">
@@ -626,9 +1299,10 @@
                             </div>
                         </div>
                         <div class="text-center" id="cert-signature-area">
-                            <img id="cert-signature-img" src="https://placehold.co/120x40/ffffff/000000?text=BITCAGS" alt="Signature" class="h-10 w-auto object-contain mx-auto">
+                            <!-- CEO Signature always shown -->
+                            <img id="cert-signature-img" src="https://placehold.co/120x40/ffffff/000000?text=CEO+Signature" alt="CEO Signature" class="h-10 w-auto object-contain mx-auto">
                             <div class="w-36 border-t border-slate-600 mx-auto mt-1"></div>
-                            <span class="text-[10px] text-slate-500 font-semibold block" id="cert-tutor-name">Verified System Registrar</span>
+                            <span class="text-[10px] text-slate-500 font-semibold block" id="cert-tutor-name">C.tp Abdukadir Shehu Bari</span>
                         </div>
                         <div class="text-right">
                             <div class="bg-white p-1 border border-slate-200 rounded inline-block">
@@ -640,6 +1314,33 @@
                 </div>
             </div>
         </div>
+
+        <!-- CERTIFICATE VERIFICATION PAGE -->
+        <main id="view-verify-certificate" class="view-panel hidden flex-grow bg-slate-50 py-16">
+            <div class="max-w-3xl mx-auto px-4 sm:px-6">
+                <div class="bg-white rounded-2xl border border-slate-200 shadow-xl overflow-hidden">
+                    <div class="bg-navy-brand text-white p-6 sm:p-8 text-center">
+                        <h2 class="text-2xl font-bold font-heading flex items-center justify-center gap-3">
+                            <i class="fa-solid fa-certificate text-red-brand"></i> Certificate & Admission Verification
+                        </h2>
+                        <p class="text-xs text-slate-300 mt-1">Enter the Credential ID or Admission Number to verify authenticity.</p>
+                    </div>
+                    <div class="p-6 sm:p-8">
+                        <form onsubmit="verifyCertificate(event)" class="space-y-4">
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Enter Certificate / Admission Number *</label>
+                                <div class="flex gap-3">
+                                    <input type="text" id="verify-cert-number" required placeholder="e.g. BTC-CR-XXXXX or BTC-ADM-XXXXX" class="flex-grow px-4 py-3 border border-slate-300 rounded-lg focus:ring-navy-700 focus:border-navy-700 font-mono uppercase">
+                                    <button type="submit" class="px-6 py-3 bg-red-brand text-white font-bold rounded-lg hover:bg-brandRed-900 transition shadow"><i class="fa-solid fa-search"></i></button>
+                                </div>
+                                <p class="text-[10px] text-slate-400 mt-1">Enter the unique ID found on your certificate or admission letter.</p>
+                            </div>
+                        </form>
+                        <div id="verify-result-area" class="mt-6 hidden"></div>
+                    </div>
+                </div>
+            </div>
+        </main>
 
         <!-- ADMIN DASHBOARD -->
         <main id="view-admin-dashboard" class="view-panel hidden flex-grow bg-slate-50">
@@ -668,7 +1369,7 @@
                         <div class="p-4 bg-slate-50 border-b border-slate-100 flex justify-between items-center">
                             <h3 class="font-bold text-navy-brand">Student Accounts Directory</h3>
                         </div>
-                        <div class="overflow-x-auto">
+                        <div class="overflow-x-auto admin-table-wrap">
                             <table class="w-full text-left border-collapse text-sm">
                                 <thead>
                                     <tr class="bg-slate-100 text-slate-600 font-bold">
@@ -702,19 +1403,30 @@
                         </form>
                     </div>
                     <div class="lg:col-span-2 bg-white rounded-2xl border border-slate-200 p-6 shadow-sm space-y-6">
-                        <h3 class="font-bold text-navy-brand text-lg">Add Lesson Modules</h3>
+                        <div class="flex items-center justify-between">
+                            <h3 class="font-bold text-navy-brand text-lg">Course &amp; Lesson Manager</h3>
+                        </div>
+
+                        <!-- Existing Courses with Edit/Delete -->
+                        <div id="admin-courses-list" class="space-y-4"></div>
+
+                        <hr class="border-slate-200">
+
+                        <h4 class="font-bold text-navy-brand text-sm">Add New Lesson</h4>
                         <form onsubmit="handleCreateLesson(event)" class="space-y-4 border-b border-slate-200 pb-6">
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                 <div><label class="block text-xs font-bold text-slate-700 uppercase mb-1">Select Course Module</label><select id="admin-lesson-course" required class="w-full px-3 py-2 border border-slate-300 rounded-lg"></select></div>
                                 <div><label class="block text-xs font-bold text-slate-700 uppercase mb-1">Lesson Topic Title</label><input type="text" id="admin-lesson-title" required class="w-full px-3 py-2 border border-slate-300 rounded-lg"></div>
                             </div>
-                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
                                 <div><label class="block text-xs font-bold text-slate-700 uppercase mb-1">Approx. Duration (Minutes)</label><input type="number" id="admin-lesson-duration" required class="w-full px-3 py-2 border border-slate-300 rounded-lg"></div>
-                                <div><label class="block text-xs font-bold text-slate-700 uppercase mb-1">Lesson Index (Order Rank Number)</label><input type="number" id="admin-lesson-index" required class="w-full px-3 py-2 border border-slate-300 rounded-lg" placeholder="e.g. 1"></div>
+                                <div><label class="block text-xs font-bold text-slate-700 uppercase mb-1">Lesson Index (Order Rank)</label><input type="number" id="admin-lesson-index" required class="w-full px-3 py-2 border border-slate-300 rounded-lg" placeholder="e.g. 1"></div>
+                                <div><label class="block text-xs font-bold text-slate-700 uppercase mb-1">Video URL (YouTube embed)</label><input type="url" id="admin-lesson-video" class="w-full px-3 py-2 border border-slate-300 rounded-lg" placeholder="https://www.youtube.com/embed/..."></div>
                             </div>
                             <div><label class="block text-xs font-bold text-slate-700 uppercase mb-1">Lesson Material Content (HTML supported)</label><textarea id="admin-lesson-body" required class="w-full px-3 py-2 border border-slate-300 rounded-lg font-mono text-xs" rows="6" placeholder="Lesson body copy here..."></textarea></div>
                             <button type="submit" class="px-6 py-2.5 bg-navy-brand text-white font-bold rounded-lg">Publish Lesson Module</button>
                         </form>
+
                         <div>
                             <h4 class="font-bold text-slate-700 mb-3">Published Lessons Catalogue</h4>
                             <div class="divide-y divide-slate-100" id="admin-lessons-list"></div>
@@ -732,6 +1444,17 @@
                             <div><label class="block text-xs font-bold text-slate-700 uppercase mb-1">Tutor Signature Image URL</label><input type="url" id="admin-tutor-signature" required class="w-full px-3 py-2 border border-slate-300 rounded-lg"></div>
                             <button type="submit" class="w-full py-2 bg-navy-brand text-white font-bold rounded-lg">Assign Tutor Profile</button>
                         </form>
+                        <hr class="border-slate-200">
+                        <h4 class="font-bold text-navy-brand text-sm">CEO Signature</h4>
+                        <form onsubmit="handleUploadCeoSignature(event)" class="space-y-3">
+                            <div><label class="block text-xs font-bold text-slate-700 uppercase mb-1">CEO Signature Image URL</label><input type="url" id="admin-ceo-signature" required class="w-full px-3 py-2 border border-slate-300 rounded-lg" placeholder="https://.../signature.png"></div>
+                            <button type="submit" class="w-full py-2 bg-red-brand text-white font-bold rounded-lg hover:bg-brandRed-900 transition">Upload CEO Signature</button>
+                        </form>
+                        <div class="bg-slate-50 p-3 rounded-lg border border-slate-200 text-center">
+                            <p class="text-xs text-slate-500">Current CEO Signature</p>
+                            <img id="admin-ceo-signature-preview" src="https://placehold.co/120x40/ffffff/000000?text=CEO+Signature" alt="CEO Signature" class="h-10 mx-auto mt-1 object-contain">
+                            <p class="text-xs font-bold text-navy-brand mt-1">C.tp Abdukadir Shehu Bari</p>
+                        </div>
                     </div>
                     <div class="lg:col-span-2 bg-white rounded-2xl border border-slate-200 p-6 shadow-sm space-y-4">
                         <h3 class="font-bold text-navy-brand text-lg">Active Faculty Staff</h3>
@@ -847,29 +1570,29 @@
             measurementId: "G-NVVZ2GLCKT"
         };
 
-        // FIX: Use correct Groq-hosted model names (llama series, not gpt-oss-*)
         const GROQ_API_KEY = "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";
-        const GROQ_FAST_MODEL   = "llama-3.3-70b-versatile";   // replaces gpt-oss-20b
-        const GROQ_SMART_MODEL  = "llama-3.3-70b-versatile";   // replaces gpt-oss-120b (supports json_object)
+        const GROQ_FAST_MODEL = "llama-3.3-70b-versatile";
+        const GROQ_SMART_MODEL = "llama-3.3-70b-versatile";
 
         const app = firebase.initializeApp(firebaseConfig);
         const auth = firebase.auth();
         const db = firebase.firestore();
 
-        // Namespace all BITCAGS data within this project
         const appId = 'bitcags-learning-platform-v1';
 
         // GLOBAL STATE
         let coursesState = [];
         let lessonsState = [];
         let tutorsState = [];
-        let configState = { paystackKey: "", registrationOpen: true };
+        let configState = { paystackKey: "", registrationOpen: true, ceoSignature: "" };
         let currentUserSession = null;
         let classroomActiveCourse = null;
         let classroomActiveLesson = null;
         let activeQuizQuestions = [];
         let quizAnswersState = {};
         let pendingPaymentCourseId = null;
+        let editingCourseId = null;
+        let pendingEnrollmentCourseId = null;
 
         // ================================================================
         // INIT
@@ -884,7 +1607,6 @@
 
         function initializeMobileMenu() {
             const btn = document.getElementById('mobile-menu-toggle');
-            // FIX: guard against duplicate event listeners — use onclick
             btn.onclick = () => {
                 document.getElementById('mobile-menu').classList.toggle('hidden');
             };
@@ -896,7 +1618,7 @@
         }
 
         // ================================================================
-        // PASSWORD HASHING (SHA-256, browser Web Crypto)
+        // PASSWORD HASHING
         // ================================================================
         async function hashPassword(plainText) {
             try {
@@ -908,7 +1630,7 @@
             } catch (err) {
                 console.error("Password hashing error:", err);
                 showNotification("Could not hash password. Ensure the site is served over HTTPS.", "error");
-                return plainText; // fallback
+                return plainText;
             }
         }
 
@@ -946,14 +1668,15 @@
             const container = document.getElementById('toast-container');
             if (!container) return;
             const toast = document.createElement('div');
-            toast.className = `p-4 rounded-xl shadow-xl border text-white font-semibold text-xs transition duration-300 transform translate-y-2 pointer-events-auto flex items-center gap-2 ${
-                type === 'success' ? 'bg-emerald-600 border-emerald-500' :
-                type === 'error'   ? 'bg-red-brand border-brandRed-900' :
-                'bg-navy-brand border-navy-900'
-            }`;
+            toast.className =
+                `p-4 rounded-xl shadow-xl border text-white font-semibold text-xs transition duration-300 transform translate-y-2 pointer-events-auto flex items-center gap-2 ${
+                    type === 'success' ? 'bg-emerald-600 border-emerald-500' :
+                    type === 'error' ? 'bg-red-brand border-brandRed-900' :
+                    'bg-navy-brand border-navy-900'
+                }`;
             const icon = type === 'success' ? '<i class="fa-solid fa-check-circle"></i>' :
-                         type === 'error'   ? '<i class="fa-solid fa-triangle-exclamation"></i>' :
-                         '<i class="fa-solid fa-info-circle"></i>';
+                type === 'error' ? '<i class="fa-solid fa-triangle-exclamation"></i>' :
+                '<i class="fa-solid fa-info-circle"></i>';
             toast.innerHTML = `${icon} <span>${message}</span>`;
             container.appendChild(toast);
             setTimeout(() => {
@@ -988,35 +1711,38 @@
         // ================================================================
         async function fetchGlobalData() {
             try {
-                // Settings — FIX: use db.doc() not db.collection() for single document
                 db.doc(`artifacts/${appId}/public/settings`).onSnapshot((doc) => {
                     if (doc.exists) {
                         configState = doc.data();
+                        if (configState.ceoSignature) {
+                            const preview = document.getElementById('admin-ceo-signature-preview');
+                            if (preview) preview.src = configState.ceoSignature;
+                        }
                     } else {
                         db.doc(`artifacts/${appId}/public/settings`).set(configState);
                     }
                 }, err => console.error("Settings sync error:", err));
 
-                // Courses
                 db.collection(`artifacts/${appId}/public/data/courses`).onSnapshot((snap) => {
                     coursesState = snap.docs.map(d => ({ id: d.id, ...d.data() }));
                     populateCoursesUI();
                     populateFormDropdowns();
+                    renderAdminCoursesList();
+                    populateAdmissionCourseSelect();
                 }, err => {
                     console.error("Courses sync error:", err);
                     showNotification("Could not load courses: " + err.message, "error");
                 });
 
-                // Lessons
                 db.collection(`artifacts/${appId}/public/data/lessons`).onSnapshot((snap) => {
                     lessonsState = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+                    renderAdminLessonsTable();
                 }, err => console.error("Lessons sync error:", err));
 
-                // Tutors
                 db.collection(`artifacts/${appId}/public/data/tutors`).onSnapshot((snap) => {
                     tutorsState = snap.docs.map(d => ({ id: d.id, ...d.data() }));
                     populateTutorsUI();
-                    populateCoursesUI(); // Re-render so tutor info shows on cards
+                    populateCoursesUI();
                 }, err => console.error("Tutors sync error:", err));
 
             } catch (err) {
@@ -1026,13 +1752,14 @@
         }
 
         // ================================================================
-        // COURSES UI (LANDING)
+        // COURSES UI (LANDING) with rating display
         // ================================================================
         function populateCoursesUI() {
             const grid = document.getElementById('course-directory-grid');
             if (!grid) return;
             if (coursesState.length === 0) {
-                grid.innerHTML = `<div class="col-span-full py-12 text-center text-slate-500">
+                grid.innerHTML =
+                    `<div class="col-span-full py-12 text-center text-slate-500">
                     <i class="fa-solid fa-graduation-cap text-4xl mb-2 text-navy-brand"></i>
                     <p class="font-bold">Welcome to BITCAGS LTD</p>
                     <p class="text-xs">No active programs are registered at this moment. Admin will publish courses soon.</p>
@@ -1041,21 +1768,42 @@
             }
             grid.innerHTML = coursesState.map(course => {
                 const tutors = tutorsState.filter(t => t.courseId === course.id);
-                const tutorHtml = tutors.length > 0
-                    ? `<div class="flex items-center gap-2 mt-4 pt-4 border-t border-slate-100">
-                         <img src="${tutors[0].photo}" class="w-8 h-8 rounded-full object-cover" onerror="this.src='https://placehold.co/32'">
-                         <div class="text-[11px]"><span class="block font-bold text-navy-brand">${tutors[0].name}</span><span class="text-slate-400">Class Director</span></div>
-                       </div>`
-                    : `<p class="text-[10px] text-slate-400 mt-3 pt-3 border-t border-slate-100">Enrollment module: Self-Paced AI Study Mode</p>`;
+                const tutorHtml = tutors.length > 0 ?
+                    `<div class="tutor-avatar-group mt-4 pt-4 border-t border-slate-100">
+                         <img src="${tutors[0].photo}" class="avatar" onerror="this.src='https://placehold.co/40'">
+                         <div class="text-[11px]"><span class="block font-bold text-navy-brand">${tutors[0].name}</span><span class="text-slate-400 text-[10px]">Lead Faculty</span></div>
+                       </div>` :
+                    `<p class="text-[10px] text-slate-400 mt-3 pt-3 border-t border-slate-100">Self-Paced AI Study Mode</p>`;
+
+                // Rating display
+                const avgRating = course.avgRating || 0;
+                const ratingCount = course.ratingCount || 0;
+                const fullStars = Math.floor(avgRating);
+                const halfStar = avgRating - fullStars >= 0.5 ? 1 : 0;
+                const emptyStars = 5 - fullStars - halfStar;
+                let starsHtml = '';
+                for (let i = 0; i < fullStars; i++) starsHtml += '<i class="fa-solid fa-star text-yellow-400"></i>';
+                if (halfStar) starsHtml += '<i class="fa-solid fa-star-half-stroke text-yellow-400"></i>';
+                for (let i = 0; i < emptyStars; i++) starsHtml += '<i class="fa-regular fa-star text-yellow-400"></i>';
+                const ratingDisplay = ratingCount > 0 ?
+                    `<div class="flex items-center gap-1 text-xs"><span class="flex">${starsHtml}</span> <span class="text-slate-500">(${ratingCount})</span></div>` :
+                    `<span class="text-xs text-slate-400">No ratings yet</span>`;
+
                 return `
-                    <div class="bg-white border border-slate-200 rounded-2xl overflow-hidden hover:shadow-xl transition-all flex flex-col justify-between">
+                    <div class="bg-white border border-slate-200 rounded-2xl overflow-hidden hover:shadow-xl transition-all flex flex-col justify-between group">
                         <div class="p-6">
-                            <span class="px-2.5 py-0.5 bg-navy-50 text-navy-800 text-xs font-semibold rounded-full">${course.duration} Weeks Plan</span>
-                            <h3 class="text-xl font-bold text-navy-brand mt-3 leading-tight">${course.name}</h3>
+                            <div class="flex justify-between items-start">
+                                <span class="px-2.5 py-0.5 bg-navy-50 text-navy-800 text-xs font-semibold rounded-full">${course.duration} Weeks</span>
+                                <span class="text-xs font-bold text-red-brand">₦${parseFloat(course.fee).toLocaleString()}</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-navy-brand mt-3 leading-tight group-hover:text-red-brand transition">${course.name}</h3>
                             <p class="text-xs text-slate-500 mt-2 line-clamp-3">${course.intro}</p>
-                            <div class="mt-4 flex items-baseline gap-1.5">
-                                <span class="text-2xl font-black text-red-brand">₦${parseFloat(course.fee).toLocaleString()}</span>
-                                <span class="text-xs text-slate-400">Tuition fee</span>
+                            <div class="mt-4 flex items-center justify-between">
+                                <div class="flex items-baseline gap-1.5">
+                                    <span class="text-sm text-slate-400">Tuition</span>
+                                    <span class="text-2xl font-black text-red-brand">₦${parseFloat(course.fee).toLocaleString()}</span>
+                                </div>
+                                ${ratingDisplay}
                             </div>
                         </div>
                         <div class="p-6 bg-slate-50 border-t border-slate-100">
@@ -1070,76 +1818,270 @@
         }
 
         function populateFormDropdowns() {
-            const options = coursesState.map(c => `<option value="${c.id}">${c.name} - ₦${parseFloat(c.fee).toLocaleString()}</option>`).join('');
-            ['reg-course','complete-course','admin-lesson-course','admin-tutor-course','edit-student-course'].forEach(id => {
+            const options = coursesState.map(c =>
+                `<option value="${c.id}">${c.name} - ₦${parseFloat(c.fee).toLocaleString()}</option>`).join('');
+            ['reg-course', 'complete-course', 'admin-lesson-course', 'admin-tutor-course', 'edit-student-course'].forEach(id => {
                 const el = document.getElementById(id);
                 if (el) el.innerHTML = options;
             });
         }
 
+        function populateAdmissionCourseSelect() {
+            const sel = document.getElementById('admission-course-select');
+            if (!sel) return;
+            const enrolledIds = currentUserSession?.courses || [];
+            const opts = coursesState.filter(c => enrolledIds.includes(c.id));
+            sel.innerHTML = opts.length > 0 ?
+                opts.map(c => `<option value="${c.id}">${c.name}</option>`).join('') :
+                `<option value="">No enrolled courses found</option>`;
+        }
+
         // ================================================================
-        // COURSE CURRICULUM MODAL
+        // COURSE CURRICULUM MODAL (with rating)
         // ================================================================
         function viewCourseCurriculum(courseId) {
             const course = coursesState.find(c => c.id === courseId);
             if (!course) return;
             const tutors = tutorsState.filter(t => t.courseId === courseId);
-            const tutorSection = tutors.length > 0
-                ? `<div class="flex items-center gap-4 bg-slate-50 p-4 rounded-xl border border-slate-100">
-                     <img src="${tutors[0].photo}" class="w-12 h-12 rounded-full object-cover border border-navy-700" onerror="this.src='https://placehold.co/48'">
-                     <div><span class="block font-bold text-navy-brand text-sm">${tutors[0].name}</span><span class="text-xs text-slate-500">Expert Lead Faculty Director</span></div>
-                   </div>`
-                : `<p class="text-xs text-slate-500 italic">Self-Guided Tech Blueprints</p>`;
+            const tutorSection = tutors.length > 0 ?
+                `<div class="flex items-center gap-4 bg-slate-50 p-4 rounded-xl border border-slate-100">
+                     <img src="${tutors[0].photo}" class="w-14 h-14 rounded-full object-cover border-2 border-navy-700" onerror="this.src='https://placehold.co/56'">
+                     <div><span class="block font-bold text-navy-brand text-base">${tutors[0].name}</span><span class="text-xs text-slate-500">Expert Lead Faculty Director</span></div>
+                   </div>` :
+                `<p class="text-xs text-slate-500 italic">Self-Guided Tech Blueprints</p>`;
+
+            // Get lessons for this course
+            const courseLessons = lessonsState.filter(l => l.courseId === courseId).sort((a, b) => parseInt(a.index) - parseInt(b
+            .index));
+            const lessonsHtml = courseLessons.length > 0 ?
+                `<ul class="space-y-1.5 text-sm">
+                    ${courseLessons.map(l => `<li class="flex items-center gap-2 text-slate-600"><i class="fa-solid fa-circle-check text-green-500 text-xs"></i> <span>${l.index}. ${l.title}</span> <span class="text-[10px] text-slate-400">(${l.duration} min)</span></li>`).join('')}
+                 </ul>` :
+                `<p class="text-xs text-slate-400">Lesson modules are being prepared.</p>`;
+
+            // Rating display
+            const avgRating = course.avgRating || 0;
+            const ratingCount = course.ratingCount || 0;
+            const fullStars = Math.floor(avgRating);
+            const halfStar = avgRating - fullStars >= 0.5 ? 1 : 0;
+            const emptyStars = 5 - fullStars - halfStar;
+            let starsHtml = '';
+            for (let i = 0; i < fullStars; i++) starsHtml += '<i class="fa-solid fa-star text-yellow-400"></i>';
+            if (halfStar) starsHtml += '<i class="fa-solid fa-star-half-stroke text-yellow-400"></i>';
+            for (let i = 0; i < emptyStars; i++) starsHtml += '<i class="fa-regular fa-star text-yellow-400"></i>';
+
+            // Rating form (only if logged in)
+            let ratingForm = '';
+            if (currentUserSession) {
+                ratingForm = `
+                    <div class="mt-4 border-t border-slate-200 pt-4">
+                        <h4 class="font-bold text-navy-brand text-sm flex items-center gap-2"><i class="fa-solid fa-star text-yellow-400"></i> Rate this Course</h4>
+                        <div class="flex items-center gap-3 mt-2">
+                            <div class="stars" id="rating-stars-${course.id}" data-course="${course.id}">
+                                <i class="fa-regular fa-star star" data-value="1"></i>
+                                <i class="fa-regular fa-star star" data-value="2"></i>
+                                <i class="fa-regular fa-star star" data-value="3"></i>
+                                <i class="fa-regular fa-star star" data-value="4"></i>
+                                <i class="fa-regular fa-star star" data-value="5"></i>
+                            </div>
+                            <button onclick="submitRating('${course.id}')" class="px-4 py-1.5 bg-navy-brand text-white text-xs font-bold rounded-lg hover:bg-navy-950 transition">Submit</button>
+                        </div>
+                    </div>
+                `;
+            }
+
             document.getElementById('course-modal-content').innerHTML = `
                 <div class="space-y-6">
                     <div>
                         <span class="text-xs font-bold text-red-brand uppercase tracking-wider">Curriculum Prospectus</span>
                         <h2 class="text-2xl font-extrabold text-navy-brand mt-1">${course.name}</h2>
-                        <div class="flex items-center gap-4 mt-2 text-xs text-slate-500 font-medium">
+                        <div class="flex flex-wrap items-center gap-4 mt-2 text-xs text-slate-500 font-medium">
                             <span><i class="fa-solid fa-clock text-navy-700 mr-1"></i> ${course.duration} Weeks</span>
                             <span><i class="fa-solid fa-wallet text-navy-700 mr-1"></i> ₦${parseFloat(course.fee).toLocaleString()}</span>
+                            <span><i class="fa-solid fa-book-open text-navy-700 mr-1"></i> ${courseLessons.length} Lessons</span>
+                            <span class="flex items-center gap-1">${starsHtml} <span class="text-slate-500">(${ratingCount})</span></span>
                         </div>
                     </div>
-                    <div><h4 class="font-bold text-navy-brand text-sm">Course Overview</h4><p class="text-xs text-slate-600 leading-relaxed mt-1">${course.intro}</p></div>
-                    <div><h4 class="font-bold text-navy-brand text-sm">Syllabus Structure</h4>
-                        <div class="bg-slate-50 border border-slate-200 p-4 rounded-xl whitespace-pre-wrap font-mono text-xs text-slate-700 mt-1">${course.curriculum}</div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <h4 class="font-bold text-navy-brand text-sm flex items-center gap-2"><i class="fa-solid fa-info-circle text-red-brand"></i> Course Overview</h4>
+                            <p class="text-xs text-slate-600 leading-relaxed mt-1">${course.intro}</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-navy-brand text-sm flex items-center gap-2"><i class="fa-solid fa-list-check text-red-brand"></i> Syllabus Structure</h4>
+                            <div class="bg-slate-50 border border-slate-200 p-4 rounded-xl max-h-60 overflow-y-auto mt-1">${lessonsHtml}</div>
+                        </div>
                     </div>
-                    <div><h4 class="font-bold text-navy-brand text-sm">Course Directing Faculty</h4>${tutorSection}</div>
-                    <div class="pt-4 border-t border-slate-100 flex justify-end gap-2">
+                    <div>
+                        <h4 class="font-bold text-navy-brand text-sm flex items-center gap-2"><i class="fa-solid fa-chalkboard-user text-red-brand"></i> Course Directing Faculty</h4>
+                        ${tutorSection}
+                    </div>
+                    ${ratingForm}
+                    <div class="pt-4 border-t border-slate-100 flex flex-wrap justify-end gap-2">
                         <button onclick="closeCourseModal()" class="px-5 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold rounded-lg transition">Close</button>
                         <button onclick="closeCourseModal(); enrollFromLanding('${course.id}')" class="px-6 py-2.5 bg-red-brand hover:bg-brandRed-900 text-white text-xs font-bold rounded-lg transition shadow">Begin Study Pathway</button>
                     </div>
                 </div>`;
             document.getElementById('course-detail-modal').classList.remove('hidden');
+
+            // Initialize star rating interaction
+            setTimeout(() => {
+                const starsContainer = document.getElementById(`rating-stars-${course.id}`);
+                if (!starsContainer) return;
+                const stars = starsContainer.querySelectorAll('.star');
+                stars.forEach(star => {
+                    star.addEventListener('mouseenter', function() {
+                        const val = parseInt(this.dataset.value);
+                        stars.forEach(s => {
+                            const sv = parseInt(s.dataset.value);
+                            if (sv <= val) s.classList.add('hover');
+                            else s.classList.remove('hover');
+                        });
+                    });
+                    star.addEventListener('mouseleave', function() {
+                        stars.forEach(s => s.classList.remove('hover'));
+                    });
+                    star.addEventListener('click', function() {
+                        const val = parseInt(this.dataset.value);
+                        stars.forEach(s => {
+                            const sv = parseInt(s.dataset.value);
+                            if (sv <= val) {
+                                s.classList.add('active');
+                                s.className = 'fa-solid fa-star star active';
+                            } else {
+                                s.classList.remove('active');
+                                s.className = 'fa-regular fa-star star';
+                            }
+                        });
+                        // Store selected rating
+                        starsContainer.dataset.selected = val;
+                    });
+                });
+            }, 100);
+        }
+
+        // ================================================================
+        // RATING SUBMISSION
+        // ================================================================
+        async function submitRating(courseId) {
+            if (!currentUserSession) {
+                showNotification("Please log in to rate a course.", "error");
+                return;
+            }
+            const container = document.getElementById(`rating-stars-${courseId}`);
+            if (!container) return;
+            const selected = parseInt(container.dataset.selected);
+            if (!selected || selected < 1 || selected > 5) {
+                showNotification("Please select a rating (1-5 stars).", "error");
+                return;
+            }
+
+            try {
+                // Check if user already rated this course
+                const ratingDocId = `${currentUserSession.appId}_${courseId}`;
+                const ratingRef = db.collection(`artifacts/${appId}/public/data/ratings`).doc(ratingDocId);
+                const doc = await ratingRef.get();
+                if (doc.exists) {
+                    await ratingRef.update({ rating: selected, updatedAt: firebase.firestore.FieldValue.serverTimestamp() });
+                } else {
+                    await ratingRef.set({
+                        studentId: currentUserSession.appId,
+                        courseId: courseId,
+                        rating: selected,
+                        createdAt: firebase.firestore.FieldValue.serverTimestamp()
+                    });
+                }
+
+                // Recalculate average
+                const ratingsSnap = await db.collection(`artifacts/${appId}/public/data/ratings`)
+                    .where('courseId', '==', courseId).get();
+                let total = 0,
+                    count = 0;
+                ratingsSnap.forEach(d => { total += d.data().rating;
+                    count++; });
+                const avg = count > 0 ? total / count : 0;
+                await db.collection(`artifacts/${appId}/public/data/courses`).doc(courseId).update({
+                    avgRating: avg,
+                    ratingCount: count
+                });
+
+                showNotification("Rating submitted successfully!", "success");
+                closeCourseModal();
+                populateCoursesUI();
+            } catch (err) {
+                showNotification("Rating submission failed: " + err.message, "error");
+            }
         }
 
         function closeCourseModal() {
             document.getElementById('course-detail-modal').classList.add('hidden');
         }
 
+        // ================================================================
+        // ENROLLMENT WITH PAYMENT SELECTION
+        // ================================================================
         function enrollFromLanding(courseId) {
-            if (currentUserSession) {
-                triggerCourseEnrolment(courseId);
-            } else {
+            if (!currentUserSession) {
                 navigateTo('student-register');
                 document.getElementById('reg-course').value = courseId;
                 showNotification("Please finish creating your student profile to register.", "info");
+                return;
             }
+            // Check if already enrolled
+            const enrolledIds = currentUserSession.courses || [];
+            if (enrolledIds.includes(courseId)) {
+                showNotification("You are already enrolled in this course.", "info");
+                return;
+            }
+            // Show payment selection modal
+            pendingEnrollmentCourseId = courseId;
+            document.getElementById('payment-select-modal').classList.remove('hidden');
+        }
+
+        function closePaymentSelectModal() {
+            document.getElementById('payment-select-modal').classList.add('hidden');
+            pendingEnrollmentCourseId = null;
+        }
+
+        // Paystack option
+        function selectPaystackPayment() {
+            if (!pendingEnrollmentCourseId) return;
+            closePaymentSelectModal();
+            // Open the payment modal (which triggers Paystack)
+            openPaymentModal(pendingEnrollmentCourseId);
+        }
+
+        // Local WhatsApp option - with admin number +1238107907647
+        function selectLocalPayment() {
+            if (!pendingEnrollmentCourseId || !currentUserSession) return;
+            const course = coursesState.find(c => c.id === pendingEnrollmentCourseId);
+            if (!course) return;
+            const adminNumber = '1238107907647';
+            const message = `Hello BITCAGS Admin,%0A%0AI would like to request local payment for course enrollment.%0A%0A*Student Name:* ${currentUserSession.name}%0A*App ID:* ${currentUserSession.appId}%0A*Course:* ${course.name}%0A*Tuition Fee:* ₦${parseFloat(course.fee).toLocaleString()}%0A*Date:* ${new Date().toDateString()}%0A%0APlease confirm payment and update my status. Thank you.`;
+            const whatsappUrl = `https://wa.me/${adminNumber}?text=${message}`;
+            window.open(whatsappUrl, '_blank');
+            // Add course to student's list but mark as unpaid (admin will update later)
+            triggerCourseEnrolment(pendingEnrollmentCourseId);
+            showNotification("Payment request sent via WhatsApp. Please await admin confirmation.", "success");
+            closePaymentSelectModal();
+            pendingEnrollmentCourseId = null;
         }
 
         // ================================================================
-        // MULTI-STEP REGISTRATION
+        // MULTI-STEP REGISTRATION (FIXED)
         // ================================================================
         function goToRegStep(step) {
             [1, 2, 3].forEach(i => {
                 document.getElementById(`reg-step-${i}`).classList.add('hidden');
                 document.getElementById(`step-dot-${i}`).className = "flex items-center gap-1.5 text-xs font-bold text-slate-400";
-                document.getElementById(`step-dot-${i}`).querySelector('span').className = "w-6 h-6 rounded-full bg-slate-300 text-slate-600 flex items-center justify-center";
+                document.getElementById(`step-dot-${i}`).querySelector('span').className =
+                    "w-6 h-6 rounded-full bg-slate-300 text-slate-600 flex items-center justify-center";
             });
             document.getElementById(`reg-step-${step}`).classList.remove('hidden');
             for (let i = 1; i <= step; i++) {
                 document.getElementById(`step-dot-${i}`).className = "flex items-center gap-1.5 text-xs font-bold text-navy-brand";
-                document.getElementById(`step-dot-${i}`).querySelector('span').className = "w-6 h-6 rounded-full bg-navy-brand text-white flex items-center justify-center";
+                document.getElementById(`step-dot-${i}`).querySelector('span').className =
+                    "w-6 h-6 rounded-full bg-navy-brand text-white flex items-center justify-center";
             }
             if (step === 3) {
                 document.getElementById('review-name').innerText = document.getElementById('reg-fullname').value;
@@ -1158,27 +2100,52 @@
                 showNotification("Registration is currently closed by the system administration.", "error");
                 return;
             }
-            const name       = document.getElementById('reg-fullname').value;
-            const email      = document.getElementById('reg-email').value;
-            const dob        = document.getElementById('reg-dob').value;
+            const name = document.getElementById('reg-fullname').value.trim();
+            const email = document.getElementById('reg-email').value.trim();
+            const dob = document.getElementById('reg-dob').value;
             const passwordRaw = document.getElementById('reg-password').value;
-            const photo      = document.getElementById('reg-photo').value;
-            const courseId   = document.getElementById('reg-course').value;
+            const photo = document.getElementById('reg-photo').value.trim();
+            const courseId = document.getElementById('reg-course').value;
             const experience = document.getElementById('reg-experience').value;
-            const remark     = document.getElementById('reg-remark').value;
+            const remark = document.getElementById('reg-remark').value.trim();
+
+            if (!name || !email || !dob || !passwordRaw || !photo || !courseId) {
+                showNotification("Please fill all required fields.", "error");
+                return;
+            }
+            if (passwordRaw.length < 6) {
+                showNotification("Password must be at least 6 characters.", "error");
+                return;
+            }
+            if (!email.includes('@')) {
+                showNotification("Please enter a valid email address.", "error");
+                return;
+            }
+
             const registrationId = "BTC-" + Math.floor(10000 + Math.random() * 90000);
             try {
                 const password = await hashPassword(passwordRaw);
                 await db.collection(`artifacts/${appId}/public/data/students`).doc(registrationId).set({
-                    appId: registrationId, name, email, dob, password, photo, experience, remark,
-                    courses: [courseId], payments: {}, quizzesPassed: {},
+                    appId: registrationId,
+                    name,
+                    email,
+                    dob,
+                    password,
+                    photo,
+                    experience,
+                    remark,
+                    courses: [courseId],
+                    payments: {},
+                    quizzesPassed: {},
                     registeredAt: firebase.firestore.FieldValue.serverTimestamp()
                 });
                 document.getElementById('generated-app-id').innerText = registrationId;
                 document.getElementById('success-reg-modal').classList.remove('hidden');
                 document.getElementById('student-registration-form').reset();
                 goToRegStep(1);
+                showNotification("Account created successfully! Use your App ID to log in.", "success");
             } catch (err) {
+                console.error("Registration error:", err);
                 showNotification("Failed registration: " + err.message, "error");
             }
         }
@@ -1186,7 +2153,8 @@
         function copyGeneratedAppId() {
             const text = document.getElementById('generated-app-id').innerText;
             if (navigator.clipboard && navigator.clipboard.writeText) {
-                navigator.clipboard.writeText(text).then(() => showNotification("App ID copied!", "success")).catch(() => legacyCopy(text));
+                navigator.clipboard.writeText(text).then(() => showNotification("App ID copied!", "success")).catch(() =>
+                    legacyCopy(text));
             } else { legacyCopy(text); }
         }
 
@@ -1195,7 +2163,8 @@
             ta.value = text;
             document.body.appendChild(ta);
             ta.select();
-            try { document.execCommand('copy'); showNotification("App ID copied!", "success"); } catch {}
+            try { document.execCommand('copy');
+                showNotification("App ID copied!", "success"); } catch {}
             document.body.removeChild(ta);
         }
 
@@ -1213,6 +2182,7 @@
             e.preventDefault();
             const appIdInput = document.getElementById('login-app-id').value.trim().toUpperCase();
             const passwordInputRaw = document.getElementById('login-password').value;
+            if (!appIdInput || !passwordInputRaw) { showNotification("Please enter App ID and password.", "error"); return; }
             try {
                 const doc = await db.collection(`artifacts/${appId}/public/data/students`).doc(appIdInput).get();
                 if (!doc.exists) { showNotification("Invalid App ID. Please check or register.", "error"); return; }
@@ -1230,7 +2200,8 @@
         async function verifyStudentLoginSession(appIdVal) {
             try {
                 const doc = await db.collection(`artifacts/${appId}/public/data/students`).doc(appIdVal).get();
-                if (doc.exists) { currentUserSession = doc.data(); loadStudentDashboard(); }
+                if (doc.exists) { currentUserSession = doc.data();
+                    loadStudentDashboard(); }
             } catch (err) { console.error("Auto session verify error:", err); }
         }
 
@@ -1244,19 +2215,23 @@
             document.getElementById('dash-experience-pill').innerText = currentUserSession.experience || "Student Member";
             if (currentUserSession.photo) document.getElementById('dash-avatar').src = currentUserSession.photo;
 
-            const isComplete = currentUserSession.photo && currentUserSession.dob && currentUserSession.experience && currentUserSession.courses?.length > 0;
+            const isComplete = currentUserSession.photo && currentUserSession.dob && currentUserSession.experience && currentUserSession
+                .courses?.length > 0;
             const completionBlock = document.getElementById('continue-registration-block');
             if (!isComplete) {
                 completionBlock.classList.remove('hidden');
                 document.getElementById('dash-status-pill').innerText = "Incomplete Registration";
-                document.getElementById('dash-status-pill').className = "px-2.5 py-0.5 bg-red-brand text-white rounded-full text-xs font-semibold";
+                document.getElementById('dash-status-pill').className =
+                    "px-2.5 py-0.5 bg-red-brand text-white rounded-full text-xs font-semibold";
             } else {
                 completionBlock.classList.add('hidden');
                 document.getElementById('dash-status-pill').innerText = "Verified Academic Active Student";
-                document.getElementById('dash-status-pill').className = "px-2.5 py-0.5 bg-green-100 text-green-800 rounded-full text-xs font-semibold";
+                document.getElementById('dash-status-pill').className =
+                    "px-2.5 py-0.5 bg-green-100 text-green-800 rounded-full text-xs font-semibold";
             }
             renderStudentDashboardCourses();
             renderStudentCertificates();
+            populateAdmissionCourseSelect();
             document.getElementById('settings-dob').value = currentUserSession.dob || "";
             document.getElementById('settings-photo').value = currentUserSession.photo || "";
             updateNavbarAuthButtons(true);
@@ -1301,11 +2276,13 @@
                 const isActive = btn.innerText.toLowerCase().includes(tabName) ||
                     (tabName === 'settings' && btn.innerText.toLowerCase().includes('setting')) ||
                     (tabName === 'certificates' && btn.innerText.toLowerCase().includes('certif')) ||
-                    (tabName === 'courses' && btn.innerText.toLowerCase().includes('enroll'));
-                btn.className = isActive
-                    ? "dash-tab-btn px-4 py-2 bg-navy-brand text-white rounded-xl text-sm font-bold transition"
-                    : "dash-tab-btn px-4 py-2 bg-slate-100 text-slate-700 rounded-xl text-sm font-semibold transition";
+                    (tabName === 'courses' && btn.innerText.toLowerCase().includes('enroll')) ||
+                    (tabName === 'admission' && btn.innerText.toLowerCase().includes('admission'));
+                btn.className = isActive ?
+                    "dash-tab-btn px-4 py-2 bg-navy-brand text-white rounded-xl text-sm font-bold transition" :
+                    "dash-tab-btn px-4 py-2 bg-slate-100 text-slate-700 rounded-xl text-sm font-semibold transition";
             });
+            if (tabName === 'admission') populateAdmissionCourseSelect();
         }
 
         async function triggerCourseEnrolment(courseId) {
@@ -1331,7 +2308,8 @@
             if (!grid) return;
             const enrolledIds = currentUserSession.courses || [];
             if (enrolledIds.length === 0) {
-                grid.innerHTML = `<div class="col-span-full py-8 text-center text-slate-400"><p class="font-bold">No registered syllabuses</p><p class="text-xs">Select any course on the home page catalog to enroll.</p></div>`;
+                grid.innerHTML =
+                    `<div class="col-span-full py-8 text-center text-slate-400"><p class="font-bold">No registered syllabuses</p><p class="text-xs">Select any course on the home page catalog to enroll.</p></div>`;
                 return;
             }
             grid.innerHTML = enrolledIds.map(courseId => {
@@ -1339,12 +2317,12 @@
                 if (!course) return '';
                 const paymentStatus = (currentUserSession.payments && currentUserSession.payments[courseId]) || "Unpaid";
                 const isPaid = paymentStatus === "Paid";
-                const statusBadge = isPaid
-                    ? `<span class="px-2.5 py-0.5 bg-green-100 text-green-800 text-xs font-bold rounded-full">Tuition Paid</span>`
-                    : `<span class="px-2.5 py-0.5 bg-red-100 text-red-800 text-xs font-bold rounded-full">Awaiting Tuition</span>`;
-                const actionBtn = isPaid
-                    ? `<button onclick="openClassroomSyllabus('${course.id}')" class="w-full py-2.5 bg-navy-brand hover:bg-navy-950 text-white text-xs font-bold rounded-lg transition">Enter Lecture Room</button>`
-                    : `<button onclick="openPaymentModal('${course.id}')" class="w-full py-2.5 bg-red-brand hover:bg-brandRed-900 text-white text-xs font-bold rounded-lg transition"><i class="fa-solid fa-lock mr-1"></i> Pay Tuition to Unlock</button>`;
+                const statusBadge = isPaid ?
+                    `<span class="px-2.5 py-0.5 bg-green-100 text-green-800 text-xs font-bold rounded-full">Tuition Paid</span>` :
+                    `<span class="px-2.5 py-0.5 bg-red-100 text-red-800 text-xs font-bold rounded-full">Awaiting Tuition</span>`;
+                const actionBtn = isPaid ?
+                    `<button onclick="openClassroomSyllabus('${course.id}')" class="w-full py-2.5 bg-navy-brand hover:bg-navy-950 text-white text-xs font-bold rounded-lg transition">Enter Lecture Room</button>` :
+                    `<button onclick="openPaymentModal('${course.id}')" class="w-full py-2.5 bg-red-brand hover:bg-brandRed-900 text-white text-xs font-bold rounded-lg transition"><i class="fa-solid fa-lock mr-1"></i> Pay Tuition to Unlock</button>`;
                 return `<div class="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-sm flex flex-col justify-between">
                     <div class="p-5 space-y-3">
                         <div class="flex justify-between items-start"><span class="text-[10px] text-slate-400 font-bold uppercase tracking-wider">BITCAGS Syllabus Plan</span>${statusBadge}</div>
@@ -1357,7 +2335,7 @@
         }
 
         // ================================================================
-        // PAYSTACK PAYMENT
+        // PAYSTACK PAYMENT (FIXED)
         // ================================================================
         function openPaymentModal(courseId) {
             const course = coursesState.find(c => c.id === courseId);
@@ -1374,13 +2352,18 @@
         }
 
         function triggerCoursePayment() {
-            if (!pendingPaymentCourseId || !currentUserSession) return;
+            if (!pendingPaymentCourseId || !currentUserSession) {
+                showNotification("Invalid payment session.", "error");
+                return;
+            }
             const course = coursesState.find(c => c.id === pendingPaymentCourseId);
-            if (!course) return;
-            if (!configState.paystackKey) {
+            if (!course) { showNotification("Course not found.", "error"); return; }
+
+            if (!configState.paystackKey || configState.paystackKey.trim() === '') {
                 showNotification("Payment gateway not configured. Contact the academy administrator.", "error");
                 return;
             }
+
             const handler = PaystackPop.setup({
                 key: configState.paystackKey,
                 email: currentUserSession.email,
@@ -1404,7 +2387,7 @@
         }
 
         // ================================================================
-        // CLASSROOM / LESSON SYSTEM
+        // CLASSROOM / LESSON SYSTEM (with Video Cover - FIXED)
         // ================================================================
         function openClassroomSyllabus(courseId) {
             const course = coursesState.find(c => c.id === courseId);
@@ -1424,6 +2407,7 @@
                 document.getElementById('lesson-duration').innerText = "Duration: -- min";
                 document.getElementById('lesson-quiz-segment').classList.add('hidden');
                 document.getElementById('ai-explain-trigger').classList.add('hidden');
+                document.getElementById('lesson-video-container').classList.add('hidden');
             }
         }
 
@@ -1440,11 +2424,16 @@
                 const quizScore = currentUserSession.quizzesPassed && currentUserSession.quizzesPassed[les.id];
                 const isPassed = quizScore && parseFloat(quizScore) >= 60;
                 const isActive = classroomActiveLesson && classroomActiveLesson.id === les.id;
-                let lockHtml = '', clickAction, itemClass = 'w-full text-left p-3 rounded-xl text-xs font-semibold flex items-center justify-between transition-all ';
+                let lockHtml = '',
+                    clickAction,
+                    itemClass = 'w-full text-left p-3 rounded-xl text-xs font-semibold flex items-center justify-between transition-all ';
 
                 if (unlockNext) {
-                    itemClass += isActive ? 'bg-navy-brand text-white shadow-sm' : 'bg-slate-50 hover:bg-slate-100 text-slate-700 border border-slate-200';
-                    lockHtml = isPassed ? `<span class="text-green-500 font-bold"><i class="fa-solid fa-circle-check"></i> ${quizScore}%</span>` : `<span class="text-orange-500"><i class="fa-solid fa-circle-play"></i> Run</span>`;
+                    itemClass += isActive ? 'bg-navy-brand text-white shadow-sm' :
+                        'bg-slate-50 hover:bg-slate-100 text-slate-700 border border-slate-200';
+                    lockHtml = isPassed ?
+                        `<span class="text-green-500 font-bold"><i class="fa-solid fa-circle-check"></i> ${quizScore}%</span>` :
+                        `<span class="text-orange-500"><i class="fa-solid fa-circle-play"></i> Run</span>`;
                     clickAction = `selectClassroomLesson('${les.id}')`;
                 } else {
                     itemClass += 'bg-slate-100 text-slate-400 cursor-not-allowed border border-slate-150';
@@ -1465,7 +2454,6 @@
             checkCourseCompletionCelebration(courseLessons);
         }
 
-        // FIX: use .visible CSS class instead of toggling hidden/flex conflict
         function checkCourseCompletionCelebration(courseLessons) {
             const block = document.getElementById('syllabus-complete-celebration');
             if (!block) return;
@@ -1484,10 +2472,107 @@
             document.getElementById('lesson-index-tag').innerText = `Lesson ${lesson.index}`;
             document.getElementById('lesson-title').innerText = lesson.title;
             document.getElementById('lesson-duration').innerText = `Duration: ${lesson.duration} min`;
-            document.getElementById('lesson-content-view').innerHTML = lesson.body;
+
+            // Transform lesson body into step-by-step if it contains headings
+            let content = lesson.body;
+            // Wrap content in a container and enhance with progress bar and TOC
+            // We'll parse for h2/h3 to create steps
+            const tempDiv = document.createElement('div');
+            tempDiv.innerHTML = content;
+            const headings = tempDiv.querySelectorAll('h2, h3');
+            let stepsHtml = '';
+            if (headings.length > 0) {
+                // Build TOC
+                let tocHtml = `<div class="lesson-toc"><h4>📚 Lesson Contents</h4><ul>`;
+                headings.forEach((h, idx) => {
+                    const id = `step-${idx}`;
+                    h.id = id;
+                    tocHtml += `<li><a href="#${id}">${h.innerText}</a></li>`;
+                });
+                tocHtml += `</ul></div>`;
+
+                // Wrap each heading and subsequent content in a step container
+                let wrappedContent = '';
+                let currentStep = null;
+                const children = Array.from(tempDiv.childNodes);
+                children.forEach((node, i) => {
+                    if (node.nodeType === 1 && (node.tagName === 'H2' || node.tagName === 'H3')) {
+                        // Close previous step
+                        if (currentStep) {
+                            wrappedContent += currentStep.outerHTML;
+                        }
+                        // Start new step
+                        const stepDiv = document.createElement('div');
+                        stepDiv.className = 'step-container';
+                        const stepNum = document.createElement('div');
+                        stepNum.className = 'step-number';
+                        const count = headings.length > 1 ? `Step ${i+1}` : '';
+                        stepNum.textContent = count;
+                        stepDiv.appendChild(stepNum);
+                        // Clone the heading
+                        const headingClone = node.cloneNode(true);
+                        stepDiv.appendChild(headingClone);
+                        currentStep = stepDiv;
+                    } else if (currentStep) {
+                        // Append content to current step
+                        const clone = node.cloneNode(true);
+                        currentStep.appendChild(clone);
+                    } else {
+                        // Before first heading, keep as is
+                        wrappedContent += node.outerHTML || node.textContent;
+                    }
+                });
+                if (currentStep) {
+                    wrappedContent += currentStep.outerHTML;
+                }
+                content = tocHtml + wrappedContent;
+            } else {
+                // No headings, just add a nice wrapper
+                content = `<div class="step-container"><div class="step-number">Lesson Content</div>${content}</div>`;
+            }
+
+            // Add progress bar (simulate based on lesson index)
+            const totalLessons = lessonsState.filter(l => l.courseId === classroomActiveCourse.id).length;
+            const currentIdx = parseInt(lesson.index);
+            const progress = Math.round((currentIdx / totalLessons) * 100);
+            const progressHtml = `<div class="lesson-progress">
+                <span>Progress</span>
+                <div class="progress-bar"><div class="fill" style="width:${progress}%"></div></div>
+                <span>${progress}%</span>
+            </div>`;
+
+            document.getElementById('lesson-content-view').innerHTML = progressHtml + content;
+
             document.getElementById('ai-explain-box').classList.add('hidden');
             document.getElementById('ai-explain-box').innerHTML = '';
             document.getElementById('ai-explain-trigger').classList.remove('hidden');
+
+            // Video with cover - FIXED
+            const videoContainer = document.getElementById('lesson-video-container');
+            const videoIframe = document.getElementById('lesson-video-iframe');
+            const videoCover = document.getElementById('video-cover');
+            const videoWrapper = document.getElementById('video-wrapper');
+
+            if (lesson.video && lesson.video.trim() !== '') {
+                videoContainer.classList.remove('hidden');
+                // Reset playing state
+                videoWrapper.classList.remove('playing');
+                // Set the iframe src without autoplay initially
+                videoIframe.src = lesson.video;
+                // Cover click to play with autoplay
+                videoCover.onclick = function() {
+                    videoWrapper.classList.add('playing');
+                    // Ensure autoplay parameter
+                    let src = lesson.video;
+                    if (src.indexOf('?') === -1) src += '?autoplay=1&rel=0';
+                    else if (src.indexOf('autoplay') === -1) src += '&autoplay=1';
+                    videoIframe.src = src;
+                };
+            } else {
+                videoContainer.classList.add('hidden');
+                videoIframe.src = '';
+                videoCover.onclick = null;
+            }
 
             const previousScore = currentUserSession.quizzesPassed && currentUserSession.quizzesPassed[lesson.id];
             const controlBlock = document.getElementById('quiz-control-block');
@@ -1496,12 +2581,14 @@
             flowBlock.innerHTML = '';
 
             if (previousScore) {
-                controlBlock.innerHTML = `<div class="flex items-center justify-between flex-wrap gap-4 bg-white/10 p-4 rounded-xl border border-white/10">
+                controlBlock.innerHTML =
+                    `<div class="flex items-center justify-between flex-wrap gap-4 bg-white/10 p-4 rounded-xl border border-white/10">
                     <div><span class="text-xs text-slate-300">Examination Passed</span><p class="font-extrabold text-xl text-green-400">Score: ${previousScore}%</p></div>
                     <button onclick="startLessonQuiz()" class="px-5 py-2 bg-red-brand text-white text-xs font-bold rounded hover:bg-brandRed-900 transition">Retake Examination</button>
                 </div>`;
             } else {
-                controlBlock.innerHTML = `<button onclick="startLessonQuiz()" class="px-6 py-3 bg-red-brand text-white font-bold rounded-lg hover:bg-brandRed-900 transition flex items-center gap-2 text-sm">
+                controlBlock.innerHTML =
+                    `<button onclick="startLessonQuiz()" class="px-6 py-3 bg-red-brand text-white font-bold rounded-lg hover:bg-brandRed-900 transition flex items-center gap-2 text-sm">
                     <i class="fa-solid fa-graduation-cap"></i> Generate 30-Question Dynamic Examination
                 </button>`;
             }
@@ -1510,8 +2597,7 @@
         }
 
         // ================================================================
-        // AI LESSON EXPLAINER (Groq)
-        // FIX: use correct Groq model names
+        // AI LESSON EXPLAINER
         // ================================================================
         async function runAiLessonExplanation() {
             if (!classroomActiveLesson) return;
@@ -1528,13 +2614,16 @@
                     body: JSON.stringify({
                         model: GROQ_FAST_MODEL,
                         messages: [
-                            { role: "system", content: "You are the BITCAGS LTD Academic Professor AI. Analyze lessons and generate clean, engaging, beautifully structured text-based breakdowns with code analogies, real-world metaphors, and summaries. Respond in Markdown." },
-                            { role: "user", content: `Please analyze this study lesson for the curriculum ${classroomActiveCourse.name}:\nTopic: ${classroomActiveLesson.title}\nSyllabus details: ${classroomActiveLesson.body}\n\nProvide a detailed breakdown, metaphors, key take-aways and a practical programming sample.` }
+                            { role: "system",
+                                content: "You are the BITCAGS LTD Academic Professor AI. Analyze lessons and generate clean, engaging, beautifully structured text-based breakdowns with code analogies, real-world metaphors, and summaries. Respond in Markdown." },
+                            { role: "user",
+                                content: `Please analyze this study lesson for the curriculum ${classroomActiveCourse.name}:\nTopic: ${classroomActiveLesson.title}\nSyllabus details: ${classroomActiveLesson.body}\n\nProvide a detailed breakdown, metaphors, key take-aways and a practical programming sample.` }
                         ],
                         temperature: 0.7
                     })
                 });
-                if (!response.ok) { const t = await response.text(); throw new Error(`HTTP ${response.status}: ${t.slice(0,200)}`); }
+                if (!response.ok) { const t = await response.text(); throw new Error(`HTTP ${response.status}: ${t.slice(0,
+                        200)}`); }
                 const result = await response.json();
                 box.innerHTML = formatMarkdownToHtml(result.choices[0].message.content);
             } catch (err) {
@@ -1547,26 +2636,28 @@
             return text
                 .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
                 .replace(/\*(.*?)\*/g, '<em>$1</em>')
-                .replace(/```([\s\S]*?)```/g, '<pre class="bg-navy-950 text-green-400 p-4 rounded-lg overflow-x-auto text-xs my-3 font-mono">$1</pre>')
+                .replace(/```([\s\S]*?)```/g,
+                    '<pre class="bg-navy-950 text-green-400 p-4 rounded-lg overflow-x-auto text-xs my-3 font-mono">$1</pre>')
                 .replace(/`([^`]+)`/g, '<code class="bg-slate-100 text-red-brand px-1 py-0.5 rounded font-mono text-xs">$1</code>')
                 .replace(/\n/g, '<br>');
         }
 
         // ================================================================
         // QUIZ GENERATION
-        // FIX: correct Groq model, improved JSON parsing, proper error msgs
         // ================================================================
         async function startLessonQuiz() {
             if (!classroomActiveLesson) return;
             const flowBlock = document.getElementById('quiz-question-flow');
             flowBlock.classList.remove('hidden');
-            flowBlock.innerHTML = `<div class="py-6 text-center text-slate-300">
+            flowBlock.innerHTML =
+                `<div class="py-6 text-center text-slate-300">
                 <i class="fa-solid fa-cog animate-spin text-3xl mb-3 text-red-brand"></i>
                 <p class="text-sm font-bold">Synthesizing 30-Question Validation Assessment...</p>
                 <p class="text-xs text-slate-400">Groq AI is preparing a custom grading set for: ${classroomActiveLesson.title}</p>
             </div>`;
 
-            const prompt = `Generate exactly 30 unique, professional multiple-choice questions for the following tech topic: "${classroomActiveLesson.title}" (Course: ${classroomActiveCourse.name}).
+            const prompt =
+                `Generate exactly 30 unique, professional multiple-choice questions for the following tech topic: "${classroomActiveLesson.title}" (Course: ${classroomActiveCourse.name}).
 Respond ONLY with a raw JSON object with this exact structure, no markdown, no explanation:
 {"questions":[{"id":1,"question":"Question text here","options":["Option A","Option B","Option C","Option D"],"answer":"Exact text of correct option"}]}
 Ensure all 30 questions are present and the answer value exactly matches one of the options.`;
@@ -1578,25 +2669,26 @@ Ensure all 30 questions are present and the answer value exactly matches one of 
                     body: JSON.stringify({
                         model: GROQ_SMART_MODEL,
                         messages: [
-                            { role: "system", content: "You are a strict technical school board processor. Output raw valid JSON ONLY, conforming precisely to the requested schema. No preamble, no markdown, no extra text." },
+                            { role: "system",
+                                content: "You are a strict technical school board processor. Output raw valid JSON ONLY, conforming precisely to the requested schema. No preamble, no markdown, no extra text." },
                             { role: "user", content: prompt }
                         ],
                         temperature: 0.5,
                         response_format: { type: "json_object" }
                     })
                 });
-                if (!response.ok) { const t = await response.text(); throw new Error(`HTTP ${response.status}: ${t.slice(0,300)}`); }
+                if (!response.ok) { const t = await response.text(); throw new Error(`HTTP ${response.status}: ${t.slice(0,
+                        300)}`); }
                 const resData = await response.json();
                 let rawText = resData.choices[0].message.content;
-
-                // FIX: robust JSON extraction — strip markdown fences if present
                 rawText = rawText.replace(/```json\s*/gi, '').replace(/```\s*/g, '').trim();
 
                 const parsed = JSON.parse(rawText);
                 let questionsList = [];
                 if (Array.isArray(parsed)) questionsList = parsed;
                 else if (parsed.questions && Array.isArray(parsed.questions)) questionsList = parsed.questions;
-                else { const vals = Object.values(parsed); const arr = vals.find(v => Array.isArray(v)); if (arr) questionsList = arr; }
+                else { const vals = Object.values(parsed); const arr = vals.find(v => Array.isArray(v)); if (arr) questionsList =
+                        arr; }
 
                 activeQuizQuestions = questionsList.slice(0, 30);
                 quizAnswersState = {};
@@ -1605,7 +2697,8 @@ Ensure all 30 questions are present and the answer value exactly matches one of 
                 renderQuizQuestionsUI();
             } catch (err) {
                 console.error("Quiz generation error:", err);
-                flowBlock.innerHTML = `<div class="p-4 bg-red-brand/10 border border-brandRed-900/20 text-red-100 rounded-lg text-xs space-y-2">
+                flowBlock.innerHTML =
+                    `<div class="p-4 bg-red-brand/10 border border-brandRed-900/20 text-red-100 rounded-lg text-xs space-y-2">
                     <p class="font-bold">Failed synthesizing exam questions.</p>
                     <p>Error: ${err.message}</p>
                     <button onclick="startLessonQuiz()" class="px-3 py-1.5 bg-red-brand text-white font-bold rounded">Retry</button>
@@ -1643,7 +2736,6 @@ Ensure all 30 questions are present and the answer value exactly matches one of 
             </div>`;
         }
 
-        // FIX: use onchange (not onclick) and store actual value from event
         function recordQuizAnswer(qIndex, selectedOption) {
             quizAnswersState[qIndex] = selectedOption;
         }
@@ -1669,26 +2761,27 @@ Ensure all 30 questions are present and the answer value exactly matches one of 
                 }
                 const flowBlock = document.getElementById('quiz-question-flow');
                 const isPassed = percentage >= 60;
-                flowBlock.innerHTML = isPassed
-                    ? `<div class="bg-green-600/20 border border-green-500/30 rounded-xl p-6 text-center space-y-4">
+                flowBlock.innerHTML = isPassed ?
+                    `<div class="bg-green-600/20 border border-green-500/30 rounded-xl p-6 text-center space-y-4">
                            <span class="text-4xl text-green-400 block"><i class="fa-solid fa-circle-check"></i></span>
                            <h3 class="text-2xl font-black text-white">Verification Succeeded!</h3>
                            <p class="text-xs text-slate-300">You scored ${percentage}% (${scoreCount}/${totalQuestions} correct).</p>
                            <button onclick="openClassroomSyllabus('${classroomActiveCourse.id}')" class="px-6 py-2 bg-green-500 text-white font-bold text-xs rounded hover:bg-green-600 transition">Proceed to Next Module</button>
-                       </div>`
-                    : `<div class="bg-red-brand/20 border border-brandRed-900/30 rounded-xl p-6 text-center space-y-4">
+                       </div>` :
+                    `<div class="bg-red-brand/20 border border-brandRed-900/30 rounded-xl p-6 text-center space-y-4">
                            <span class="text-4xl text-red-400 block"><i class="fa-solid fa-circle-xmark"></i></span>
                            <h3 class="text-2xl font-black text-white">Assessment Failed</h3>
                            <p class="text-xs text-slate-300">You scored ${percentage}% (${scoreCount}/${totalQuestions} correct). Minimum required: 60%.</p>
                            <button onclick="startLessonQuiz()" class="px-6 py-2.5 bg-red-brand text-white font-bold text-xs rounded hover:bg-brandRed-900 transition">Re-attempt Quiz Module</button>
                        </div>`;
-                showNotification(isPassed ? "Syllabus unlocked!" : "Try again to achieve 60%+.", isPassed ? "success" : "error");
+                showNotification(isPassed ? "Syllabus unlocked!" : "Try again to achieve 60%+.", isPassed ? "success" :
+                "error");
                 renderClassroomLessonsNav();
             } catch (err) { showNotification("Failed updating scores: " + err.message, "error"); }
         }
 
         // ================================================================
-        // CERTIFICATES
+        // CERTIFICATES (with CEO signature)
         // ================================================================
         function renderStudentCertificates() {
             const list = document.getElementById('student-cert-list');
@@ -1702,7 +2795,8 @@ Ensure all 30 questions are present and the answer value exactly matches one of 
                 });
             });
             if (completedCourses.length === 0) {
-                list.innerHTML = `<div class="col-span-full py-8 text-center text-slate-400 border border-dashed rounded-2xl">
+                list.innerHTML =
+                    `<div class="col-span-full py-8 text-center text-slate-400 border border-dashed rounded-2xl">
                     <i class="fa-solid fa-medal text-3xl mb-2 text-slate-300"></i>
                     <p class="font-semibold text-xs text-slate-500">No active certs earned yet.</p>
                     <p class="text-[10px]">Complete all lessons with 60%+ quiz marks to earn verification.</p>
@@ -1735,21 +2829,175 @@ Ensure all 30 questions are present and the answer value exactly matches one of 
             document.getElementById('cert-student-photo').src = currentUserSession.photo || "https://placehold.co/100";
             document.getElementById('cert-passing-score').innerText = `Average Score: ${averageScore}%`;
             const today = new Date();
-            document.getElementById('cert-completion-date').innerText = `Issued Date: ${today.getFullYear()}-${String(today.getMonth()+1).padStart(2,'0')}-${String(today.getDate()).padStart(2,'0')}`;
-            const tutors = tutorsState.filter(t => t.courseId === targetId);
-            if (tutors.length > 0) {
-                document.getElementById('cert-tutor-name').innerText = `Tutor: ${tutors[0].name}`;
-                document.getElementById('cert-signature-img').src = tutors[0].signature || "https://placehold.co/120x40/ffffff/000000?text=BITCAGS";
-            } else {
-                document.getElementById('cert-tutor-name').innerText = "BITCAGS Director General";
-                document.getElementById('cert-signature-img').src = "https://placehold.co/120x40/ffffff/000000?text=BITCAGS";
-            }
-            document.getElementById('cert-qr-code').src = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://bitcags.ltd/verify/${currentUserSession.appId}/${targetId}`;
+            document.getElementById('cert-completion-date').innerText =
+                `Issued Date: ${today.getFullYear()}-${String(today.getMonth()+1).padStart(2,'0')}-${String(today.getDate()).padStart(2,'0')}`;
+
+            // Use CEO signature always
+            const ceoSignature = configState.ceoSignature || "https://placehold.co/120x40/ffffff/000000?text=CEO+Signature";
+            document.getElementById('cert-signature-img').src = ceoSignature;
+            document.getElementById('cert-tutor-name').innerText = "C.tp Abdukadir Shehu Bari";
+
+            document.getElementById('cert-qr-code').src =
+                `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://bitcags.ltd/verify/${currentUserSession.appId}/${targetId}`;
             document.getElementById('certificate-preview-modal').classList.remove('hidden');
         }
 
         function closeCertModal() { document.getElementById('certificate-preview-modal').classList.add('hidden'); }
+
         function printCert() { window.print(); }
+
+        // ================================================================
+        // ADMISSION LETTER
+        // ================================================================
+        function generateAdmissionLetter() {
+            const courseId = document.getElementById('admission-course-select').value;
+            if (!courseId) { showNotification("Please select a course first.", "error"); return; }
+            const course = coursesState.find(c => c.id === courseId);
+            if (!course) { showNotification("Course not found.", "error"); return; }
+
+            const today = new Date();
+            const refNumber =
+                `BTC-ADM-${String(today.getFullYear()).slice(2)}-${String(today.getMonth()+1).padStart(2,'0')}-${String(today.getDate()).padStart(2,'0')}-${Math.floor(1000+Math.random()*9000)}`;
+
+            document.getElementById('admission-ref-number').innerText = refNumber;
+            document.getElementById('admission-student-name').innerText = currentUserSession.name.toUpperCase();
+            document.getElementById('admission-student-dob').innerText = currentUserSession.dob || "Not specified";
+            document.getElementById('admission-course-name').innerText = course.name.toUpperCase();
+            document.getElementById('admission-course-duration').innerText = `${course.duration} Weeks`;
+            document.getElementById('admission-course-fee').innerText = `₦${parseFloat(course.fee).toLocaleString()}`;
+            document.getElementById('admission-reg-date').innerText = today.toDateString();
+            document.getElementById('admission-app-id').innerText = currentUserSession.appId;
+
+            // CEO Signature
+            const sigImg = document.getElementById('admission-ceo-signature');
+            sigImg.src = configState.ceoSignature || "https://placehold.co/120x40/ffffff/000000?text=CEO+Signature";
+
+            // QR Code
+            const qrData = `https://bitcags.ltd/verify/${currentUserSession.appId}/${courseId}`;
+            document.getElementById('admission-qr-code').src =
+                `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(qrData)}`;
+
+            document.getElementById('admission-letter-modal').classList.remove('hidden');
+            showNotification("Admission letter generated successfully!", "success");
+        }
+
+        function closeAdmissionModal() {
+            document.getElementById('admission-letter-modal').classList.add('hidden');
+        }
+
+        function printAdmissionLetter() {
+            window.print();
+        }
+
+        // ================================================================
+        // CERTIFICATE VERIFICATION PAGE
+        // ================================================================
+        async function verifyCertificate(e) {
+            e.preventDefault();
+            const input = document.getElementById('verify-cert-number').value.trim().toUpperCase();
+            if (!input) { showNotification("Please enter a certificate or admission number.", "error"); return; }
+
+            const resultArea = document.getElementById('verify-result-area');
+            resultArea.classList.remove('hidden');
+            resultArea.innerHTML =
+                `<div class="text-center py-6"><i class="fa-solid fa-spinner animate-spin text-3xl text-navy-brand"></i><p class="text-xs text-slate-500 mt-2">Verifying credential...</p></div>`;
+
+            try {
+                let foundStudent = null;
+                let foundCourse = null;
+                let isAdmission = false;
+
+                if (input.startsWith('BTC-ADM')) {
+                    isAdmission = true;
+                    const snapshot = await db.collection(`artifacts/${appId}/public/data/students`).get();
+                    for (const doc of snapshot.docs) {
+                        const s = doc.data();
+                        const courses = s.courses || [];
+                        for (const cid of courses) {
+                            const course = coursesState.find(c => c.id === cid);
+                            if (course) {
+                                if (input.includes(cid.toUpperCase()) || input.includes(s.appId)) {
+                                    foundStudent = s;
+                                    foundCourse = course;
+                                    break;
+                                }
+                            }
+                        }
+                        if (foundStudent) break;
+                    }
+                } else {
+                    const snapshot = await db.collection(`artifacts/${appId}/public/data/students`).get();
+                    for (const doc of snapshot.docs) {
+                        const s = doc.data();
+                        if (s.appId === input || input.includes(s.appId)) {
+                            foundStudent = s;
+                            const courses = s.courses || [];
+                            if (courses.length > 0) {
+                                foundCourse = coursesState.find(c => c.id === courses[0]);
+                            }
+                            break;
+                        }
+                    }
+                    if (!foundStudent) {
+                        const parts = input.split('-');
+                        if (parts.length >= 3) {
+                            const possibleAppId = parts[parts.length - 1];
+                            const doc = await db.collection(`artifacts/${appId}/public/data/students`).doc(possibleAppId).get();
+                            if (doc.exists) {
+                                foundStudent = doc.data();
+                                const courses = foundStudent.courses || [];
+                                if (courses.length > 0) {
+                                    foundCourse = coursesState.find(c => c.id === courses[0]);
+                                }
+                            }
+                        }
+                    }
+                }
+
+                if (foundStudent && foundCourse) {
+                    const isComplete = foundStudent.photo && foundStudent.dob && foundStudent.experience;
+                    resultArea.innerHTML = `
+                        <div class="verify-result-card verified border-2 border-green-500 bg-green-50 rounded-xl p-6 space-y-3">
+                            <div class="flex items-center gap-3 text-green-700">
+                                <i class="fa-solid fa-circle-check text-2xl"></i>
+                                <span class="font-bold text-lg">VERIFIED — Authentic Credential</span>
+                            </div>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
+                                <div><span class="text-slate-500">Student Name:</span> <strong class="text-navy-brand">${foundStudent.name}</strong></div>
+                                <div><span class="text-slate-500">App ID:</span> <strong class="font-mono">${foundStudent.appId}</strong></div>
+                                <div><span class="text-slate-500">Course:</span> <strong class="text-red-brand">${foundCourse.name}</strong></div>
+                                <div><span class="text-slate-500">Duration:</span> <strong>${foundCourse.duration} Weeks</strong></div>
+                                <div><span class="text-slate-500">Status:</span> <span class="font-bold text-green-600"><i class="fa-solid fa-check-circle mr-1"></i> Active</span></div>
+                                <div><span class="text-slate-500">Profile:</span> ${isComplete ? '<span class="font-bold text-green-600">Complete</span>' : '<span class="font-bold text-yellow-600">Incomplete</span>'}</div>
+                            </div>
+                            <div class="border-t border-green-200 pt-3 flex flex-wrap gap-3 justify-between items-center">
+                                <span class="text-xs text-slate-500">${isAdmission ? 'Admission Letter Verified' : 'Certificate Verified'}</span>
+                                <span class="text-[10px] text-slate-400 font-mono">Verified at ${new Date().toLocaleString()}</span>
+                            </div>
+                            <div class="bg-white p-2 rounded-lg border border-green-200 inline-block">
+                                <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=https://bitcags.ltd/verify/${foundStudent.appId}/${foundCourse.id}" alt="QR" class="w-16 h-16">
+                            </div>
+                        </div>
+                    `;
+                    showNotification("Credential verified successfully!", "success");
+                } else {
+                    resultArea.innerHTML = `
+                        <div class="verify-result-card not-found border-2 border-red-500 bg-red-50 rounded-xl p-6 text-center space-y-3">
+                            <i class="fa-solid fa-circle-xmark text-4xl text-red-500"></i>
+                            <h3 class="font-bold text-red-700">Credential Not Found</h3>
+                            <p class="text-sm text-slate-600">The certificate or admission number you entered could not be verified in our system.</p>
+                            <p class="text-xs text-slate-400">Please check the number and try again. If the issue persists, contact the academy administration.</p>
+                        </div>
+                    `;
+                    showNotification("Credential not found.", "error");
+                }
+            } catch (err) {
+                console.error("Verification error:", err);
+                resultArea.innerHTML =
+                    `<div class="p-6 bg-red-50 border border-red-200 rounded-xl text-center text-sm text-red-700">Verification failed: ${err.message}</div>`;
+                showNotification("Verification error: " + err.message, "error");
+            }
+        }
 
         // ================================================================
         // PROFILE SETTINGS
@@ -1771,6 +3019,7 @@ Ensure all 30 questions are present and the answer value exactly matches one of 
         }
 
         function openCompletionModal() { document.getElementById('completion-modal').classList.remove('hidden'); }
+
         function closeCompletionModal() { document.getElementById('completion-modal').classList.add('hidden'); }
 
         async function handleProfileCompletion(e) {
@@ -1784,10 +3033,14 @@ Ensure all 30 questions are present and the answer value exactly matches one of 
                 const currentCourses = currentUserSession.courses || [];
                 if (!currentCourses.includes(courseId)) currentCourses.push(courseId);
                 await db.collection(`artifacts/${appId}/public/data/students`).doc(currentUserSession.appId).update({
-                    photo, courses: currentCourses, experience, remark,
+                    photo,
+                    courses: currentCourses,
+                    experience,
+                    remark,
                     dob: currentUserSession.dob || "2000-01-01"
                 });
-                currentUserSession = { ...currentUserSession, photo, courses: currentCourses, experience, remark, dob: currentUserSession.dob || "2000-01-01" };
+                currentUserSession = { ...currentUserSession, photo, courses: currentCourses, experience, remark, dob: currentUserSession
+                        .dob || "2000-01-01" };
                 closeCompletionModal();
                 showNotification("Profile setup complete!", "success");
                 loadStudentDashboard();
@@ -1813,20 +3066,26 @@ Ensure all 30 questions are present and the answer value exactly matches one of 
         function loadAdminDashboard() {
             document.getElementById('admin-paystack-key').value = configState.paystackKey || "";
             document.getElementById('admin-registration-toggle').checked = configState.registrationOpen !== false;
+            if (configState.ceoSignature) {
+                document.getElementById('admin-ceo-signature-preview').src = configState.ceoSignature;
+            }
             db.collection(`artifacts/${appId}/public/data/students`).onSnapshot((snap) => {
                 renderAdminStudentsTable(snap.docs.map(d => ({ id: d.id, ...d.data() })));
             }, err => showNotification("Could not load students: " + err.message, "error"));
             renderAdminLessonsTable();
+            renderAdminCoursesList();
         }
 
         function switchAdminTab(tabName) {
             document.querySelectorAll('.admin-tab-panel').forEach(p => p.classList.add('hidden'));
             document.getElementById(`admin-tab-${tabName}`).classList.remove('hidden');
             document.querySelectorAll('.admin-tab-btn').forEach(btn => {
-                const isActive = btn.innerText.toLowerCase().replace('&', '').includes(tabName.replace('gateways', 'gateway').replace('students', 'student').replace('courses', 'course').replace('tutors', 'tutor'));
-                btn.className = isActive
-                    ? "admin-tab-btn px-4 py-2 text-sm font-bold border-b-2 border-navy-700 text-navy-700"
-                    : "admin-tab-btn px-4 py-2 text-sm font-semibold text-slate-500";
+                const isActive = btn.innerText.toLowerCase().replace('&', '').includes(tabName.replace('gateways',
+                    'gateway').replace('students', 'student').replace('courses', 'course').replace('tutors',
+                    'tutor'));
+                btn.className = isActive ?
+                    "admin-tab-btn px-4 py-2 text-sm font-bold border-b-2 border-navy-700 text-navy-700" :
+                    "admin-tab-btn px-4 py-2 text-sm font-semibold text-slate-500";
             });
         }
 
@@ -1838,16 +3097,16 @@ Ensure all 30 questions are present and the answer value exactly matches one of 
                 return;
             }
             body.innerHTML = students.map(student => {
-                const targetCourseName = student.courses?.length > 0
-                    ? (coursesState.find(c => c.id === student.courses[0])?.name || "Multiple Courses")
-                    : "No primary course";
-                const paymentStatus = student.courses?.length > 0
-                    ? (student.payments && student.payments[student.courses[0]]) || "Unpaid"
-                    : "Unpaid";
+                const targetCourseName = student.courses?.length > 0 ?
+                    (coursesState.find(c => c.id === student.courses[0])?.name || "Multiple Courses") :
+                    "No primary course";
+                const paymentStatus = student.courses?.length > 0 ?
+                    (student.payments && student.payments[student.courses[0]]) || "Unpaid" :
+                    "Unpaid";
                 const isPaid = paymentStatus === "Paid";
-                const payButton = isPaid
-                    ? `<button onclick="toggleStudentPaymentStatus('${student.id}', 'Unpaid')" class="px-2 py-1 bg-yellow-100 hover:bg-yellow-200 text-yellow-800 text-xs rounded transition"><i class="fa-solid fa-ban"></i> Block</button>`
-                    : `<button onclick="toggleStudentPaymentStatus('${student.id}', 'Paid')" class="px-2 py-1 bg-green-100 hover:bg-green-200 text-green-800 text-xs rounded transition"><i class="fa-solid fa-check-double"></i> Verify Paid</button>`;
+                const payButton = isPaid ?
+                    `<button onclick="toggleStudentPaymentStatus('${student.id}', 'Unpaid')" class="px-2 py-1 bg-yellow-100 hover:bg-yellow-200 text-yellow-800 text-xs rounded transition"><i class="fa-solid fa-ban"></i> Block</button>` :
+                    `<button onclick="toggleStudentPaymentStatus('${student.id}', 'Paid')" class="px-2 py-1 bg-green-100 hover:bg-green-200 text-green-800 text-xs rounded transition"><i class="fa-solid fa-check-double"></i> Verify Paid</button>`;
                 return `<tr class="hover:bg-slate-50 transition border-b">
                     <td class="p-4 font-bold text-navy-brand"><div class="flex items-center gap-2">
                         <img src="${student.photo || 'https://placehold.co/100'}" class="w-8 h-8 rounded object-cover" onerror="this.src='https://placehold.co/32'"><span>${student.name}</span></div></td>
@@ -1886,32 +3145,163 @@ Ensure all 30 questions are present and the answer value exactly matches one of 
             } catch (err) { showNotification("Could not delete: " + err.message, "error"); }
         }
 
-        async function handleCreateCourse(e) {
-            e.preventDefault();
-            const name = document.getElementById('admin-course-name').value;
-            const intro = document.getElementById('admin-course-intro').value;
-            const duration = document.getElementById('admin-course-duration').value;
-            const fee = document.getElementById('admin-course-fee').value;
-            const curriculum = document.getElementById('admin-course-curriculum').value;
-            const courseId = "course-" + Date.now();
-            try {
-                await db.collection(`artifacts/${appId}/public/data/courses`).doc(courseId).set({ id: courseId, name, intro, duration, fee, curriculum });
-                ['admin-course-name','admin-course-intro','admin-course-duration','admin-course-fee','admin-course-curriculum'].forEach(id => { document.getElementById(id).value = ''; });
-                showNotification("Course published successfully!", "success");
-            } catch (err) { showNotification("Creation failed: " + err.message, "error"); }
+        // ================================================================
+        // ADMIN — COURSE MANAGEMENT (Edit/Delete)
+        // ================================================================
+        function renderAdminCoursesList() {
+            const container = document.getElementById('admin-courses-list');
+            if (!container) return;
+            if (coursesState.length === 0) {
+                container.innerHTML = `<p class="text-xs text-slate-400 py-2">No courses published yet.</p>`;
+                return;
+            }
+            container.innerHTML = coursesState.map(course => {
+                const lessons = lessonsState.filter(l => l.courseId === course.id);
+                return `
+                    <div class="border border-slate-200 rounded-xl p-4 bg-slate-50/50">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <h4 class="font-bold text-navy-brand">${course.name}</h4>
+                                <span class="text-xs text-slate-500">${course.duration} Weeks · ₦${parseFloat(course.fee).toLocaleString()} · ${lessons.length} Lessons</span>
+                            </div>
+                            <div class="flex gap-2">
+                                <button onclick="toggleEditCourse('${course.id}')" class="px-3 py-1.5 bg-navy-700 text-white text-xs rounded-lg hover:bg-navy-900 transition"><i class="fa-solid fa-pen"></i> Edit</button>
+                                <button onclick="handleAdminDeleteCourse('${course.id}')" class="px-3 py-1.5 bg-red-brand text-white text-xs rounded-lg hover:bg-brandRed-900 transition"><i class="fa-solid fa-trash"></i></button>
+                            </div>
+                        </div>
+                        <div id="edit-course-${course.id}" class="hidden mt-3 edit-inline-form">
+                            <div class="space-y-3">
+                                <input type="text" id="edit-course-name-${course.id}" value="${course.name.replace(/"/g,'&quot;')}" placeholder="Course Name">
+                                <textarea id="edit-course-intro-${course.id}" rows="2" placeholder="Introduction">${course.intro.replace(/"/g,'&quot;')}</textarea>
+                                <div class="grid grid-cols-2 gap-3">
+                                    <input type="number" id="edit-course-duration-${course.id}" value="${course.duration}" placeholder="Duration (Weeks)">
+                                    <input type="number" id="edit-course-fee-${course.id}" value="${course.fee}" placeholder="Fee (NGN)">
+                                </div>
+                                <textarea id="edit-course-curriculum-${course.id}" rows="3" placeholder="Curriculum">${course.curriculum ? course.curriculum.replace(/"/g,'&quot;') : ''}</textarea>
+                                <div class="btn-row">
+                                    <button type="button" class="cancel-btn" onclick="toggleEditCourse('${course.id}')">Cancel</button>
+                                    <button type="button" class="save-btn" onclick="saveCourseEdit('${course.id}')">Save Changes</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
         }
 
+        function toggleEditCourse(courseId) {
+            const el = document.getElementById(`edit-course-${courseId}`);
+            if (el) el.classList.toggle('hidden');
+        }
+
+        async function saveCourseEdit(courseId) {
+            const name = document.getElementById(`edit-course-name-${courseId}`).value.trim();
+            const intro = document.getElementById(`edit-course-intro-${courseId}`).value.trim();
+            const duration = document.getElementById(`edit-course-duration-${courseId}`).value;
+            const fee = document.getElementById(`edit-course-fee-${courseId}`).value;
+            const curriculum = document.getElementById(`edit-course-curriculum-${courseId}`).value.trim();
+
+            if (!name || !intro || !duration || !fee) {
+                showNotification("Please fill all required fields.", "error");
+                return;
+            }
+
+            try {
+                await db.collection(`artifacts/${appId}/public/data/courses`).doc(courseId).update({
+                    name,
+                    intro,
+                    duration: parseInt(duration),
+                    fee: parseFloat(fee),
+                    curriculum
+                });
+                showNotification("Course updated successfully!", "success");
+                toggleEditCourse(courseId);
+            } catch (err) {
+                showNotification("Update failed: " + err.message, "error");
+            }
+        }
+
+        async function handleAdminDeleteCourse(courseId) {
+            if (!confirm("Delete this course and all its lessons? This cannot be undone.")) return;
+            try {
+                const lessonsToDelete = lessonsState.filter(l => l.courseId === courseId);
+                for (const l of lessonsToDelete) {
+                    await db.collection(`artifacts/${appId}/public/data/lessons`).doc(l.id).delete();
+                }
+                await db.collection(`artifacts/${appId}/public/data/courses`).doc(courseId).delete();
+                showNotification("Course and lessons deleted.", "success");
+            } catch (err) { showNotification("Delete failed: " + err.message, "error"); }
+        }
+
+        // ================================================================
+        // ADMIN — CREATE COURSE (FIXED)
+        // ================================================================
+        async function handleCreateCourse(e) {
+            e.preventDefault();
+            const name = document.getElementById('admin-course-name').value.trim();
+            const intro = document.getElementById('admin-course-intro').value.trim();
+            const duration = document.getElementById('admin-course-duration').value;
+            const fee = document.getElementById('admin-course-fee').value;
+            const curriculum = document.getElementById('admin-course-curriculum').value.trim();
+
+            if (!name || !intro || !duration || !fee || !curriculum) {
+                showNotification("Please fill all fields.", "error");
+                return;
+            }
+
+            const courseId = "course-" + Date.now();
+            try {
+                await db.collection(`artifacts/${appId}/public/data/courses`).doc(courseId).set({
+                    id: courseId,
+                    name,
+                    intro,
+                    duration: parseInt(duration),
+                    fee: parseFloat(fee),
+                    curriculum,
+                    avgRating: 0,
+                    ratingCount: 0
+                });
+                document.getElementById('admin-course-name').value = '';
+                document.getElementById('admin-course-intro').value = '';
+                document.getElementById('admin-course-duration').value = '';
+                document.getElementById('admin-course-fee').value = '';
+                document.getElementById('admin-course-curriculum').value = '';
+                showNotification("Course published successfully!", "success");
+            } catch (err) {
+                showNotification("Creation failed: " + err.message, "error");
+            }
+        }
+
+        // ================================================================
+        // ADMIN — LESSON MANAGEMENT (with Video)
+        // ================================================================
         async function handleCreateLesson(e) {
             e.preventDefault();
             const courseId = document.getElementById('admin-lesson-course').value;
-            const title = document.getElementById('admin-lesson-title').value;
+            const title = document.getElementById('admin-lesson-title').value.trim();
             const duration = document.getElementById('admin-lesson-duration').value;
             const index = document.getElementById('admin-lesson-index').value;
-            const body = document.getElementById('admin-lesson-body').value;
+            const video = document.getElementById('admin-lesson-video').value.trim();
+            const body = document.getElementById('admin-lesson-body').value.trim();
+
+            if (!title || !duration || !index || !body) {
+                showNotification("Please fill all required fields.", "error");
+                return;
+            }
+
             const lessonId = "lesson-" + Date.now();
             try {
-                await db.collection(`artifacts/${appId}/public/data/lessons`).doc(lessonId).set({ id: lessonId, courseId, title, duration, index, body });
-                ['admin-lesson-title','admin-lesson-duration','admin-lesson-index','admin-lesson-body'].forEach(id => { document.getElementById(id).value = ''; });
+                await db.collection(`artifacts/${appId}/public/data/lessons`).doc(lessonId).set({
+                    id: lessonId,
+                    courseId,
+                    title,
+                    duration: parseInt(duration),
+                    index: parseInt(index),
+                    video: video || "",
+                    body
+                });
+                ['admin-lesson-title', 'admin-lesson-duration', 'admin-lesson-index', 'admin-lesson-video', 'admin-lesson-body']
+                .forEach(id => { document.getElementById(id).value = ''; });
                 showNotification("Lesson published successfully!", "success");
             } catch (err) { showNotification("Creation failed: " + err.message, "error"); }
         }
@@ -1919,35 +3309,81 @@ Ensure all 30 questions are present and the answer value exactly matches one of 
         function renderAdminLessonsTable() {
             const list = document.getElementById('admin-lessons-list');
             if (!list) return;
-            db.collection(`artifacts/${appId}/public/data/lessons`).onSnapshot((snap) => {
-                const lessons = snap.docs.map(d => d.data()).sort((a, b) => parseInt(a.index) - parseInt(b.index));
-                if (lessons.length === 0) { list.innerHTML = `<p class="text-xs text-slate-400 py-3">No lesson modules published yet.</p>`; return; }
-                list.innerHTML = lessons.map(les => {
-                    const cName = coursesState.find(c => c.id === les.courseId)?.name || "Unknown Course";
-                    return `<div class="flex items-center justify-between py-3 border-b border-slate-100">
-                        <div><span class="text-[10px] font-bold text-red-brand uppercase tracking-wider">${cName}</span><h5 class="text-sm font-bold text-navy-brand mt-0.5">${les.index}. ${les.title}</h5></div>
-                        <button onclick="handleDeleteLesson('${les.id}')" class="p-1.5 bg-red-50 text-red-600 rounded hover:bg-red-100 transition text-xs"><i class="fa-solid fa-trash"></i></button>
-                    </div>`;
-                }).join('');
-            }, err => showNotification("Could not load lessons: " + err.message, "error"));
+            const sorted = [...lessonsState].sort((a, b) => parseInt(a.index) - parseInt(b.index));
+            if (sorted.length === 0) { list.innerHTML =
+                    `<p class="text-xs text-slate-400 py-3">No lesson modules published yet.</p>`; return; }
+            list.innerHTML = sorted.map(les => {
+                const cName = coursesState.find(c => c.id === les.courseId)?.name || "Unknown Course";
+                const hasVideo = les.video && les.video.trim() !== '';
+                return `<div class="flex items-center justify-between py-3 border-b border-slate-100">
+                    <div>
+                        <span class="text-[10px] font-bold text-red-brand uppercase tracking-wider">${cName}</span>
+                        <h5 class="text-sm font-bold text-navy-brand mt-0.5">${les.index}. ${les.title}</h5>
+                        <span class="text-[10px] text-slate-400">${les.duration} min ${hasVideo ? '· 🎬 Video' : ''}</span>
+                    </div>
+                    <div class="flex gap-2">
+                        <button onclick="editLesson('${les.id}')" class="px-2 py-1 bg-navy-700 text-white text-xs rounded hover:bg-navy-900 transition"><i class="fa-solid fa-pen"></i></button>
+                        <button onclick="handleDeleteLesson('${les.id}')" class="px-2 py-1 bg-red-50 text-red-600 rounded hover:bg-red-100 transition text-xs"><i class="fa-solid fa-trash"></i></button>
+                    </div>
+                </div>`;
+            }).join('');
+        }
+
+        async function editLesson(lessonId) {
+            const lesson = lessonsState.find(l => l.id === lessonId);
+            if (!lesson) return;
+            const newTitle = prompt("Edit lesson title:", lesson.title);
+            if (newTitle === null) return;
+            const newDuration = prompt("Edit duration (minutes):", lesson.duration);
+            if (newDuration === null) return;
+            const newIndex = prompt("Edit lesson index (order):", lesson.index);
+            if (newIndex === null) return;
+            const newVideo = prompt("Edit video URL (YouTube embed):", lesson.video || "");
+            if (newVideo === null) return;
+            const newBody = prompt("Edit lesson content (HTML):", lesson.body);
+            if (newBody === null) return;
+
+            try {
+                await db.collection(`artifacts/${appId}/public/data/lessons`).doc(lessonId).update({
+                    title: newTitle.trim(),
+                    duration: parseInt(newDuration),
+                    index: parseInt(newIndex),
+                    video: newVideo.trim(),
+                    body: newBody.trim()
+                });
+                showNotification("Lesson updated!", "success");
+            } catch (err) { showNotification("Update failed: " + err.message, "error"); }
         }
 
         async function handleDeleteLesson(lessonId) {
-            if (!confirm("Delete this syllabus lesson?")) return;
-            try { await db.collection(`artifacts/${appId}/public/data/lessons`).doc(lessonId).delete(); showNotification("Lesson deleted.", "success"); }
-            catch (err) { showNotification("Delete error: " + err.message, "error"); }
+            if (!confirm("Delete this lesson?")) return;
+            try {
+                await db.collection(`artifacts/${appId}/public/data/lessons`).doc(lessonId).delete();
+                showNotification("Lesson deleted.", "success");
+            } catch (err) { showNotification("Delete error: " + err.message, "error"); }
         }
 
+        // ================================================================
+        // ADMIN — TUTOR MANAGEMENT
+        // ================================================================
         async function handleCreateTutor(e) {
             e.preventDefault();
             const courseId = document.getElementById('admin-tutor-course').value;
-            const name = document.getElementById('admin-tutor-name').value;
-            const photo = document.getElementById('admin-tutor-photo').value;
-            const signature = document.getElementById('admin-tutor-signature').value;
+            const name = document.getElementById('admin-tutor-name').value.trim();
+            const photo = document.getElementById('admin-tutor-photo').value.trim();
+            const signature = document.getElementById('admin-tutor-signature').value.trim();
+
+            if (!name || !photo || !signature) {
+                showNotification("Please fill all fields.", "error");
+                return;
+            }
+
             const tutorId = "tutor-" + Date.now();
             try {
-                await db.collection(`artifacts/${appId}/public/data/tutors`).doc(tutorId).set({ id: tutorId, courseId, name, photo, signature });
-                ['admin-tutor-name','admin-tutor-photo','admin-tutor-signature'].forEach(id => { document.getElementById(id).value = ''; });
+                await db.collection(`artifacts/${appId}/public/data/tutors`).doc(tutorId).set({ id: tutorId, courseId, name, photo,
+                    signature });
+                ['admin-tutor-name', 'admin-tutor-photo', 'admin-tutor-signature'].forEach(id => { document.getElementById(id)
+                        .value = ''; });
                 showNotification("Tutor registered successfully!", "success");
             } catch (err) { showNotification("Registration failed: " + err.message, "error"); }
         }
@@ -1955,7 +3391,8 @@ Ensure all 30 questions are present and the answer value exactly matches one of 
         function populateTutorsUI() {
             const grid = document.getElementById('admin-tutors-list-grid');
             if (!grid) return;
-            if (tutorsState.length === 0) { grid.innerHTML = `<p class="text-xs text-slate-400 py-3">No registered faculty members.</p>`; return; }
+            if (tutorsState.length === 0) { grid.innerHTML =
+                    `<p class="text-xs text-slate-400 py-3">No registered faculty members.</p>`; return; }
             grid.innerHTML = tutorsState.map(t => {
                 const cName = coursesState.find(c => c.id === t.courseId)?.name || "General Course";
                 return `<div class="bg-slate-50 border border-slate-200 p-4 rounded-xl flex items-center justify-between">
@@ -1970,14 +3407,35 @@ Ensure all 30 questions are present and the answer value exactly matches one of 
 
         async function handleDeleteTutor(tutorId) {
             if (!confirm("Delete this faculty tutor member?")) return;
-            try { await db.collection(`artifacts/${appId}/public/data/tutors`).doc(tutorId).delete(); showNotification("Tutor deleted.", "success"); }
-            catch (err) { showNotification("Delete error: " + err.message, "error"); }
+            try {
+                await db.collection(`artifacts/${appId}/public/data/tutors`).doc(tutorId).delete();
+                showNotification("Tutor deleted.", "success");
+            } catch (err) { showNotification("Delete error: " + err.message, "error"); }
         }
 
-        // FIX: use db.doc() with set({merge:true}) — not db.collection() which caused settings to never save
+        // ================================================================
+        // ADMIN — CEO SIGNATURE
+        // ================================================================
+        async function handleUploadCeoSignature(e) {
+            e.preventDefault();
+            const url = document.getElementById('admin-ceo-signature').value.trim();
+            if (!url) { showNotification("Please enter a valid image URL.", "error"); return; }
+
+            try {
+                await db.doc(`artifacts/${appId}/public/settings`).set({ ceoSignature: url }, { merge: true });
+                configState.ceoSignature = url;
+                document.getElementById('admin-ceo-signature-preview').src = url;
+                document.getElementById('admin-ceo-signature').value = '';
+                showNotification("CEO Signature uploaded successfully!", "success");
+            } catch (err) { showNotification("Upload failed: " + err.message, "error"); }
+        }
+
+        // ================================================================
+        // ADMIN — CONFIG
+        // ================================================================
         async function handleSaveConfig(e) {
             e.preventDefault();
-            const paystackKey = document.getElementById('admin-paystack-key').value;
+            const paystackKey = document.getElementById('admin-paystack-key').value.trim();
             const registrationOpen = document.getElementById('admin-registration-toggle').checked;
             try {
                 await db.doc(`artifacts/${appId}/public/settings`).set({ paystackKey, registrationOpen }, { merge: true });
@@ -1985,6 +3443,9 @@ Ensure all 30 questions are present and the answer value exactly matches one of 
             } catch (err) { showNotification("Config save failed: " + err.message, "error"); }
         }
 
+        // ================================================================
+        // ADMIN — STUDENT EDIT MODAL
+        // ================================================================
         async function openAdminStudentModal(studentId) {
             try {
                 const doc = await db.collection(`artifacts/${appId}/public/data/students`).doc(studentId).get();
@@ -1992,7 +3453,6 @@ Ensure all 30 questions are present and the answer value exactly matches one of 
                 const s = doc.data();
                 document.getElementById('edit-student-docid').value = studentId;
                 document.getElementById('edit-student-name').value = s.name;
-                // FIX: ensure dropdown is populated before setting value
                 populateFormDropdowns();
                 setTimeout(() => {
                     if (s.courses?.length > 0) document.getElementById('edit-student-course').value = s.courses[0];
@@ -2009,10 +3469,13 @@ Ensure all 30 questions are present and the answer value exactly matches one of 
         async function handleAdminUpdateStudent(e) {
             e.preventDefault();
             const id = document.getElementById('edit-student-docid').value;
-            const name = document.getElementById('edit-student-name').value;
+            const name = document.getElementById('edit-student-name').value.trim();
             const courseId = document.getElementById('edit-student-course').value;
             const paymentStatus = document.getElementById('edit-student-payment').value;
             const newPasswordRaw = document.getElementById('edit-student-newpassword').value;
+
+            if (!name) { showNotification("Name is required.", "error"); return; }
+
             try {
                 const ref = db.collection(`artifacts/${appId}/public/data/students`).doc(id);
                 const doc = await ref.get();
@@ -2034,6 +3497,7 @@ Ensure all 30 questions are present and the answer value exactly matches one of 
         // AI CHAT — CONVERSATIONAL REGISTRATION
         // ================================================================
         let conversationState = { active: false, step: 0, payload: { name: '', email: '', password: '' } };
+        let chatLoadingEl = null;
 
         function appendInput(text) { document.getElementById('chat-message-input').value = text; }
 
@@ -2045,7 +3509,8 @@ Ensure all 30 questions are present and the answer value exactly matches one of 
 
         function resetChat() {
             conversationState = { active: false, step: 0, payload: { name: '', email: '', password: '' } };
-            document.getElementById('chat-messages-area').innerHTML = `<div class="flex items-start gap-2.5">
+            document.getElementById('chat-messages-area').innerHTML =
+                `<div class="flex items-start gap-2.5">
                 <div class="bg-navy-50 text-slate-800 p-3 rounded-2xl rounded-tl-none max-w-[85%] text-sm">
                     Hello! I am the official <strong>BITCAGS LTD AI Learning Companion</strong>. Feel free to ask me anything about our curriculum, courses, campus location, or type
                     <code class="bg-navy-100 px-1 py-0.5 rounded cursor-pointer text-red-brand font-bold" onclick="appendInput('register me')">register me</code> to register automatically.
@@ -2075,28 +3540,23 @@ Ensure all 30 questions are present and the answer value exactly matches one of 
             const wrapper = document.createElement('div');
             wrapper.className = isUser ? "flex items-start justify-end gap-2.5" : "flex items-start gap-2.5";
             const msgDiv = document.createElement('div');
-            msgDiv.className = isUser
-                ? "bg-navy-brand text-white p-3 rounded-2xl rounded-tr-none max-w-[85%] text-sm shadow-sm"
-                : "bg-slate-100 text-slate-800 p-3 rounded-2xl rounded-tl-none max-w-[85%] text-sm shadow-sm";
-            if (sender === 'loading') {
-                msgDiv.setAttribute('data-loading', 'true');
-                msgDiv.className = "bg-slate-100 text-slate-800 p-3 rounded-2xl rounded-tl-none max-w-[85%] text-sm shadow-sm";
-            }
+            msgDiv.className = isUser ?
+                "bg-navy-brand text-white p-3 rounded-2xl rounded-tr-none max-w-[85%] text-sm shadow-sm" :
+                "bg-slate-100 text-slate-800 p-3 rounded-2xl rounded-tl-none max-w-[85%] text-sm shadow-sm";
             msgDiv.innerHTML = isUser ? text : formatMarkdownToHtml(text);
             wrapper.appendChild(msgDiv);
             area.appendChild(wrapper);
             area.scrollTop = area.scrollHeight;
-            return wrapper; // return so we can remove it
+            return wrapper;
         }
 
-        // FIX: use a dedicated loading indicator element rather than removing lastElementChild blindly
-        let chatLoadingEl = null;
         function showChatLoading() {
             const area = document.getElementById('chat-messages-area');
             const wrapper = document.createElement('div');
             wrapper.className = "flex items-start gap-2.5";
             wrapper.setAttribute('data-chat-loading', 'true');
-            wrapper.innerHTML = `<div class="bg-slate-100 text-slate-500 p-3 rounded-2xl rounded-tl-none text-sm shadow-sm">
+            wrapper.innerHTML =
+                `<div class="bg-slate-100 text-slate-500 p-3 rounded-2xl rounded-tl-none text-sm shadow-sm">
                 <i class="fa-solid fa-spinner animate-spin mr-1"></i> Brainstorming educational parameters...
             </div>`;
             area.appendChild(wrapper);
@@ -2115,33 +3575,42 @@ Ensure all 30 questions are present and the answer value exactly matches one of 
             const msgLower = message.toLowerCase().trim();
             if (msgLower === 'register me') {
                 if (!configState.registrationOpen) {
-                    appendMessageToStream('bot', "I apologize, but BITCAGS Academy registration intake portal is currently closed by administration. Please check back later.");
+                    appendMessageToStream('bot',
+                        "I apologize, but BITCAGS Academy registration intake portal is currently closed by administration. Please check back later."
+                        );
                     return;
                 }
                 conversationState = { active: true, step: 1, payload: { name: '', email: '', password: '' } };
-                appendMessageToStream('bot', "Hello! I am the BITCAGS AI Virtual Registrar. Let's create your account instantly.<br><br>First, please type your <strong>Full Name</strong>:");
+                appendMessageToStream('bot',
+                    "Hello! I am the BITCAGS AI Virtual Registrar. Let's create your account instantly.<br><br>First, please type your <strong>Full Name</strong>:"
+                    );
                 return;
             }
             if (conversationState.step === 1) {
-                conversationState.payload.name = message;
+                if (!message.trim()) { appendMessageToStream('bot', "Please enter your full name."); return; }
+                conversationState.payload.name = message.trim();
                 conversationState.step = 2;
-                appendMessageToStream('bot', `Great! Thank you, <strong>${message}</strong>.<br><br>Now, please enter your secure <strong>Gmail Address</strong>:`);
+                appendMessageToStream('bot',
+                    `Great! Thank you, <strong>${message.trim()}</strong>.<br><br>Now, please enter your secure <strong>Gmail Address</strong>:`
+                    );
                 return;
             }
             if (conversationState.step === 2) {
-                if (!message.includes('@')) {
-                    appendMessageToStream('bot', "Oops, that doesn't look like a valid Gmail address. Please provide a real Gmail address (e.g. yourname@gmail.com):");
+                if (!message.includes('@') || !message.includes('.')) {
+                    appendMessageToStream('bot',
+                        "Oops, that doesn't look like a valid email address. Please provide a real Gmail address (e.g. yourname@gmail.com):"
+                        );
                     return;
                 }
-                conversationState.payload.email = message;
+                conversationState.payload.email = message.trim();
                 conversationState.step = 3;
                 appendMessageToStream('bot', "Excellent.<br><br>Lastly, type a secure <strong>Password</strong> (minimum 6 characters):");
                 return;
             }
             if (conversationState.step === 3) {
-                // FIX: check raw length BEFORE hashing (was checking after, which always passed)
                 if (message.length < 6) {
-                    appendMessageToStream('bot', "Safety alert! Your password must be at least 6 characters long. Please enter a longer password:");
+                    appendMessageToStream('bot',
+                        "Safety alert! Your password must be at least 6 characters long. Please enter a longer password:");
                     return;
                 }
                 const registrationId = "BTC-" + Math.floor(10000 + Math.random() * 90000);
@@ -2152,10 +3621,14 @@ Ensure all 30 questions are present and the answer value exactly matches one of 
                         name: conversationState.payload.name,
                         email: conversationState.payload.email,
                         password: hashedPassword,
-                        courses: [], payments: {}, quizzesPassed: {},
+                        courses: [],
+                        payments: {},
+                        quizzesPassed: {},
                         registeredAt: firebase.firestore.FieldValue.serverTimestamp()
                     });
-                    appendMessageToStream('bot', `🎉 <strong>SUCCESS!</strong> Your student account is registered.<br><br>Your secure <strong>App ID</strong> is: <strong class="text-red-brand bg-slate-100 px-2 py-1 rounded font-mono select-all">${registrationId}</strong>.<br><br>When you log in, the system will prompt a <strong>Continue Registration</strong> form to complete your profile. Let me redirect you to log in.`);
+                    appendMessageToStream('bot',
+                        `🎉 <strong>SUCCESS!</strong> Your student account is registered.<br><br>Your secure <strong>App ID</strong> is: <strong class="text-red-brand bg-slate-100 px-2 py-1 rounded font-mono select-all">${registrationId}</strong>.<br><br>When you log in, the system will prompt a <strong>Continue Registration</strong> form to complete your profile. Let me redirect you to log in.`
+                        );
                     conversationState = { active: false, step: 0, payload: { name: '', email: '', password: '' } };
                     setTimeout(() => {
                         navigateTo('student-login');
@@ -2170,7 +3643,8 @@ Ensure all 30 questions are present and the answer value exactly matches one of 
 
         async function fetchGroqGeneralResponse(userQuery) {
             showChatLoading();
-            const bitcagsSystemPrompt = `You are the official BITCAGS LTD AI Learning Assistant for a state-of-the-art technological academy located at OH17 Janbulo 2nd Gate, Gwarzo Road, Kano State, Nigeria, offering premium tech courses such as Full Stack Development, Cloud Engineering, and Cyber Security.
+            const bitcagsSystemPrompt =
+                `You are the official BITCAGS LTD AI Learning Assistant for a state-of-the-art technological academy located at OH17 Janbulo 2nd Gate, Gwarzo Road, Kano State, Nigeria, offering premium tech courses such as Full Stack Development, Cloud Engineering, and Cyber Security.
 Current course catalogue:
 ${coursesState.map(c => `- ${c.name}: Fee NGN ${c.fee}, Duration ${c.duration} Weeks. ${c.intro}`).join('\n')}
 Answer questions about lessons, tech topics, syllabus details, campus location, or registration details gracefully. Match the tone of an elegant tech professor. Be direct and helpful.`;
@@ -2188,13 +3662,15 @@ Answer questions about lessons, tech topics, syllabus details, campus location, 
                         temperature: 0.7
                     })
                 });
-                if (!response.ok) { const t = await response.text(); throw new Error(`HTTP ${response.status}: ${t.slice(0,200)}`); }
+                if (!response.ok) { const t = await response.text(); throw new Error(`HTTP ${response.status}: ${t.slice(0,
+                        200)}`); }
                 const result = await response.json();
                 removeChatLoading();
                 appendMessageToStream('bot', result.choices[0].message.content);
             } catch (err) {
                 removeChatLoading();
-                appendMessageToStream('bot', "Connection error — unable to get a response from Groq. Please retry. (" + err.message + ")");
+                appendMessageToStream('bot', "Connection error — unable to get a response from Groq. Please retry. (" + err
+                    .message + ")");
             }
         }
     </script>
