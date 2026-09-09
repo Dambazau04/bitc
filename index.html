@@ -490,100 +490,338 @@
         }
 
         /* ================================================================
-               STUDENT DASHBOARD — MATCHING MOCKUP
+               SIDEBAR — LMS style
             ================================================================ */
-        .dash-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 1.5rem 1.5rem 6rem;
+        .lms-sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            width: 260px;
+            background: #0B2E6D;
+            color: #fff;
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s ease;
+            overflow-y: auto;
+            overflow-x: hidden;
+            padding: 0 0 1.5rem 0;
+        }
+        .lms-sidebar .brand {
+            padding: 1.25rem 1.5rem 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            margin-bottom: 0.5rem;
+        }
+        .lms-sidebar .brand img {
+            height: 38px;
+            width: auto;
+            border-radius: 8px;
+        }
+        .lms-sidebar .brand .name {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            font-size: 1.15rem;
+            letter-spacing: -0.5px;
+            line-height: 1.1;
+        }
+        .lms-sidebar .brand .name span {
+            color: #facc15;
+        }
+        .lms-sidebar .brand .sub {
+            font-size: 0.5rem;
+            opacity: 0.6;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            display: block;
+            margin-top: -0.1rem;
         }
 
-        /* Profile header */
-        .dash-profile {
+        .lms-sidebar .nav {
+            flex: 1;
+            padding: 0.5rem 0.75rem;
+        }
+        .lms-sidebar .nav .nav-label {
+            font-size: 0.55rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            opacity: 0.4;
+            padding: 0.5rem 0.75rem 0.25rem;
+            font-weight: 600;
+        }
+        .lms-sidebar .nav .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.6rem 0.75rem;
+            border-radius: 10px;
+            color: rgba(255, 255, 255, 0.65);
+            font-size: 0.85rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: none;
+            background: none;
+            width: 100%;
+            text-align: left;
+        }
+        .lms-sidebar .nav .nav-item i {
+            width: 20px;
+            font-size: 1rem;
+            text-align: center;
+            flex-shrink: 0;
+        }
+        .lms-sidebar .nav .nav-item:hover {
+            background: rgba(255, 255, 255, 0.08);
+            color: #fff;
+        }
+        .lms-sidebar .nav .nav-item.active {
+            background: rgba(255, 255, 255, 0.12);
+            color: #fff;
+            font-weight: 600;
+        }
+        .lms-sidebar .nav .nav-item.active i {
+            color: #facc15;
+        }
+        .lms-sidebar .nav .nav-item.logout {
+            margin-top: 0.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            padding-top: 0.75rem;
+            color: rgba(255, 255, 255, 0.45);
+        }
+        .lms-sidebar .nav .nav-item.logout:hover {
+            color: #f87171;
+            background: rgba(248, 113, 113, 0.1);
+        }
+
+        /* Sidebar toggle (mobile) */
+        .sidebar-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: 99;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+        .sidebar-overlay.open {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .sidebar-toggle-btn {
+            background: none;
+            border: none;
+            color: #0B2E6D;
+            font-size: 1.4rem;
+            cursor: pointer;
+            padding: 0.25rem 0.5rem;
+            display: none;
+        }
+
+        /* Main content shift for sidebar */
+        .lms-main {
+            margin-left: 260px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        @media (max-width: 1024px) {
+            .lms-sidebar {
+                transform: translateX(-100%);
+            }
+            .lms-sidebar.open {
+                transform: translateX(0);
+            }
+            .sidebar-toggle-btn {
+                display: block;
+            }
+            .lms-main {
+                margin-left: 0;
+            }
+            .sidebar-overlay.open {
+                opacity: 1;
+                pointer-events: auto;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .lms-sidebar {
+                width: 280px;
+            }
+            .lms-sidebar .brand .name {
+                font-size: 1rem;
+            }
+        }
+
+        /* ================================================================
+               STUDENT DASHBOARD — LMS style
+            ================================================================ */
+        .dash-topbar {
+            background: #fff;
+            border-bottom: 1px solid #eef2f6;
+            padding: 0.75rem 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        .dash-topbar .left {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        .dash-topbar .left h1 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #0B2E6D;
+        }
+        .dash-topbar .right {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .dash-topbar .right .welcome {
+            font-size: 0.8rem;
+            color: #64748b;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+        .dash-topbar .right .welcome strong {
+            color: #0B2E6D;
+        }
+        .dash-topbar .right .avatar-sm {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #e2e8f0;
+            cursor: pointer;
+        }
+
+        .dash-content {
+            padding: 1.5rem 2rem 2.5rem;
+            flex: 1;
+        }
+
+        /* Profile summary card — compact */
+        .profile-summary {
+            background: #fff;
+            border-radius: 16px;
+            padding: 1.25rem 1.5rem;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+            border: 1px solid #eef2f6;
             display: flex;
             align-items: center;
             gap: 1.25rem;
-            padding: 1.5rem 1.5rem 1.25rem;
-            background: #fff;
-            border-radius: 20px;
-            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
-            margin-bottom: 1.5rem;
             flex-wrap: wrap;
+            margin-bottom: 1.5rem;
         }
-        .dash-profile .avatar {
-            width: 72px;
-            height: 72px;
+        .profile-summary .avatar {
+            width: 56px;
+            height: 56px;
             border-radius: 50%;
             object-fit: cover;
             border: 3px solid #0B2E6D;
-            background: #f1f5f9;
             flex-shrink: 0;
+            background: #f1f5f9;
         }
-        .dash-profile .info {
+        .profile-summary .info {
             flex: 1;
             min-width: 160px;
         }
-        .dash-profile .info h2 {
-            font-size: 1.4rem;
-            font-weight: 800;
+        .profile-summary .info .name {
+            font-size: 1.1rem;
+            font-weight: 700;
             color: #0B2E6D;
-            margin-bottom: 0.1rem;
         }
-        .dash-profile .info .app-id {
-            font-size: 0.75rem;
+        .profile-summary .info .app-id {
+            font-size: 0.7rem;
             color: #94a3b8;
             font-family: monospace;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.3px;
         }
-        .dash-profile .badges {
+        .profile-summary .info .badges {
             display: flex;
-            gap: 0.5rem;
-            margin-top: 0.3rem;
+            gap: 0.4rem;
+            margin-top: 0.2rem;
             flex-wrap: wrap;
         }
-        .dash-profile .badges .badge {
-            padding: 0.15rem 0.9rem;
+        .profile-summary .info .badges .badge {
+            padding: 0.1rem 0.7rem;
             border-radius: 999px;
-            font-size: 0.65rem;
+            font-size: 0.6rem;
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.03em;
         }
-        .dash-profile .badges .badge.level {
+        .profile-summary .info .badges .badge.level {
             background: #eef2ff;
             color: #0B2E6D;
         }
-        .dash-profile .badges .badge.verified {
+        .profile-summary .info .badges .badge.verified {
             background: #dcfce7;
             color: #166534;
         }
-
-        /* Section title */
-        .dash-section-title {
-            font-size: 1.1rem;
+        .profile-summary .info .badges .badge.pending {
+            background: #fef9c3;
+            color: #854d0e;
+        }
+        .profile-summary .progress-mini {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-left: auto;
+            flex-wrap: wrap;
+        }
+        .profile-summary .progress-mini .stat {
+            font-size: 0.7rem;
+            color: #64748b;
+            text-align: right;
+        }
+        .profile-summary .progress-mini .stat strong {
+            color: #0B2E6D;
             font-weight: 700;
-            color: #0f172a;
-            margin-bottom: 0.75rem;
+            display: block;
+            font-size: 0.9rem;
         }
-        .dash-section-title .sub {
-            font-weight: 400;
-            color: #94a3b8;
-            font-size: 0.8rem;
+        .profile-summary .progress-mini .bar-wrap {
+            width: 100px;
+            height: 4px;
+            background: #e9edf4;
+            border-radius: 999px;
+            overflow: hidden;
+        }
+        .profile-summary .progress-mini .bar-wrap .fill {
+            height: 100%;
+            background: #0B2E6D;
+            border-radius: 999px;
+            transition: width 0.5s ease;
         }
 
-        /* Tabs */
+        /* Dashboard tabs — compact */
         .dash-tabs {
             display: flex;
             gap: 0.25rem;
             background: #f1f5f9;
             border-radius: 12px;
             padding: 0.25rem;
-            margin-bottom: 1.25rem;
-            max-width: 320px;
+            margin-bottom: 1.5rem;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            flex-wrap: nowrap;
         }
         .dash-tabs .tab-btn {
-            flex: 1;
-            padding: 0.5rem 0.8rem;
+            padding: 0.45rem 1rem;
             border-radius: 10px;
             font-size: 0.75rem;
             font-weight: 600;
@@ -592,7 +830,8 @@
             color: #94a3b8;
             cursor: pointer;
             transition: 0.2s;
-            text-align: center;
+            white-space: nowrap;
+            flex-shrink: 0;
         }
         .dash-tabs .tab-btn:hover {
             color: #475569;
@@ -602,461 +841,203 @@
             color: #0B2E6D;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
         }
-
-        /* Course cards — grid */
-        .dash-course-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-            gap: 1rem;
-            margin-bottom: 2rem;
+        .dash-tabs .tab-btn i {
+            margin-right: 0.3rem;
         }
-        .dash-course-card {
+
+        /* Course cards — with thumbnails, progress */
+        .course-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 1.25rem;
+            margin-bottom: 1.5rem;
+        }
+        .course-card {
             background: #fff;
             border-radius: 16px;
-            padding: 1.25rem 1.25rem 1rem;
-            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
             border: 1px solid #eef2f6;
-            transition: 0.2s;
-            position: relative;
+            overflow: hidden;
+            transition: 0.25s;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+            display: flex;
+            flex-direction: column;
         }
-        .dash-course-card:hover {
+        .course-card:hover {
             box-shadow: 0 8px 30px rgba(0, 0, 0, 0.07);
             transform: translateY(-2px);
         }
-        .dash-course-card .status-tag {
+        .course-card .thumb {
+            height: 120px;
+            background: #e9edf4;
+            position: relative;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+        .course-card .thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .course-card .thumb .status-badge {
             position: absolute;
-            top: 0.75rem;
-            right: 0.75rem;
+            top: 0.6rem;
+            right: 0.6rem;
             font-size: 0.55rem;
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.04em;
             padding: 0.15rem 0.6rem;
             border-radius: 999px;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
         }
-        .dash-course-card .status-tag.unpaid {
-            background: #fef2f2;
+        .course-card .thumb .status-badge.unpaid {
             color: #dc2626;
+            background: rgba(254, 242, 242, 0.9);
         }
-        .dash-course-card .status-tag.paid {
-            background: #dcfce7;
+        .course-card .thumb .status-badge.paid {
             color: #166534;
+            background: rgba(220, 252, 231, 0.9);
         }
-        .dash-course-card .status-tag.web {
-            background: #eef2ff;
+        .course-card .thumb .status-badge.free {
             color: #0B2E6D;
+            background: rgba(238, 242, 255, 0.9);
         }
-        .dash-course-card h4 {
-            font-size: 1rem;
+        .course-card .body {
+            padding: 1rem 1.1rem 0.8rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .course-card .body .title {
+            font-size: 0.95rem;
             font-weight: 700;
             color: #0B2E6D;
-            margin-bottom: 0.3rem;
-            padding-right: 3.5rem;
+            margin-bottom: 0.2rem;
+            line-height: 1.3;
         }
-        .dash-course-card .meta {
+        .course-card .body .meta {
             font-size: 0.7rem;
             color: #94a3b8;
             display: flex;
             gap: 1rem;
+            margin-bottom: 0.6rem;
         }
-        .dash-course-card .meta span {
+        .course-card .body .meta span {
             display: flex;
             align-items: center;
-            gap: 0.25rem;
+            gap: 0.2rem;
         }
-        .dash-course-card .action-btn {
-            margin-top: 0.75rem;
-            padding: 0.4rem 1rem;
+        .course-card .body .progress-area {
+            margin-top: auto;
+            padding-top: 0.6rem;
+            border-top: 1px solid #f1f5f9;
+        }
+        .course-card .body .progress-area .progress-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.65rem;
+            color: #64748b;
+            margin-bottom: 0.25rem;
+        }
+        .course-card .body .progress-area .progress-row .pct {
+            font-weight: 700;
+            color: #0B2E6D;
+        }
+        .course-card .body .progress-area .bar {
+            width: 100%;
+            height: 4px;
+            background: #e9edf4;
+            border-radius: 999px;
+            overflow: hidden;
+        }
+        .course-card .body .progress-area .bar .fill {
+            height: 100%;
+            background: #0B2E6D;
+            border-radius: 999px;
+            transition: width 0.6s ease;
+        }
+        .course-card .footer {
+            padding: 0.6rem 1.1rem 1rem;
+            border-top: 1px solid #f1f5f9;
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+        .course-card .footer .btn {
+            flex: 1;
+            padding: 0.4rem 0.6rem;
             border-radius: 8px;
             font-size: 0.7rem;
             font-weight: 600;
             border: none;
+            cursor: pointer;
+            transition: 0.2s;
+            text-align: center;
+            min-width: 80px;
+        }
+        .course-card .footer .btn-primary {
             background: #0B2E6D;
             color: #fff;
-            cursor: pointer;
-            transition: 0.2s;
-            width: 100%;
         }
-        .dash-course-card .action-btn:hover {
+        .course-card .footer .btn-primary:hover {
             background: #1a4a8a;
         }
-        .dash-course-card .action-btn.unpaid-btn {
-            background: #B01217;
+        .course-card .footer .btn-primary:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
         }
-        .dash-course-card .action-btn.unpaid-btn:hover {
+        .course-card .footer .btn-unpaid {
+            background: #B01217;
+            color: #fff;
+        }
+        .course-card .footer .btn-unpaid:hover {
             background: #8f0e12;
         }
-
-        /* Feature cards (bottom) */
-        .dash-features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 1rem;
-            margin-top: 1.5rem;
+        .course-card .footer .btn-outline {
+            background: transparent;
+            color: #64748b;
+            border: 1px solid #e2e8f0;
         }
-        .dash-feature {
-            background: #fff;
-            border-radius: 16px;
-            padding: 1.2rem 1rem;
-            text-align: center;
-            border: 1px solid #eef2f6;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
-        }
-        .dash-feature .icon {
-            font-size: 1.5rem;
-            color: #0B2E6D;
-            margin-bottom: 0.4rem;
-        }
-        .dash-feature h5 {
-            font-size: 0.8rem;
-            font-weight: 700;
-            color: #0f172a;
-            margin-bottom: 0.1rem;
-        }
-        .dash-feature p {
-            font-size: 0.65rem;
-            color: #94a3b8;
-            line-height: 1.4;
+        .course-card .footer .btn-outline:hover {
+            background: #f1f5f9;
         }
 
-        /* Bottom navigation (mobile style) */
-        .dash-bottom-nav {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: #fff;
-            border-top: 1px solid #eef2f6;
+        .section-header {
             display: flex;
-            justify-content: space-around;
-            padding: 0.5rem 0.5rem 0.7rem;
-            z-index: 30;
-            box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.04);
-        }
-        .dash-bottom-nav .nav-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 0.1rem;
-            background: none;
-            border: none;
-            font-size: 0.6rem;
-            font-weight: 600;
-            color: #94a3b8;
-            cursor: pointer;
-            transition: 0.2s;
-            padding: 0.25rem 0.5rem;
-            min-width: 44px;
-        }
-        .dash-bottom-nav .nav-item i {
-            font-size: 1.2rem;
-        }
-        .dash-bottom-nav .nav-item:hover {
-            color: #0B2E6D;
-        }
-        .dash-bottom-nav .nav-item.active {
-            color: #0B2E6D;
-        }
-        @media (min-width: 768px) {
-            .dash-bottom-nav {
-                display: none;
-            }
-            .dash-container {
-                padding-bottom: 2rem;
-            }
-        }
-
-        /* ================================================================
-               CERTIFICATE — REDESIGNED (matching mockup)
-            ================================================================ */
-        .certificate-professional {
-            background: #ffffff;
-            border: 2px solid #0B2E6D;
-            border-radius: 20px;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.18);
-            padding: 2.5rem 2.5rem 2.2rem;
-            font-family: 'Inter', sans-serif;
-        }
-        .certificate-professional::before {
-            content: '';
-            position: absolute;
-            inset: 12px;
-            border: 1px solid rgba(11, 46, 109, 0.15);
-            border-radius: 14px;
-            pointer-events: none;
-        }
-        .certificate-professional .corner-deco {
-            position: absolute;
-            width: 40px;
-            height: 40px;
-            border: 2px solid #B01217;
-            opacity: 0.2;
-        }
-        .certificate-professional .corner-deco.tl {
-            top: 18px;
-            left: 18px;
-            border-right: none;
-            border-bottom: none;
-            border-top-left-radius: 10px;
-        }
-        .certificate-professional .corner-deco.tr {
-            top: 18px;
-            right: 18px;
-            border-left: none;
-            border-bottom: none;
-            border-top-right-radius: 10px;
-        }
-        .certificate-professional .corner-deco.bl {
-            bottom: 18px;
-            left: 18px;
-            border-right: none;
-            border-top: none;
-            border-bottom-left-radius: 10px;
-        }
-        .certificate-professional .corner-deco.br {
-            bottom: 18px;
-            right: 18px;
-            border-left: none;
-            border-top: none;
-            border-bottom-right-radius: 10px;
-        }
-        .certificate-professional .header-logo {
-            display: flex;
-            align-items: center;
             justify-content: space-between;
-            margin-bottom: 1.5rem;
+            align-items: center;
+            margin-bottom: 1rem;
             flex-wrap: wrap;
             gap: 0.5rem;
         }
-        .certificate-professional .header-logo .brand {
-            display: flex;
-            align-items: center;
-            gap: 0.6rem;
-        }
-        .certificate-professional .header-logo .brand img {
-            height: 44px;
-            width: auto;
-            border-radius: 8px;
-        }
-        .certificate-professional .header-logo .brand .name {
-            font-family: 'Playfair Display', serif;
+        .section-header h2 {
+            font-size: 1.1rem;
             font-weight: 700;
-            font-size: 1.3rem;
-            color: #0B2E6D;
+            color: #0f172a;
         }
-        .certificate-professional .header-logo .brand .sub {
-            font-size: 0.5rem;
-            color: #B01217;
-            font-weight: 600;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            display: block;
-            margin-top: -0.1rem;
-        }
-        .certificate-professional .header-logo .cpd-badge {
-            background: #0B2E6D;
+        .section-header .btn-enroll {
+            padding: 0.4rem 1.2rem;
+            background: #B01217;
             color: #fff;
-            padding: 0.3rem 1.2rem;
-            border-radius: 999px;
-            font-size: 0.7rem;
-            font-weight: 700;
-            letter-spacing: 0.5px;
+            border: none;
+            border-radius: 10px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
             display: flex;
             align-items: center;
             gap: 0.4rem;
         }
-        .certificate-professional .header-logo .cpd-badge i {
-            font-size: 0.9rem;
-        }
-
-        .certificate-professional .title {
-            text-align: center;
-            margin: 1rem 0 0.8rem;
-        }
-        .certificate-professional .title h2 {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: #0B2E6D;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-        }
-        .certificate-professional .title .line {
-            width: 80px;
-            height: 3px;
-            background: #B01217;
-            margin: 0.4rem auto 0.8rem;
-            border-radius: 2px;
-        }
-
-        .certificate-professional .recipient {
-            text-align: center;
-            font-size: 1.6rem;
-            font-weight: 800;
-            color: #B01217;
-            font-family: 'Playfair Display', serif;
-            letter-spacing: 1px;
-            border-bottom: 2px solid #B01217;
-            display: inline-block;
-            padding-bottom: 0.2rem;
-            margin: 0 auto 0.6rem;
-        }
-        .certificate-professional .recipient-wrap {
-            text-align: center;
-        }
-
-        .certificate-professional .course-name {
-            text-align: center;
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: #0B2E6D;
-            margin-bottom: 0.6rem;
-        }
-
-        .certificate-professional .description {
-            text-align: center;
-            font-size: 0.85rem;
-            color: #475569;
-            max-width: 500px;
-            margin: 0.5rem auto 1rem;
-            line-height: 1.6;
-        }
-
-        .certificate-professional .dates {
-            display: flex;
-            justify-content: center;
-            gap: 2.5rem;
-            font-size: 0.75rem;
-            color: #64748b;
-            margin-bottom: 1.2rem;
-            flex-wrap: wrap;
-        }
-        .certificate-professional .dates span strong {
-            color: #0f172a;
-            font-weight: 600;
-        }
-
-        .certificate-professional .footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-            border-top: 1px solid #e2e8f0;
-            padding-top: 1.2rem;
-            margin-top: 0.5rem;
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
-        .certificate-professional .footer .org {
-            display: flex;
-            align-items: center;
-            gap: 0.6rem;
-        }
-        .certificate-professional .footer .org .logo-placeholder {
-            width: 48px;
-            height: 48px;
-            border-radius: 50%;
-            background: #0B2E6D;
-            color: #fff;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 800;
-            font-size: 0.7rem;
-            text-transform: uppercase;
-        }
-        .certificate-professional .footer .org .info .name {
-            font-weight: 700;
-            font-size: 0.85rem;
-            color: #0f172a;
-        }
-        .certificate-professional .footer .org .info .role {
-            font-size: 0.65rem;
-            color: #94a3b8;
-        }
-
-        .certificate-professional .footer .signature {
-            text-align: center;
-            min-width: 120px;
-        }
-        .certificate-professional .footer .signature img {
-            height: 32px;
-            object-fit: contain;
-            display: block;
-            margin: 0 auto 0.2rem;
-        }
-        .certificate-professional .footer .signature .name {
-            font-weight: 700;
-            font-size: 0.75rem;
-            color: #0B2E6D;
-        }
-        .certificate-professional .footer .signature .title {
-            font-size: 0.6rem;
-            color: #94a3b8;
-            font-weight: 500;
-        }
-
-        .certificate-professional .footer .contact {
-            font-size: 0.6rem;
-            color: #94a3b8;
-            text-align: right;
-            line-height: 1.5;
-        }
-
-        .certificate-professional .qr-wrap {
-            display: flex;
-            align-items: center;
-            gap: 0.6rem;
-        }
-        .certificate-professional .qr-wrap img {
-            width: 56px;
-            height: 56px;
-            border: 1px solid #e2e8f0;
-            border-radius: 8px;
-            padding: 2px;
-        }
-        .certificate-professional .qr-wrap .label {
-            font-size: 0.5rem;
-            color: #94a3b8;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        @media (max-width: 640px) {
-            .certificate-professional {
-                padding: 1.5rem 1.2rem;
-            }
-            .certificate-professional .title h2 {
-                font-size: 1.2rem;
-            }
-            .certificate-professional .recipient {
-                font-size: 1.2rem;
-            }
-            .certificate-professional .course-name {
-                font-size: 1rem;
-            }
-            .certificate-professional .footer {
-                flex-direction: column;
-                align-items: center;
-                text-align: center;
-            }
-            .certificate-professional .footer .contact {
-                text-align: center;
-            }
-            .certificate-professional .header-logo .cpd-badge {
-                font-size: 0.6rem;
-                padding: 0.2rem 0.8rem;
-            }
-            .certificate-professional .dates {
-                gap: 1rem;
-                font-size: 0.65rem;
-            }
+        .section-header .btn-enroll:hover {
+            background: #8f0e12;
         }
 
         /* ================================================================
-               AI EXPLANATION — BEAUTIFUL & ARRANGED
+               AI RESPONSE — beautiful & arranged
             ================================================================ */
         .ai-response {
             font-size: 0.95rem;
@@ -1195,7 +1176,7 @@
         }
 
         /* ================================================================
-               SETTINGS — Photo upload (file input)
+               SETTINGS — Photo upload
             ================================================================ */
         .settings-photo-wrap {
             display: flex;
@@ -1274,55 +1255,73 @@
         }
 
         /* ================================================================
-               RESPONSIVE TWEAKS
+               RESPONSIVE
             ================================================================ */
-        @media (max-width: 640px) {
+        @media (max-width: 768px) {
+            .dash-content {
+                padding: 1rem 1rem 2rem;
+            }
+            .profile-summary {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 1rem;
+            }
+            .profile-summary .progress-mini {
+                margin-left: 0;
+                width: 100%;
+                justify-content: space-between;
+            }
+            .profile-summary .progress-mini .bar-wrap {
+                width: 60%;
+            }
+            .course-grid {
+                grid-template-columns: 1fr;
+            }
+            .dash-topbar {
+                padding: 0.5rem 1rem;
+            }
+            .dash-topbar .right .welcome {
+                font-size: 0.7rem;
+            }
+            .dash-topbar .left h1 {
+                font-size: 0.95rem;
+            }
+            .dash-tabs .tab-btn {
+                font-size: 0.7rem;
+                padding: 0.35rem 0.7rem;
+            }
+            .section-header h2 {
+                font-size: 1rem;
+            }
+            .section-header .btn-enroll {
+                font-size: 0.7rem;
+                padding: 0.3rem 0.8rem;
+            }
             .quiz-exam-wrap {
                 padding: 1.2rem;
             }
             .quiz-options-grid {
                 grid-template-columns: 1fr;
             }
-            .dash-profile {
-                flex-direction: column;
-                text-align: center;
-                padding: 1.25rem;
-            }
-            .dash-profile .badges {
-                justify-content: center;
-            }
-            .dash-course-grid {
-                grid-template-columns: 1fr;
-            }
-            .dash-features {
-                grid-template-columns: 1fr 1fr;
-            }
-            .dash-tabs {
-                max-width: 100%;
-            }
-            .certificate-professional .header-logo {
-                flex-direction: column;
-                align-items: center;
-            }
-            .settings-photo-wrap {
-                flex-direction: column;
-                align-items: center;
-            }
         }
 
         @media (max-width: 480px) {
-            .quiz-question-text {
+            .profile-summary .info .name {
                 font-size: 0.95rem;
             }
-            .quiz-option-btn {
-                font-size: 0.8rem;
-                padding: 0.6rem 0.8rem;
+            .course-card .thumb {
+                height: 100px;
             }
-            .quiz-stats-row .stat {
-                font-size: 0.7rem;
+            .dash-tabs {
+                gap: 0.1rem;
+                padding: 0.15rem;
             }
-            .dash-features {
-                grid-template-columns: 1fr;
+            .dash-tabs .tab-btn {
+                font-size: 0.65rem;
+                padding: 0.3rem 0.5rem;
+            }
+            .dash-topbar .right .welcome {
+                display: none;
             }
         }
 
@@ -1458,13 +1457,6 @@
                 margin: 0 !important;
                 overflow: visible !important;
             }
-            #certificate-preview-modal .max-w-4xl,
-            #admission-letter-modal .max-w-4xl,
-            #student-list-modal .max-w-7xl {
-                max-width: 100% !important;
-                margin: 0 !important;
-                padding: 0 !important;
-            }
             .no-print {
                 display: none !important;
             }
@@ -1475,8 +1467,14 @@
                 min-height: 100vh !important;
                 aspect-ratio: auto !important;
             }
-            .dash-bottom-nav {
+            .lms-sidebar {
                 display: none !important;
+            }
+            .lms-main {
+                margin-left: 0 !important;
+            }
+            .dash-topbar {
+                position: static !important;
             }
         }
 
@@ -1949,271 +1947,291 @@
         }
 
         /* ================================================================
-               CERTIFICATE — OLD STYLES (keep for compatibility)
+               CERTIFICATE — professional
             ================================================================ */
-        .certificate-premium {
-            background: linear-gradient(135deg, #f8fafc 0%, #eef2ff 30%, #fdfcfb 70%, #f1f5f9 100%);
-            border: 3px solid #0B2E6D;
-            border-radius: 24px;
+        .certificate-professional {
+            background: #ffffff;
+            border: 2px solid #0B2E6D;
+            border-radius: 20px;
             position: relative;
             overflow: hidden;
-            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.25);
-            transition: all 0.3s ease;
+            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.18);
+            padding: 2.5rem 2.5rem 2.2rem;
+            font-family: 'Inter', sans-serif;
         }
-        .certificate-premium::before {
+        .certificate-professional::before {
             content: '';
             position: absolute;
             inset: 12px;
+            border: 1px solid rgba(11, 46, 109, 0.15);
+            border-radius: 14px;
+            pointer-events: none;
+        }
+        .certificate-professional .corner-deco {
+            position: absolute;
+            width: 40px;
+            height: 40px;
             border: 2px solid #B01217;
-            border-radius: 16px;
-            pointer-events: none;
-            z-index: 1;
+            opacity: 0.2;
         }
-        .certificate-premium::after {
-            content: '';
-            position: absolute;
-            inset: 20px;
-            border: 1px solid rgba(11, 46, 109, 0.2);
-            border-radius: 12px;
-            pointer-events: none;
-            z-index: 1;
-        }
-        .certificate-premium .corner-decoration {
-            position: absolute;
-            width: 60px;
-            height: 60px;
-            border: 3px solid #B01217;
-            opacity: 0.3;
-            z-index: 0;
-        }
-        .certificate-premium .corner-decoration.tl {
-            top: 20px;
-            left: 20px;
+        .certificate-professional .corner-deco.tl {
+            top: 18px;
+            left: 18px;
             border-right: none;
             border-bottom: none;
-            border-top-left-radius: 16px;
+            border-top-left-radius: 10px;
         }
-        .certificate-premium .corner-decoration.tr {
-            top: 20px;
-            right: 20px;
+        .certificate-professional .corner-deco.tr {
+            top: 18px;
+            right: 18px;
             border-left: none;
             border-bottom: none;
-            border-top-right-radius: 16px;
+            border-top-right-radius: 10px;
         }
-        .certificate-premium .corner-decoration.bl {
-            bottom: 20px;
-            left: 20px;
+        .certificate-professional .corner-deco.bl {
+            bottom: 18px;
+            left: 18px;
             border-right: none;
             border-top: none;
-            border-bottom-left-radius: 16px;
+            border-bottom-left-radius: 10px;
         }
-        .certificate-premium .corner-decoration.br {
-            bottom: 20px;
-            right: 20px;
+        .certificate-professional .corner-deco.br {
+            bottom: 18px;
+            right: 18px;
             border-left: none;
             border-top: none;
-            border-bottom-right-radius: 16px;
+            border-bottom-right-radius: 10px;
         }
-        .certificate-premium .gold-seal {
-            position: absolute;
-            top: 50%;
-            right: 40px;
-            transform: translateY(-50%);
-            width: 120px;
-            height: 120px;
+        .certificate-professional .header-logo {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        .certificate-professional .header-logo .brand {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+        .certificate-professional .header-logo .brand img {
+            height: 44px;
+            width: auto;
+            border-radius: 8px;
+        }
+        .certificate-professional .header-logo .brand .name {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: 1.3rem;
+            color: #0B2E6D;
+        }
+        .certificate-professional .header-logo .brand .sub {
+            font-size: 0.5rem;
+            color: #B01217;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            display: block;
+            margin-top: -0.1rem;
+        }
+        .certificate-professional .header-logo .cpd-badge {
+            background: #0B2E6D;
+            color: #fff;
+            padding: 0.3rem 1.2rem;
+            border-radius: 999px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+        .certificate-professional .header-logo .cpd-badge i {
+            font-size: 0.9rem;
+        }
+
+        .certificate-professional .title {
+            text-align: center;
+            margin: 1rem 0 0.8rem;
+        }
+        .certificate-professional .title h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #0B2E6D;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+        .certificate-professional .title .line {
+            width: 80px;
+            height: 3px;
+            background: #B01217;
+            margin: 0.4rem auto 0.8rem;
+            border-radius: 2px;
+        }
+
+        .certificate-professional .recipient {
+            text-align: center;
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: #B01217;
+            font-family: 'Playfair Display', serif;
+            letter-spacing: 1px;
+            border-bottom: 2px solid #B01217;
+            display: inline-block;
+            padding-bottom: 0.2rem;
+            margin: 0 auto 0.6rem;
+        }
+        .certificate-professional .recipient-wrap {
+            text-align: center;
+        }
+
+        .certificate-professional .course-name {
+            text-align: center;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #0B2E6D;
+            margin-bottom: 0.6rem;
+        }
+
+        .certificate-professional .description {
+            text-align: center;
+            font-size: 0.85rem;
+            color: #475569;
+            max-width: 500px;
+            margin: 0.5rem auto 1rem;
+            line-height: 1.6;
+        }
+
+        .certificate-professional .dates {
+            display: flex;
+            justify-content: center;
+            gap: 2.5rem;
+            font-size: 0.75rem;
+            color: #64748b;
+            margin-bottom: 1.2rem;
+            flex-wrap: wrap;
+        }
+        .certificate-professional .dates span strong {
+            color: #0f172a;
+            font-weight: 600;
+        }
+
+        .certificate-professional .footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            border-top: 1px solid #e2e8f0;
+            padding-top: 1.2rem;
+            margin-top: 0.5rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .certificate-professional .footer .org {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+        .certificate-professional .footer .org .logo-placeholder {
+            width: 48px;
+            height: 48px;
             border-radius: 50%;
-            background: radial-gradient(circle, #fef08a, #eab308);
-            border: 4px solid #ca8a04;
-            box-shadow: 0 0 40px rgba(234, 179, 8, 0.3), inset 0 0 20px rgba(234, 179, 8, 0.2);
+            background: #0B2E6D;
+            color: #fff;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2.5rem;
-            color: #854d0e;
-            opacity: 0.15;
-            z-index: 0;
-        }
-        .certificate-premium .gold-seal i {
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-        .certificate-premium .security-pattern {
-            position: absolute;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            gap: 8px;
-            opacity: 0.08;
-            z-index: 0;
-        }
-        .certificate-premium .security-pattern span {
-            width: 4px;
-            height: 20px;
-            background: #0B2E6D;
-            border-radius: 2px;
-        }
-        .certificate-premium .watermark-text {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) rotate(-30deg);
-            font-size: 8rem;
-            font-weight: 900;
-            color: #0B2E6D;
-            opacity: 0.025;
-            font-family: 'Playfair Display', serif;
-            letter-spacing: 20px;
-            white-space: nowrap;
-            z-index: 0;
-            pointer-events: none;
-        }
-        .certificate-premium .header-logo {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-        .certificate-premium .header-logo img {
-            height: 60px;
-            width: auto;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-        }
-        .certificate-premium .header-logo .title {
-            font-family: 'Playfair Display', serif;
-            font-weight: 700;
-            color: #0B2E6D;
-            letter-spacing: -0.5px;
-        }
-        .certificate-premium .header-logo .subtitle {
-            font-size: 0.6rem;
-            color: #B01217;
-            font-weight: 600;
-            letter-spacing: 3px;
+            font-weight: 800;
+            font-size: 0.7rem;
             text-transform: uppercase;
         }
-        .certificate-premium .cert-title {
-            font-family: 'Playfair Display', serif;
+        .certificate-professional .footer .org .info .name {
             font-weight: 700;
-            color: #0B2E6D;
-            font-size: 2rem;
-            letter-spacing: 1px;
-            position: relative;
-            display: inline-block;
+            font-size: 0.85rem;
+            color: #0f172a;
         }
-        .certificate-premium .cert-title::after {
-            content: '';
-            position: absolute;
-            bottom: -8px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 60%;
-            height: 3px;
-            background: linear-gradient(90deg, transparent, #B01217, transparent);
-            border-radius: 2px;
+        .certificate-professional .footer .org .info .role {
+            font-size: 0.65rem;
+            color: #94a3b8;
         }
-        .certificate-premium .student-name {
-            font-family: 'Playfair Display', serif;
-            font-weight: 700;
-            font-size: 2.2rem;
-            color: #B01217;
-            letter-spacing: 2px;
-            border-bottom: 2px solid #B01217;
-            padding-bottom: 4px;
-            display: inline-block;
-        }
-        .certificate-premium .course-name {
-            font-family: 'Playfair Display', serif;
-            font-weight: 700;
-            font-size: 1.4rem;
-            color: #0B2E6D;
-            letter-spacing: 1px;
-        }
-        .certificate-premium .qr-container {
-            background: white;
-            padding: 6px;
-            border-radius: 12px;
-            border: 2px solid #0B2E6D;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
-        }
-        .certificate-premium .qr-container img {
-            width: 80px;
-            height: 80px;
-            display: block;
-        }
-        .certificate-premium .signature-area {
-            border-top: 2px solid #0B2E6D;
-            padding-top: 8px;
-            min-width: 140px;
+
+        .certificate-professional .footer .signature {
             text-align: center;
+            min-width: 120px;
         }
-        .certificate-premium .signature-area img {
-            height: 40px;
+        .certificate-professional .footer .signature img {
+            height: 32px;
             object-fit: contain;
             display: block;
-            margin: 0 auto;
+            margin: 0 auto 0.2rem;
         }
-        .certificate-premium .signature-area .label {
-            font-size: 0.6rem;
-            color: #64748b;
-            letter-spacing: 1px;
-            font-weight: 500;
-            display: block;
-            margin-top: 4px;
-        }
-        .certificate-premium .signature-area .name {
-            font-size: 0.7rem;
-            font-weight: 600;
+        .certificate-professional .footer .signature .name {
+            font-weight: 700;
+            font-size: 0.75rem;
             color: #0B2E6D;
-            display: block;
-            margin-top: 2px;
         }
-        .certificate-premium .security-badge {
+        .certificate-professional .footer .signature .title {
+            font-size: 0.6rem;
+            color: #94a3b8;
+            font-weight: 500;
+        }
+
+        .certificate-professional .footer .contact {
+            font-size: 0.6rem;
+            color: #94a3b8;
+            text-align: right;
+            line-height: 1.5;
+        }
+
+        .certificate-professional .qr-wrap {
             display: flex;
             align-items: center;
-            gap: 6px;
-            font-size: 0.55rem;
-            color: #64748b;
-            letter-spacing: 0.5px;
+            gap: 0.6rem;
         }
-        .certificate-premium .security-badge i {
-            color: #22c55e;
+        .certificate-professional .qr-wrap img {
+            width: 56px;
+            height: 56px;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 2px;
+        }
+        .certificate-professional .qr-wrap .label {
+            font-size: 0.5rem;
+            color: #94a3b8;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         @media (max-width: 640px) {
-            .certificate-premium .student-name {
-                font-size: 1.4rem;
+            .certificate-professional {
+                padding: 1.5rem 1.2rem;
             }
-            .certificate-premium .course-name {
+            .certificate-professional .title h2 {
+                font-size: 1.2rem;
+            }
+            .certificate-professional .recipient {
+                font-size: 1.2rem;
+            }
+            .certificate-professional .course-name {
                 font-size: 1rem;
             }
-            .certificate-premium .header-logo img {
-                height: 40px;
+            .certificate-professional .footer {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
             }
-            .certificate-premium .qr-container img {
-                width: 56px;
-                height: 56px;
+            .certificate-professional .footer .contact {
+                text-align: center;
             }
-            .certificate-premium .gold-seal {
-                width: 80px;
-                height: 80px;
-                font-size: 1.8rem;
-                right: 20px;
+            .certificate-professional .header-logo .cpd-badge {
+                font-size: 0.6rem;
+                padding: 0.2rem 0.8rem;
             }
-            .certificate-premium .corner-decoration {
-                width: 30px;
-                height: 30px;
-            }
-            .certificate-premium .corner-decoration.tl,
-            .certificate-premium .corner-decoration.tr,
-            .certificate-premium .corner-decoration.bl,
-            .certificate-premium .corner-decoration.br {
-                border-width: 2px;
-            }
-            .certificate-premium .signature-area {
-                min-width: 100px;
-            }
-            .certificate-premium .signature-area img {
-                height: 30px;
+            .certificate-professional .dates {
+                gap: 1rem;
+                font-size: 0.65rem;
             }
         }
 
@@ -2427,67 +2445,67 @@
     <div id="app-wrapper" class="flex-grow flex flex-col">
 
         <!-- ============================================================
-        HEADER
+        HEADER (top bar — visible on all views)
         ============================================================ -->
-        <header class="bg-white border-b border-slate-200/80 sticky top-0 z-40 shadow-sm backdrop-blur-sm bg-white/95">
+        <header class="bg-white border-b border-slate-200/80 sticky top-0 z-40 shadow-sm">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="flex items-center justify-between h-20">
+                <div class="flex items-center justify-between h-16">
                     <div class="flex items-center gap-3 cursor-pointer" onclick="navigateTo('landing')">
-                        <img src="https://i.postimg.cc/FRGyRzS0/Chat-GPT-Image-Jun-25-2026-07-36-21-PM.png" alt="BITCAGS LTD" class="h-12 w-auto object-contain rounded" onerror="this.src='https://placehold.co/100x100?text=BITCAGS'" />
+                        <img src="https://i.postimg.cc/FRGyRzS0/Chat-GPT-Image-Jun-25-2026-07-36-21-PM.png" alt="BITCAGS LTD" class="h-10 w-auto object-contain rounded" onerror="this.src='https://placehold.co/100x100?text=BITCAGS'" />
                         <div>
-                            <span class="text-xl font-extrabold text-navy-brand tracking-tight">BITCAGS</span>
-                            <span class="text-red-brand font-bold text-xs block -mt-1 tracking-widest">LTD</span>
+                            <span class="text-lg font-extrabold text-navy-brand tracking-tight">BITCAGS</span>
+                            <span class="text-red-brand font-bold text-[10px] block -mt-0.5 tracking-widest">LTD</span>
                         </div>
                     </div>
 
-                    <nav class="hidden md:flex items-center gap-6">
+                    <nav class="hidden md:flex items-center gap-5">
                         <button onclick="navigateTo('landing')" class="text-slate-600 hover:text-navy-brand font-medium text-sm transition">Home</button>
                         <button onclick="scrollToSection('courses-section')" class="text-slate-600 hover:text-navy-brand font-medium text-sm transition">Courses</button>
                         <button onclick="scrollToSection('contact-section')" class="text-slate-600 hover:text-navy-brand font-medium text-sm transition">Visit</button>
                         <button onclick="navigateTo('chat-container')" class="text-slate-600 hover:text-navy-brand font-medium text-sm transition">AI Bot</button>
                         <button onclick="navigateTo('how-to-use')" class="text-slate-600 hover:text-navy-brand font-medium text-sm transition"><i class="fa-solid fa-book-open mr-1"></i>Guide</button>
                         <button onclick="navigateTo('verify-certificate')" class="text-slate-600 hover:text-navy-brand font-medium text-sm transition"><i class="fa-solid fa-certificate mr-1"></i>Verify</button>
-                        <div class="border-l border-slate-200 h-6 mx-2"></div>
-                        <div id="nav-auth-buttons" class="flex items-center gap-3">
-                            <button onclick="navigateTo('student-login')" class="px-4 py-2 border border-navy-700 text-navy-700 rounded-xl text-sm font-semibold hover:bg-navy-50 transition">Login</button>
-                            <button onclick="navigateTo('student-register')" class="px-4 py-2 bg-red-brand text-white rounded-xl text-sm font-semibold hover:bg-red-800 transition shadow-sm">Register</button>
-                            <button onclick="navigateTo('admin-login')" class="text-slate-500 hover:text-navy-brand text-sm font-medium"><i class="fa-solid fa-user-shield mr-1"></i>Admin</button>
+                        <div class="border-l border-slate-200 h-5 mx-1"></div>
+                        <div id="nav-auth-buttons" class="flex items-center gap-2">
+                            <button onclick="navigateTo('student-login')" class="px-4 py-1.5 border border-navy-700 text-navy-700 rounded-lg text-sm font-semibold hover:bg-navy-50 transition">Login</button>
+                            <button onclick="navigateTo('student-register')" class="px-4 py-1.5 bg-red-brand text-white rounded-lg text-sm font-semibold hover:bg-red-800 transition shadow-sm">Register</button>
+                            <button onclick="navigateTo('admin-login')" class="text-slate-500 hover:text-navy-brand text-sm font-medium"><i class="fa-solid fa-user-shield mr-1"></i></button>
                         </div>
                     </nav>
 
-                    <div class="flex md:hidden items-center gap-3">
+                    <div class="flex md:hidden items-center gap-2">
                         <button id="mobile-menu-toggle" class="p-2 text-slate-600 hover:text-navy-brand focus:outline-none">
-                            <i class="fa-solid fa-bars text-2xl"></i>
+                            <i class="fa-solid fa-bars text-xl"></i>
                         </button>
                     </div>
                 </div>
             </div>
 
-            <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-slate-100 px-4 py-4 space-y-3 shadow-inner">
-                <button onclick="navigateTo('landing'); closeMobileMenu()" class="block w-full text-left py-2 text-slate-700 hover:text-navy-brand font-medium">Home</button>
-                <button onclick="scrollToSection('courses-section'); closeMobileMenu()" class="block w-full text-left py-2 text-slate-700 hover:text-navy-brand font-medium">Courses</button>
-                <button onclick="scrollToSection('contact-section'); closeMobileMenu()" class="block w-full text-left py-2 text-slate-700 hover:text-navy-brand font-medium">Visit Us</button>
-                <button onclick="navigateTo('chat-container'); closeMobileMenu()" class="block w-full text-left py-2 text-slate-700 hover:text-navy-brand font-medium">AI Assistant</button>
-                <button onclick="navigateTo('how-to-use'); closeMobileMenu()" class="block w-full text-left py-2 text-slate-700 hover:text-navy-brand font-medium"><i class="fa-solid fa-book-open mr-1"></i>Guide</button>
-                <button onclick="navigateTo('verify-certificate'); closeMobileMenu()" class="block w-full text-left py-2 text-slate-700 hover:text-navy-brand font-medium"><i class="fa-solid fa-certificate mr-1"></i>Verify</button>
+            <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-slate-100 px-4 py-3 space-y-2 shadow-inner">
+                <button onclick="navigateTo('landing'); closeMobileMenu()" class="block w-full text-left py-1.5 text-slate-700 hover:text-navy-brand font-medium text-sm">Home</button>
+                <button onclick="scrollToSection('courses-section'); closeMobileMenu()" class="block w-full text-left py-1.5 text-slate-700 hover:text-navy-brand font-medium text-sm">Courses</button>
+                <button onclick="scrollToSection('contact-section'); closeMobileMenu()" class="block w-full text-left py-1.5 text-slate-700 hover:text-navy-brand font-medium text-sm">Visit Us</button>
+                <button onclick="navigateTo('chat-container'); closeMobileMenu()" class="block w-full text-left py-1.5 text-slate-700 hover:text-navy-brand font-medium text-sm">AI Assistant</button>
+                <button onclick="navigateTo('how-to-use'); closeMobileMenu()" class="block w-full text-left py-1.5 text-slate-700 hover:text-navy-brand font-medium text-sm"><i class="fa-solid fa-book-open mr-1"></i>Guide</button>
+                <button onclick="navigateTo('verify-certificate'); closeMobileMenu()" class="block w-full text-left py-1.5 text-slate-700 hover:text-navy-brand font-medium text-sm"><i class="fa-solid fa-certificate mr-1"></i>Verify</button>
                 <hr class="border-slate-100" />
-                <div id="mobile-auth-buttons" class="space-y-2">
-                    <button onclick="navigateTo('student-login'); closeMobileMenu()" class="block w-full text-center py-2.5 border border-navy-700 text-navy-700 rounded-xl font-semibold">Login</button>
-                    <button onclick="navigateTo('student-register'); closeMobileMenu()" class="block w-full text-center py-2.5 bg-red-brand text-white rounded-xl font-semibold">Register</button>
-                    <button onclick="navigateTo('admin-login'); closeMobileMenu()" class="block w-full text-center py-2 text-slate-500 font-medium text-sm"><i class="fa-solid fa-user-shield mr-1"></i>Admin</button>
+                <div id="mobile-auth-buttons" class="space-y-1.5">
+                    <button onclick="navigateTo('student-login'); closeMobileMenu()" class="block w-full text-center py-2 border border-navy-700 text-navy-700 rounded-lg font-semibold text-sm">Login</button>
+                    <button onclick="navigateTo('student-register'); closeMobileMenu()" class="block w-full text-center py-2 bg-red-brand text-white rounded-lg font-semibold text-sm">Register</button>
+                    <button onclick="navigateTo('admin-login'); closeMobileMenu()" class="block w-full text-center py-1.5 text-slate-500 font-medium text-sm"><i class="fa-solid fa-user-shield mr-1"></i>Admin</button>
                 </div>
             </div>
         </header>
 
         <!-- ============================================================
-        LANDING
+        LANDING PAGE
         ============================================================ -->
         <main id="view-landing" class="view-panel flex-grow">
-            <section class="relative bg-gradient-to-br from-navy-900 via-navy-800 to-slate-900 text-white overflow-hidden py-20 md:py-28">
+            <section class="relative bg-gradient-to-br from-navy-900 via-navy-800 to-slate-900 text-white overflow-hidden py-16 md:py-24">
                 <div class="absolute inset-0 opacity-[0.07] bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:20px_20px]"></div>
                 <div class="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-red-brand/10 to-transparent pointer-events-none"></div>
-                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-14 items-center">
-                    <div class="space-y-6 text-center lg:text-left">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                    <div class="space-y-5 text-center lg:text-left">
                         <span class="inline-flex items-center gap-1.5 px-4 py-1.5 bg-red-brand/90 text-white text-xs font-bold uppercase tracking-wider rounded-full shadow-lg shadow-red-brand/20">
                             <span class="w-1.5 h-1.5 rounded-full bg-white animate-ping"></span> Live Tech Intake
                         </span>
@@ -2498,10 +2516,10 @@
                             Accelerate your tech career with state-of-the-art lessons, industry-standard curriculum, interactive lectures, and globally verified certifications.
                         </p>
                         <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-                            <button onclick="scrollToSection('courses-section')" class="px-8 py-4 bg-red-brand text-white rounded-xl font-bold hover:bg-brandRed-900 transform hover:-translate-y-1 transition shadow-lg shadow-red-brand/30">Explore Courses</button>
-                            <button onclick="navigateTo('student-register')" class="px-8 py-4 border-2 border-white/70 text-white rounded-xl font-bold hover:bg-white/10 transform hover:-translate-y-1 transition">Get Started</button>
+                            <button onclick="scrollToSection('courses-section')" class="px-8 py-3.5 bg-red-brand text-white rounded-xl font-bold hover:bg-brandRed-900 transform hover:-translate-y-0.5 transition shadow-lg shadow-red-brand/30">Explore Courses</button>
+                            <button onclick="navigateTo('student-register')" class="px-8 py-3.5 border-2 border-white/70 text-white rounded-xl font-bold hover:bg-white/10 transform hover:-translate-y-0.5 transition">Get Started</button>
                         </div>
-                        <div class="pt-6 grid grid-cols-3 gap-4 max-w-md mx-auto lg:mx-0 border-t border-slate-700/50 text-slate-300 text-center">
+                        <div class="pt-5 grid grid-cols-3 gap-4 max-w-md mx-auto lg:mx-0 border-t border-slate-700/50 text-slate-300 text-center">
                             <div><div class="text-2xl font-extrabold text-white">100%</div><div class="text-xs">Self-paced</div></div>
                             <div><div class="text-2xl font-extrabold text-white">Groq AI</div><div class="text-xs">Interactive</div></div>
                             <div><div class="text-2xl font-extrabold text-white">Global</div><div class="text-xs">Certified</div></div>
@@ -2800,93 +2818,180 @@
         </main>
 
         <!-- ============================================================
-        STUDENT DASHBOARD — REDESIGNED (matching mockup)
+        STUDENT DASHBOARD — LMS style with sidebar
         ============================================================ -->
-        <main id="view-student-dashboard" class="view-panel hidden flex-grow bg-slate-50">
-            <div class="dash-container">
 
-                <!-- Profile Header -->
-                <div class="dash-profile">
-                    <img id="dash-avatar" src="https://placehold.co/72" alt="Avatar" class="avatar" onerror="this.src='https://placehold.co/72'" />
+        <!-- Sidebar Overlay (mobile) -->
+        <div id="sidebar-overlay" class="sidebar-overlay" onclick="toggleSidebar(false)"></div>
+
+        <!-- Sidebar -->
+        <aside id="lms-sidebar" class="lms-sidebar">
+            <div class="brand">
+                <img src="https://i.postimg.cc/FRGyRzS0/Chat-GPT-Image-Jun-25-2026-07-36-21-PM.png" alt="BITCAGS" onerror="this.src='https://placehold.co/38x38?text=BITCAGS'" />
+                <div>
+                    <div class="name">BITCAGS <span>LTD</span></div>
+                    <span class="sub">Premium Academy</span>
+                </div>
+            </div>
+
+            <nav class="nav">
+                <div class="nav-label">Main</div>
+                <button class="nav-item active" data-view="student-dashboard" onclick="navigateTo('student-dashboard'); toggleSidebar(false)">
+                    <i class="fa-solid fa-gauge-high"></i> Dashboard
+                </button>
+                <button class="nav-item" data-view="student-dashboard" onclick="switchDashTab('courses'); navigateTo('student-dashboard'); toggleSidebar(false)">
+                    <i class="fa-solid fa-book-open"></i> My Courses
+                </button>
+                <button class="nav-item" data-view="student-dashboard" onclick="switchDashTab('certificates'); navigateTo('student-dashboard'); toggleSidebar(false)">
+                    <i class="fa-solid fa-certificate"></i> Certifications
+                </button>
+                <button class="nav-item" data-view="student-dashboard" onclick="switchDashTab('admission'); navigateTo('student-dashboard'); toggleSidebar(false)">
+                    <i class="fa-solid fa-file-lines"></i> Admission
+                </button>
+
+                <div class="nav-label" style="margin-top:0.5rem;">Tools</div>
+                <button class="nav-item" onclick="navigateTo('chat-container'); toggleSidebar(false)">
+                    <i class="fa-solid fa-robot"></i> AI Bot
+                </button>
+                <button class="nav-item" onclick="scrollToSection('contact-section'); navigateTo('landing'); toggleSidebar(false)">
+                    <i class="fa-solid fa-location-dot"></i> Visit
+                </button>
+                <button class="nav-item" onclick="navigateTo('how-to-use'); toggleSidebar(false)">
+                    <i class="fa-solid fa-compass"></i> Guide
+                </button>
+
+                <button class="nav-item" data-view="student-dashboard" onclick="switchDashTab('settings'); navigateTo('student-dashboard'); toggleSidebar(false)">
+                    <i class="fa-solid fa-gear"></i> Settings
+                </button>
+
+                <button class="nav-item logout" onclick="logoutSession(); toggleSidebar(false)">
+                    <i class="fa-solid fa-right-from-bracket"></i> Logout
+                </button>
+            </nav>
+        </aside>
+
+        <!-- Main content area -->
+        <div class="lms-main" id="lms-main">
+            <!-- Top Bar -->
+            <div class="dash-topbar">
+                <div class="left">
+                    <button class="sidebar-toggle-btn" onclick="toggleSidebar(true)" aria-label="Open sidebar">
+                        <i class="fa-solid fa-bars"></i>
+                    </button>
+                    <h1 id="dash-page-title">Dashboard</h1>
+                </div>
+                <div class="right">
+                    <span class="welcome" id="dash-welcome-msg">Welcome, <strong id="dash-welcome-name">Student</strong></span>
+                    <img id="dash-top-avatar" src="https://placehold.co/36" alt="Avatar" class="avatar-sm" onerror="this.src='https://placehold.co/36'" />
+                </div>
+            </div>
+
+            <!-- Dashboard Content -->
+            <div class="dash-content" id="dash-content-area">
+
+                <!-- Profile Summary -->
+                <div class="profile-summary" id="profile-summary">
+                    <img id="dash-avatar" src="https://placehold.co/56" alt="Avatar" class="avatar" onerror="this.src='https://placehold.co/56'" />
                     <div class="info">
-                        <h2 id="dash-fullname">Loading...</h2>
+                        <div class="name" id="dash-fullname">Loading...</div>
                         <div class="app-id" id="dash-appid-label">App ID: --</div>
                         <div class="badges">
                             <span class="badge level" id="dash-experience-pill">Beginner</span>
                             <span class="badge verified" id="dash-status-pill">Verified</span>
                         </div>
                     </div>
-                    <div class="ml-auto flex gap-2">
-                        <button onclick="logoutSession()" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-sm font-semibold transition"><i class="fa-solid fa-sign-out-alt mr-1"></i> Logout</button>
+                    <div class="progress-mini">
+                        <div class="stat">
+                            <strong id="dash-progress-pct">0%</strong>
+                            <span>completed</span>
+                        </div>
+                        <div class="bar-wrap">
+                            <div class="fill" id="dash-progress-bar" style="width:0%"></div>
+                        </div>
+                        <div class="stat" style="text-align:left;min-width:80px;">
+                            <strong id="dash-lessons-done">0</strong>
+                            <span>of <span id="dash-lessons-total">0</span> lessons</span>
+                        </div>
                     </div>
                 </div>
 
                 <!-- Continue Registration Block -->
-                <div id="continue-registration-block" class="hidden bg-gradient-to-r from-red-brand to-navy-800 text-white rounded-2xl p-5 shadow-lg mb-5">
+                <div id="continue-registration-block" class="hidden bg-gradient-to-r from-red-brand to-navy-800 text-white rounded-2xl p-4 shadow-lg mb-4">
                     <div class="flex flex-wrap items-center justify-between gap-3">
                         <div><h3 class="text-lg font-bold font-heading">Complete Your Profile</h3><p class="text-xs text-slate-200">Finalize your photo, course, and experience to unlock all features.</p></div>
                         <button onclick="openCompletionModal()" class="px-5 py-2 bg-white text-navy-brand font-bold rounded-xl hover:bg-slate-100 transition shadow text-sm">Finalize Now</button>
                     </div>
                 </div>
 
-                <!-- Section: Enrolled Syllabuses -->
-                <div class="dash-section-title">
-                    Your Enrolled Syllabuses
-                    <span class="sub">Access your courses, track progress and continue learning.</span>
-                </div>
-
                 <!-- Tabs -->
                 <div class="dash-tabs" id="dash-tabs-container">
-                    <button class="tab-btn active" data-tab="all" onclick="filterDashCourses('all')">All</button>
-                    <button class="tab-btn" data-tab="unpaid" onclick="filterDashCourses('unpaid')">Unpaid</button>
-                    <button class="tab-btn" data-tab="paid" onclick="filterDashCourses('paid')">Paid</button>
-                    <button class="tab-btn" data-tab="web" onclick="filterDashCourses('web')">Web</button>
+                    <button class="tab-btn active" data-tab="courses" onclick="switchDashTab('courses')"><i class="fa-solid fa-book-open"></i> My Courses</button>
+                    <button class="tab-btn" data-tab="certificates" onclick="switchDashTab('certificates')"><i class="fa-solid fa-certificate"></i> Certifications</button>
+                    <button class="tab-btn" data-tab="admission" onclick="switchDashTab('admission')"><i class="fa-solid fa-file-lines"></i> Admission</button>
+                    <button class="tab-btn" data-tab="settings" onclick="switchDashTab('settings')"><i class="fa-solid fa-gear"></i> Settings</button>
                 </div>
 
-                <!-- Course Grid -->
-                <div id="dash-course-grid" class="dash-course-grid"></div>
+                <!-- Tab: Courses -->
+                <div id="student-tab-courses" class="student-tab-panel">
+                    <div class="section-header">
+                        <h2>Enrolled Courses</h2>
+                        <button onclick="scrollToSection('courses-section')" class="btn-enroll"><i class="fa-solid fa-plus"></i> Enroll New</button>
+                    </div>
+                    <div id="dash-course-grid" class="course-grid"></div>
+                </div>
 
-                <!-- Feature Cards -->
-                <div class="dash-features">
-                    <div class="dash-feature">
-                        <div class="icon"><i class="fa-solid fa-shield-halved"></i></div>
-                        <h5>Secure &amp; Reliable</h5>
-                        <p>Your data and progress are always protected.</p>
-                    </div>
-                    <div class="dash-feature">
-                        <div class="icon"><i class="fa-solid fa-chalkboard-user"></i></div>
-                        <h5>Expert Led Courses</h5>
-                        <p>Learn from experienced professionals.</p>
-                    </div>
-                    <div class="dash-feature">
-                        <div class="icon"><i class="fa-solid fa-mobile-screen-button"></i></div>
-                        <h5>Learn Anywhere</h5>
-                        <p>Access on any device, anytime, anywhere.</p>
-                    </div>
-                    <div class="dash-feature">
-                        <div class="icon"><i class="fa-solid fa-award"></i></div>
-                        <h5>Build Your Future</h5>
-                        <p>Get certified and unlock new opportunities.</p>
+                <!-- Tab: Certificates -->
+                <div id="student-tab-certificates" class="student-tab-panel hidden">
+                    <div class="section-header"><h2>Your Certifications</h2></div>
+                    <div id="student-cert-list" class="course-grid"></div>
+                </div>
+
+                <!-- Tab: Admission -->
+                <div id="student-tab-admission" class="student-tab-panel hidden">
+                    <div class="section-header"><h2>Admission Letter</h2></div>
+                    <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm max-w-xl">
+                        <p class="text-sm text-slate-600 mb-4">Generate your official BITCAGS LTD Admission Letter with QR verification.</p>
+                        <div id="admission-letter-selector" class="space-y-4">
+                            <div><label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Select Course</label><select id="admission-course-select" class="w-full px-4 py-2.5 border border-slate-300 rounded-xl focus:ring-navy-700 focus:border-navy-700"><option value="">-- Select --</option></select></div>
+                            <button onclick="generateAdmissionLetter()" class="px-6 py-3 bg-navy-brand text-white font-bold rounded-xl hover:bg-navy-950 transition shadow"><i class="fa-solid fa-file-pdf mr-2"></i> Generate</button>
+                        </div>
+                        <div id="admission-letter-preview" class="mt-6 hidden"></div>
                     </div>
                 </div>
 
-                <!-- Bottom Navigation (mobile) -->
-                <div class="dash-bottom-nav">
-                    <button class="nav-item active" onclick="navigateTo('student-dashboard')"><i class="fa-solid fa-house"></i><span>Home</span></button>
-                    <button class="nav-item" onclick="scrollToSection('courses-section')"><i class="fa-solid fa-book-open"></i><span>Courses</span></button>
-                    <button class="nav-item" onclick="scrollToSection('contact-section')"><i class="fa-solid fa-location-dot"></i><span>Visit</span></button>
-                    <button class="nav-item" onclick="navigateTo('chat-container')"><i class="fa-solid fa-robot"></i><span>AI Bot</span></button>
-                    <button class="nav-item" onclick="navigateTo('how-to-use')"><i class="fa-solid fa-book"></i><span>Guide</span></button>
-                    <button class="nav-item" onclick="switchDashTab('settings')"><i class="fa-solid fa-gear"></i><span>Settings</span></button>
+                <!-- Tab: Settings -->
+                <div id="student-tab-settings" class="student-tab-panel hidden">
+                    <div class="section-header"><h2>Profile Settings</h2></div>
+                    <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm max-w-xl">
+                        <form onsubmit="handleProfileUpdate(event)" class="space-y-5">
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Full Name</label>
+                                <input type="text" id="settings-name" class="w-full px-4 py-2.5 border border-slate-300 rounded-xl" />
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Date of Birth</label>
+                                <input type="date" id="settings-dob" class="w-full px-4 py-2.5 border border-slate-300 rounded-xl" />
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Profile Photo</label>
+                                <div class="settings-photo-wrap">
+                                    <img id="settings-photo-preview" src="https://placehold.co/80" alt="Preview" class="preview" onerror="this.src='https://placehold.co/80'" />
+                                    <div class="upload-area">
+                                        <input type="file" id="settings-photo-file" accept="image/*" />
+                                        <p class="hint">Upload a clear portrait image (JPG, PNG)</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">New Password</label>
+                                <input type="password" id="settings-password" placeholder="Leave blank to keep current" class="w-full px-4 py-2.5 border border-slate-300 rounded-xl" />
+                            </div>
+                            <button type="submit" class="w-full py-2.5 bg-navy-brand hover:bg-navy-950 text-white font-bold rounded-xl transition">Save Changes</button>
+                        </form>
+                    </div>
                 </div>
-
-                <!-- Hidden panels for tab switching (kept for compatibility) -->
-                <div id="student-tab-courses" class="hidden"></div>
-                <div id="student-tab-certificates" class="hidden"></div>
-                <div id="student-tab-admission" class="hidden"></div>
-                <div id="student-tab-settings" class="hidden"></div>
             </div>
-        </main>
+        </div>
 
         <!-- ============================================================
         PROFILE COMPLETION MODAL
@@ -2934,7 +3039,7 @@
                         </div>
                         <div id="lesson-content-view" class="lesson-prose border-t border-slate-100 pt-4">Please select a lesson.</div>
 
-                        <!-- AI Explainer with beautiful styling -->
+                        <!-- AI Explainer -->
                         <div class="mt-8 bg-slate-50 border border-slate-200 rounded-xl p-5 relative overflow-hidden">
                             <div class="absolute top-0 right-0 p-3 text-3xl text-navy-700 opacity-10"><i class="fa-solid fa-robot"></i></div>
                             <h3 class="font-bold text-navy-brand flex items-center gap-2 mb-2"><i class="fa-solid fa-wand-magic-sparkles text-red-brand"></i> Groq AI Lesson Analyzer</h3>
@@ -3009,7 +3114,7 @@
         </div>
 
         <!-- ============================================================
-        CERTIFICATE MODAL — REDESIGNED (matching mockup)
+        CERTIFICATE MODAL — professional
         ============================================================ -->
         <div id="certificate-preview-modal" class="hidden fixed inset-0 z-50 bg-slate-900/80 flex items-center justify-center p-4 overflow-y-auto">
             <div class="max-w-4xl w-full my-8">
@@ -3026,7 +3131,6 @@
                     <div class="corner-deco bl"></div>
                     <div class="corner-deco br"></div>
 
-                    <!-- Header: Logo + CPD Badge -->
                     <div class="header-logo">
                         <div class="brand">
                             <img src="https://i.postimg.cc/FRGyRzS0/Chat-GPT-Image-Jun-25-2026-07-36-21-PM.png" alt="BITCAGS" onerror="this.src='https://placehold.co/44x44?text=BITCAGS'" />
@@ -3040,32 +3144,26 @@
                         </div>
                     </div>
 
-                    <!-- Title -->
                     <div class="title">
                         <h2>Certificate of Completion</h2>
                         <div class="line"></div>
                     </div>
 
-                    <!-- Recipient -->
                     <div class="recipient-wrap">
                         <div class="recipient" id="cert-student-name">STUDENT NAME</div>
                     </div>
 
-                    <!-- Course -->
                     <div class="course-name" id="cert-course-title">COURSE MODULE</div>
 
-                    <!-- Description -->
                     <div class="description" id="cert-description">
                         Ensuring expertise in <span id="cert-course-skill">technology and innovation</span>. This program aligns with industry standards and best practices.
                     </div>
 
-                    <!-- Dates -->
                     <div class="dates">
                         <span><strong>Date of Issuance:</strong> <span id="cert-issue-date">01/02/2025</span></span>
                         <span><strong>Date of Validity:</strong> <span id="cert-expiry-date">01/02/2028</span></span>
                     </div>
 
-                    <!-- Footer -->
                     <div class="footer">
                         <div class="org">
                             <div class="logo-placeholder">NIOSH</div>
@@ -3085,7 +3183,6 @@
                         </div>
                     </div>
 
-                    <!-- Bottom contact -->
                     <div style="margin-top:0.8rem;border-top:1px solid #e2e8f0;padding-top:0.6rem;display:flex;justify-content:space-between;flex-wrap:wrap;gap:0.5rem;font-size:0.6rem;color:#94a3b8;">
                         <span>OH17 Janbulo 2nd Gate, Gwarzo Road, Kano State, Nigeria</span>
                         <span>info@bitcags.com · (123) 456-7890</span>
@@ -3393,7 +3490,7 @@
         let pendingPaymentCourseId = null;
         let pendingEnrollmentCourseId = null;
         let currentAdminStudentDetailId = null;
-        let currentFilter = 'all';
+        let currentTab = 'courses';
 
         // =============================================================
         // INIT
@@ -3488,6 +3585,14 @@
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             }
             closeMobileMenu();
+            // Close sidebar on navigation
+            if (targetId !== 'student-dashboard') {
+                toggleSidebar(false);
+            }
+            // Update sidebar active state
+            document.querySelectorAll('.lms-sidebar .nav-item').forEach(item => {
+                item.classList.toggle('active', item.dataset.view === targetId);
+            });
         }
 
         function scrollToSection(id) {
@@ -3496,6 +3601,24 @@
                 const el = document.getElementById(id);
                 if (el) el.scrollIntoView({ behavior: 'smooth' });
             }, 200);
+        }
+
+        // =============================================================
+        // SIDEBAR TOGGLE
+        // =============================================================
+        function toggleSidebar(open) {
+            const sidebar = document.getElementById('lms-sidebar');
+            const overlay = document.getElementById('sidebar-overlay');
+            if (open === true) {
+                sidebar.classList.add('open');
+                overlay.classList.add('open');
+            } else if (open === false) {
+                sidebar.classList.remove('open');
+                overlay.classList.remove('open');
+            } else {
+                sidebar.classList.toggle('open');
+                overlay.classList.toggle('open');
+            }
         }
 
         // =============================================================
@@ -4015,7 +4138,6 @@
                 const studentData = doc.data();
                 const passwordInputHash = await hashPassword(passwordInputRaw);
                 if (studentData.password !== passwordInputHash) { showNotification("Incorrect Password.", "error"); return; }
-                // Check remember me
                 const remember = document.getElementById('login-remember').checked;
                 if (remember) {
                     localStorage.setItem('bitcags_student_payload', JSON.stringify({ appId: studentData.appId }));
@@ -4061,30 +4183,43 @@
         // =============================================================
         function loadStudentDashboard() {
             if (!currentUserSession) return;
+            // Profile
             document.getElementById('dash-fullname').innerText = currentUserSession.name;
             document.getElementById('dash-appid-label').innerText = `App ID: ${currentUserSession.appId}`;
+            document.getElementById('dash-welcome-name').innerText = currentUserSession.name.split(' ')[0] || 'Student';
             const expLevel = currentUserSession.experience || 'Beginner';
             document.getElementById('dash-experience-pill').innerText = expLevel;
-            if (currentUserSession.photo) document.getElementById('dash-avatar').src = currentUserSession.photo;
+            if (currentUserSession.photo) {
+                document.getElementById('dash-avatar').src = currentUserSession.photo;
+                document.getElementById('dash-top-avatar').src = currentUserSession.photo;
+            }
+            // Settings
+            document.getElementById('settings-name').value = currentUserSession.name || '';
+            document.getElementById('settings-dob').value = currentUserSession.dob || '';
+            if (currentUserSession.photo) {
+                document.getElementById('settings-photo-preview').src = currentUserSession.photo;
+            }
+
+            // Status
             const isComplete = currentUserSession.photo && currentUserSession.dob && currentUserSession.experience &&
                 currentUserSession.courses?.length > 0;
             const completionBlock = document.getElementById('continue-registration-block');
             if (!isComplete) {
                 completionBlock.classList.remove('hidden');
                 document.getElementById('dash-status-pill').innerText = 'Pending';
-                document.getElementById('dash-status-pill').className = 'badge verified';
-                document.getElementById('dash-status-pill').style.background = '#fef9c3';
-                document.getElementById('dash-status-pill').style.color = '#854d0e';
+                document.getElementById('dash-status-pill').className = 'badge pending';
             } else {
                 completionBlock.classList.add('hidden');
                 document.getElementById('dash-status-pill').innerText = 'Verified';
                 document.getElementById('dash-status-pill').className = 'badge verified';
-                document.getElementById('dash-status-pill').style.background = '#dcfce7';
-                document.getElementById('dash-status-pill').style.color = '#166534';
             }
+
             renderDashboardCourses();
+            renderStudentCertificates();
             populateAdmissionCourseSelect();
             updateNavbarAuthButtons(true);
+            // Show the courses tab by default
+            switchDashTab('courses');
         }
 
         function updateNavbarAuthButtons(isLoggedIn) {
@@ -4093,14 +4228,14 @@
             if (!authDiv) return;
             if (isLoggedIn) {
                 authDiv.innerHTML =
-                    `<button onclick="navigateTo('student-dashboard')" class="px-4 py-2 bg-navy-700 text-white rounded-xl text-sm font-semibold hover:bg-navy-800 transition">Dashboard</button><button onclick="logoutSession()" class="text-slate-500 hover:text-navy-brand text-sm font-medium"><i class="fa-solid fa-sign-out-alt"></i> Logout</button>`;
+                    `<button onclick="navigateTo('student-dashboard')" class="px-3 py-1.5 bg-navy-700 text-white rounded-lg text-sm font-semibold hover:bg-navy-800 transition">Dashboard</button><button onclick="logoutSession()" class="text-slate-500 hover:text-navy-brand text-sm font-medium"><i class="fa-solid fa-sign-out-alt"></i></button>`;
                 mobileAuthDiv.innerHTML =
-                    `<button onclick="navigateTo('student-dashboard'); closeMobileMenu()" class="block w-full text-center py-2.5 bg-navy-brand text-white rounded-xl font-semibold">Dashboard</button><button onclick="logoutSession(); closeMobileMenu()" class="block w-full text-center py-2 text-red-brand font-medium">Logout</button>`;
+                    `<button onclick="navigateTo('student-dashboard'); closeMobileMenu()" class="block w-full text-center py-2 bg-navy-brand text-white rounded-lg font-semibold text-sm">Dashboard</button><button onclick="logoutSession(); closeMobileMenu()" class="block w-full text-center py-2 text-red-brand font-medium text-sm">Logout</button>`;
             } else {
                 authDiv.innerHTML =
-                    `<button onclick="navigateTo('student-login')" class="px-4 py-2 border border-navy-700 text-navy-700 rounded-xl text-sm font-semibold hover:bg-navy-50 transition">Login</button><button onclick="navigateTo('student-register')" class="px-4 py-2 bg-red-brand text-white rounded-xl text-sm font-semibold hover:bg-red-800 transition">Register</button><button onclick="navigateTo('admin-login')" class="text-slate-500 hover:text-navy-brand text-sm font-medium"><i class="fa-solid fa-user-shield mr-1"></i>Admin</button>`;
+                    `<button onclick="navigateTo('student-login')" class="px-3 py-1.5 border border-navy-700 text-navy-700 rounded-lg text-sm font-semibold hover:bg-navy-50 transition">Login</button><button onclick="navigateTo('student-register')" class="px-3 py-1.5 bg-red-brand text-white rounded-lg text-sm font-semibold hover:bg-red-800 transition shadow-sm">Register</button><button onclick="navigateTo('admin-login')" class="text-slate-500 hover:text-navy-brand text-sm font-medium"><i class="fa-solid fa-user-shield mr-1"></i></button>`;
                 mobileAuthDiv.innerHTML =
-                    `<button onclick="navigateTo('student-login'); closeMobileMenu()" class="block w-full text-center py-2.5 border border-navy-700 text-navy-700 rounded-xl font-semibold">Login</button><button onclick="navigateTo('student-register'); closeMobileMenu()" class="block w-full text-center py-2.5 bg-red-brand text-white rounded-xl font-semibold">Register</button><button onclick="navigateTo('admin-login'); closeMobileMenu()" class="block w-full text-center py-2 text-slate-500 font-medium text-sm"><i class="fa-solid fa-user-shield mr-1"></i>Admin</button>`;
+                    `<button onclick="navigateTo('student-login'); closeMobileMenu()" class="block w-full text-center py-2 border border-navy-700 text-navy-700 rounded-lg font-semibold text-sm">Login</button><button onclick="navigateTo('student-register'); closeMobileMenu()" class="block w-full text-center py-2 bg-red-brand text-white rounded-lg font-semibold text-sm">Register</button><button onclick="navigateTo('admin-login'); closeMobileMenu()" class="block w-full text-center py-1.5 text-slate-500 font-medium text-sm"><i class="fa-solid fa-user-shield mr-1"></i>Admin</button>`;
             }
         }
 
@@ -4111,63 +4246,181 @@
             updateNavbarAuthButtons(false);
             showNotification("Logged out.", "info");
             navigateTo('landing');
+            toggleSidebar(false);
         }
 
         // =============================================================
-        // DASHBOARD COURSES — with filter
+        // DASHBOARD TABS
+        // =============================================================
+        function switchDashTab(tabName) {
+            currentTab = tabName;
+            document.querySelectorAll('.student-tab-panel').forEach(p => p.classList.add('hidden'));
+            const target = document.getElementById(`student-tab-${tabName}`);
+            if (target) target.classList.remove('hidden');
+            document.querySelectorAll('.dash-tabs .tab-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.tab === tabName);
+            });
+            // Update page title
+            const titles = {
+                courses: 'My Courses',
+                certificates: 'Certifications',
+                admission: 'Admission',
+                settings: 'Settings'
+            };
+            document.getElementById('dash-page-title').innerText = titles[tabName] || 'Dashboard';
+            // Update sidebar active state
+            document.querySelectorAll('.lms-sidebar .nav-item').forEach(item => {
+                const view = item.dataset.view;
+                if (view === 'student-dashboard') {
+                    const isActive = tabName === 'courses' || tabName === 'certificates' || tabName === 'admission' ||
+                        tabName === 'settings';
+                    item.classList.toggle('active', isActive);
+                }
+            });
+            if (tabName === 'admission') populateAdmissionCourseSelect();
+            if (tabName === 'settings') {
+                document.getElementById('settings-name').value = currentUserSession?.name || '';
+                document.getElementById('settings-dob').value = currentUserSession?.dob || '';
+                if (currentUserSession?.photo) {
+                    document.getElementById('settings-photo-preview').src = currentUserSession.photo;
+                }
+            }
+        }
+
+        // =============================================================
+        // DASHBOARD COURSES — with progress & thumbnails
         // =============================================================
         function renderDashboardCourses() {
             const grid = document.getElementById('dash-course-grid');
             if (!grid) return;
-            const enrolledIds = currentUserSession.courses || [];
+            const enrolledIds = currentUserSession?.courses || [];
             if (enrolledIds.length === 0) {
                 grid.innerHTML =
                     `<div class="col-span-full py-8 text-center text-slate-400 border border-dashed rounded-2xl"><p class="font-bold">No enrolled courses</p><p class="text-xs">Browse the catalog to enroll.</p></div>`;
+                updateProgressStats();
                 return;
             }
-            let filtered = enrolledIds.map(courseId => {
+
+            let totalLessons = 0;
+            let completedLessons = 0;
+
+            const cards = enrolledIds.map(courseId => {
                 const course = coursesState.find(c => c.id === courseId);
                 if (!course) return null;
                 const paymentStatus = (currentUserSession.payments && currentUserSession.payments[courseId]) || "Unpaid";
                 const isPaid = paymentStatus === "Paid" || course.free === true || parseFloat(course.fee) === 0;
-                const statusClass = isPaid ? 'paid' : 'unpaid';
-                const statusLabel = isPaid ? (course.free ? 'Free' : 'Paid') : 'Unpaid';
-                const lessonsCount = lessonsState.filter(l => l.courseId === courseId).length;
+                const statusClass = isPaid ? (course.free ? 'free' : 'paid') : 'unpaid';
+                const statusLabel = isPaid ? (course.free ? 'FREE' : 'Paid') : 'Unpaid';
+
+                const courseLessons = lessonsState.filter(l => l.courseId === courseId);
+                const total = courseLessons.length;
+                const passed = courseLessons.filter(l => {
+                    const score = currentUserSession.quizzesPassed && currentUserSession.quizzesPassed[l.id];
+                    return score && parseFloat(score) >= 60;
+                }).length;
+                const pct = total > 0 ? Math.round((passed / total) * 100) : 0;
+
+                totalLessons += total;
+                completedLessons += passed;
+
+                const thumb = course.flyer || 'https://placehold.co/400x120/e9edf4/94a3b8?text=' + encodeURIComponent(course
+                    .name);
+
                 const actionBtn = isPaid ?
-                    `<button onclick="openClassroomSyllabus('${course.id}')" class="action-btn">Enter Lecture Room</button>` :
-                    `<button onclick="openPaymentModal('${course.id}')" class="action-btn unpaid-btn"><i class="fa-solid fa-lock mr-1"></i> Pay to Unlock</button>`;
-                return { course, statusClass, statusLabel, lessonsCount, actionBtn };
-            }).filter(Boolean);
+                    `<button onclick="openClassroomSyllabus('${course.id}')" class="btn btn-primary">Continue →</button>` :
+                    `<button onclick="openPaymentModal('${course.id}')" class="btn btn-unpaid"><i class="fa-solid fa-lock mr-1"></i> Pay to Unlock</button>`;
 
-            // Apply filter
-            if (currentFilter === 'unpaid') filtered = filtered.filter(item => item.statusClass === 'unpaid');
-            else if (currentFilter === 'paid') filtered = filtered.filter(item => item.statusClass === 'paid');
-            else if (currentFilter === 'web') filtered = filtered.filter(item => item.statusClass === 'paid');
-
-            if (filtered.length === 0) {
-                grid.innerHTML =
-                    `<div class="col-span-full py-8 text-center text-slate-400 border border-dashed rounded-2xl"><p class="font-bold">No courses in this category</p><p class="text-xs">Try switching tabs.</p></div>`;
-                return;
-            }
-
-            grid.innerHTML = filtered.map(item => {
-                const { course, statusClass, statusLabel, lessonsCount, actionBtn } = item;
-                return `<div class="dash-course-card">
-                    <span class="status-tag ${statusClass}">${statusLabel}</span>
-                    <h4>${course.name}</h4>
-                    <div class="meta"><span><i class="fa-regular fa-file-lines"></i> ${lessonsCount} Lessons</span><span><i class="fa-regular fa-clock"></i> ${course.duration} Weeks</span></div>
-                    ${actionBtn}
+                return `<div class="course-card">
+                    <div class="thumb">
+                        <img src="${thumb}" alt="${course.name}" onerror="this.style.display='none'" />
+                        <span class="status-badge ${statusClass}">${statusLabel}</span>
+                    </div>
+                    <div class="body">
+                        <div class="title">${course.name}</div>
+                        <div class="meta">
+                            <span><i class="fa-regular fa-file-lines"></i> ${total} Lessons</span>
+                            <span><i class="fa-regular fa-clock"></i> ${course.duration} Weeks</span>
+                        </div>
+                        <div class="progress-area">
+                            <div class="progress-row">
+                                <span>${pct}% complete</span>
+                                <span class="pct">${passed}/${total} lessons</span>
+                            </div>
+                            <div class="bar"><div class="fill" style="width:${pct}%"></div></div>
+                        </div>
+                    </div>
+                    <div class="footer">
+                        ${actionBtn}
+                    </div>
                 </div>`;
-            }).join('');
+            }).filter(Boolean).join('');
+
+            grid.innerHTML = cards;
+            updateProgressStats(totalLessons, completedLessons);
         }
 
-        function filterDashCourses(filter) {
-            currentFilter = filter;
-            // Update tabs
-            document.querySelectorAll('.dash-tabs .tab-btn').forEach(btn => {
-                btn.classList.toggle('active', btn.dataset.tab === filter);
+        function updateProgressStats(total, completed) {
+            const totalEl = document.getElementById('dash-lessons-total');
+            const doneEl = document.getElementById('dash-lessons-done');
+            const pctEl = document.getElementById('dash-progress-pct');
+            const barEl = document.getElementById('dash-progress-bar');
+
+            if (total === undefined) {
+                // Recalculate from enrolled courses
+                const enrolledIds = currentUserSession?.courses || [];
+                let t = 0,
+                    c = 0;
+                enrolledIds.forEach(cid => {
+                    const courseLessons = lessonsState.filter(l => l.courseId === cid);
+                    t += courseLessons.length;
+                    c += courseLessons.filter(l => {
+                        const score = currentUserSession.quizzesPassed && currentUserSession.quizzesPassed[l
+                        .id];
+                        return score && parseFloat(score) >= 60;
+                    }).length;
+                });
+                total = t;
+                completed = c;
+            }
+
+            if (totalEl) totalEl.innerText = total || 0;
+            if (doneEl) doneEl.innerText = completed || 0;
+            const pct = total > 0 ? Math.round((completed / total) * 100) : 0;
+            if (pctEl) pctEl.innerText = pct + '%';
+            if (barEl) barEl.style.width = pct + '%';
+        }
+
+        // =============================================================
+        // CERTIFICATES
+        // =============================================================
+        function renderStudentCertificates() {
+            const list = document.getElementById('student-cert-list');
+            if (!list) return;
+            const enrolledIds = currentUserSession?.courses || [];
+            const completedCourses = enrolledIds.filter(courseId => {
+                const courseLessons = lessonsState.filter(l => l.courseId === courseId);
+                if (courseLessons.length === 0) return false;
+                return courseLessons.every(l => {
+                    const score = currentUserSession.quizzesPassed && currentUserSession.quizzesPassed[l.id];
+                    return score && parseFloat(score) >= 60;
+                });
             });
-            renderDashboardCourses();
+            if (completedCourses.length === 0) {
+                list.innerHTML =
+                    `<div class="col-span-full py-8 text-center text-slate-400 border border-dashed rounded-2xl"><i class="fa-solid fa-medal text-3xl mb-2 text-slate-300"></i><p class="font-semibold text-xs text-slate-500">No certifications earned yet.</p><p class="text-[10px]">Complete all lessons with 60%+ to earn your cert.</p></div>`;
+                return;
+            }
+            list.innerHTML = completedCourses.map(courseId => {
+                const course = coursesState.find(c => c.id === courseId);
+                if (!course) return '';
+                const thumb = course.flyer || 'https://placehold.co/400x120/e9edf4/94a3b8?text=' + encodeURIComponent(course
+                    .name);
+                return `<div class="course-card">
+                    <div class="thumb"><img src="${thumb}" alt="${course.name}" onerror="this.style.display='none'" /><span class="status-badge paid" style="background:rgba(220,252,231,0.9);color:#166534;">Earned</span></div>
+                    <div class="body"><div class="title">${course.name}</div><div class="meta"><span><i class="fa-regular fa-file-lines"></i> Certified</span></div></div>
+                    <div class="footer"><button onclick="openInteractiveCertificate('${courseId}')" class="btn btn-primary">View Certificate</button></div>
+                </div>`;
+            }).join('');
         }
 
         // =============================================================
@@ -4404,7 +4657,7 @@
         }
 
         // =============================================================
-        // AI EXPLAINER — Beautiful response styling
+        // AI EXPLAINER — with truncation to fix 413 error
         // =============================================================
         async function runAiLessonExplanation() {
             if (!classroomActiveLesson) return;
@@ -4414,6 +4667,15 @@
             box.innerHTML =
                 `<div class="flex items-center gap-3 text-navy-brand"><i class="fa-solid fa-spinner animate-spin text-xl"></i><span>Analyzing via Groq AI...</span></div>`;
             triggerBtn.classList.add('hidden');
+
+            // Truncate lesson body to prevent 413 error
+            let lessonBody = classroomActiveLesson.body || '';
+            // Strip HTML tags for plain text, then truncate
+            const tempDiv = document.createElement('div');
+            tempDiv.innerHTML = lessonBody;
+            const plainText = tempDiv.textContent || tempDiv.innerText || '';
+            const truncated = plainText.length > 3000 ? plainText.substring(0, 3000) + '...' : plainText;
+
             try {
                 const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
                     method: "POST",
@@ -4423,7 +4685,7 @@
                         messages: [{ role: "system",
                                 content: "You are the BITCAGS LTD Academic Professor AI. Analyze lessons and generate clean, engaging, beautifully structured text-based breakdowns with code analogies, real-world metaphors, and summaries. Use markdown formatting with headers, code blocks, bullet lists, and blockquotes. Make it visually appealing and well-organized." },
                             { role: "user",
-                                content: `Please analyze this study lesson for the curriculum ${classroomActiveCourse.name}:\nTopic: ${classroomActiveLesson.title}\nSyllabus details: ${classroomActiveLesson.body}\n\nProvide a detailed breakdown, metaphors, key take-aways and a practical programming sample.` }
+                                content: `Please analyze this study lesson for the curriculum ${classroomActiveCourse.name}:\nTopic: ${classroomActiveLesson.title}\nSyllabus details (truncated): ${truncated}\n\nProvide a detailed breakdown, metaphors, key take-aways and a practical programming sample.` }
                         ],
                         temperature: 0.7
                     })
@@ -4440,7 +4702,6 @@
         }
 
         function formatMarkdownToHtml(text) {
-            // Enhanced markdown to HTML with beautiful styling
             let html = text
                 .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
                 .replace(/\*(.*?)\*/g, '<em>$1</em>')
@@ -4456,19 +4717,13 @@
                 .replace(/^\d+\. (.*$)/gim, '<li class="ml-4 list-decimal">$1</li>')
                 .replace(/\n/g, '<br/>');
 
-            // Wrap lists
             html = html.replace(/(<li.*?>.*?<\/li>)/g, (match) => {
                 return `<ul class="space-y-1 my-2">${match}</ul>`;
             });
 
-            // Blockquotes
             html = html.replace(/&gt; (.*?)(<br\/>|$)/g, '<blockquote class="border-l-4 border-red-brand pl-4 my-3 text-slate-600 italic">$1</blockquote>');
-
-            // Highlight boxes for important notes
             html = html.replace(/⚠️(.*?)(<br\/>|$)/g,
                 '<div class="highlight-box text-sm">⚠️ $1</div>');
-
-            // Concept cards for definitions
             html = html.replace(/📌(.*?)(<br\/>|$)/g,
                 '<div class="concept-card text-sm"><strong>📌</strong> $1</div>');
 
@@ -4632,13 +4887,8 @@
         }
 
         // =============================================================
-        // CERTIFICATES — Redesigned
+        // CERTIFICATES — Open
         // =============================================================
-        function renderStudentCertificates() {
-            // This is called from loadStudentDashboard but we use the new design
-            // We keep it for compatibility
-        }
-
         function openInteractiveCertificate(courseId = null) {
             const targetId = courseId || (classroomActiveCourse && classroomActiveCourse.id);
             const course = coursesState.find(c => c.id === targetId);
@@ -4659,11 +4909,6 @@
             const ceoSignature = configState.ceoSignature || "https://placehold.co/140x40/ffffff/000000?text=CEO+Signature";
             document.getElementById('cert-signature-img').src = ceoSignature;
             document.getElementById('cert-ceo-name').innerText = "C.tp Abdukadir Shehu Bari";
-
-            const tutors = tutorsState.filter(t => t.courseId === targetId);
-            if (tutors.length > 0) {
-                // Use tutor name in signature area if needed
-            }
 
             document.getElementById('cert-qr-code').src =
                 `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://bitcags.ltd/verify/${currentUserSession.appId}/${targetId}`;
@@ -4782,7 +5027,7 @@
         }
 
         // =============================================================
-        // PROFILE SETTINGS — with photo upload (file input)
+        // PROFILE SETTINGS — with photo upload
         // =============================================================
         async function handleProfileUpdate(e) {
             e.preventDefault();
@@ -4797,7 +5042,6 @@
             if (name) payload.name = name;
             if (passwordRaw.trim().length >= 6) payload.password = await hashPassword(passwordRaw);
 
-            // Handle photo upload
             if (photoFile) {
                 try {
                     const storageRef = storage.ref(`student_photos/${currentUserSession.appId}_${Date.now()}`);
@@ -5540,7 +5784,7 @@
         window.togglePasswordVisibility = togglePasswordVisibility;
         window.handleAdminLogin = handleAdminLogin;
         window.logoutSession = logoutSession;
-        window.filterDashCourses = filterDashCourses;
+        window.switchDashTab = switchDashTab;
         window.openClassroomSyllabus = openClassroomSyllabus;
         window.selectClassroomLesson = selectClassroomLesson;
         window.runAiLessonExplanation = runAiLessonExplanation;
@@ -5593,7 +5837,7 @@
         window.handleChatSubmit = handleChatSubmit;
         window.submitRating = submitRating;
         window.filterAdminStudents = filterAdminStudents;
-        window.switchDashTab = switchDashTab;
+        window.toggleSidebar = toggleSidebar;
     </script>
 </body>
 </html>
