@@ -2559,19 +2559,23 @@
                     </div>
                 </div>
 
-                <!-- TAB: GATEWAYS & AI -->
+                <!-- TAB: GATEWAYS & AI (with Groq Model input) -->
                 <div id="admin-tab-gateways" class="admin-tab-panel hidden max-w-xl mx-auto bg-white rounded-2xl border border-slate-200 p-6 shadow-sm space-y-6">
                     <h3 class="font-bold text-navy-brand text-lg">System Configuration</h3>
                     <form onsubmit="handleSaveConfig(event)" class="space-y-4">
                         <div><label class="block text-xs font-bold text-slate-700 uppercase mb-1">Paystack Public Key</label><input type="text" id="admin-paystack-key" required class="w-full px-3 py-2.5 border border-slate-300 rounded-xl font-mono text-xs" placeholder="pk_live_..." /></div>
 
-                        <!-- GROQ API KEY MANAGEMENT -->
+                        <!-- GROQ API KEY + MODEL MANAGEMENT -->
                         <div class="border-t border-slate-200 pt-4">
                             <h4 class="font-bold text-navy-brand text-sm flex items-center gap-2"><i class="fa-solid fa-brain text-red-brand"></i> Groq AI Engine</h4>
-                            <p class="text-[10px] text-slate-400 mt-1">Set the API key for Groq AI. The default key is used if left empty.</p>
+                            <p class="text-[10px] text-slate-400 mt-1">Configure your Groq API credentials. The default key and model are used if left empty.</p>
                             <div class="mt-3"><label class="block text-xs font-bold text-slate-700 uppercase mb-1">Groq API Key</label>
                                 <input type="text" id="admin-groq-key" class="w-full px-3 py-2.5 border border-slate-300 rounded-xl font-mono text-xs" placeholder="gsk_..." />
-                                <p class="text-[10px] text-slate-400 mt-1">Leave empty to use the default system key.</p>
+                                <p class="text-[10px] text-slate-400 mt-1">Leave empty to use the system default key.</p>
+                            </div>
+                            <div class="mt-3"><label class="block text-xs font-bold text-slate-700 uppercase mb-1">Groq Model Name</label>
+                                <input type="text" id="admin-groq-model" class="w-full px-3 py-2.5 border border-slate-300 rounded-xl font-mono text-xs" placeholder="e.g. llama-3.1-70b-versatile" />
+                                <p class="text-[10px] text-slate-400 mt-1">Leave empty to use the default model: <strong>llama-3.1-70b-versatile</strong>. Ensure the model is available in your Groq account.</p>
                             </div>
                         </div>
 
@@ -2687,12 +2691,12 @@
             measurementId: "G-NVVZ2GLCKT"
         };
 
-        // Default Groq API key (as requested, keep the existing one)
+        // Default Groq API key and model (fallback if admin doesn't set)
         const DEFAULT_GROQ_KEY = "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";
+        const DEFAULT_GROQ_MODEL = "llama-3.1-70b-versatile";
 
         let GROQ_API_KEY = DEFAULT_GROQ_KEY;
-        const GROQ_FAST_MODEL = "llama-3.3-70b-versatile";
-        const GROQ_SMART_MODEL = "llama-3.3-70b-versatile";
+        let GROQ_MODEL = DEFAULT_GROQ_MODEL;
 
         const app = firebase.initializeApp(firebaseConfig);
         const auth = firebase.auth();
@@ -2705,7 +2709,7 @@
         let coursesState = [];
         let lessonsState = [];
         let tutorsState = [];
-        let configState = { paystackKey: "", registrationOpen: true, ceoSignature: "", groqApiKey: "" };
+        let configState = { paystackKey: "", registrationOpen: true, ceoSignature: "", groqApiKey: "", groqModel: "" };
         let currentUserSession = null;
         let classroomActiveCourse = null;
         let classroomActiveLesson = null;
@@ -2827,15 +2831,18 @@
                 db.doc(`artifacts/${appId}/public/settings`).onSnapshot((doc) => {
                     if (doc.exists) {
                         configState = doc.data();
-                        // Load Groq API key from config or use default
+                        // Load Groq API key and model from config or use defaults
                         GROQ_API_KEY = configState.groqApiKey || DEFAULT_GROQ_KEY;
+                        GROQ_MODEL = configState.groqModel || DEFAULT_GROQ_MODEL;
                         if (configState.ceoSignature) {
                             const preview = document.getElementById('admin-ceo-signature-preview');
                             if (preview) preview.src = configState.ceoSignature;
                         }
                         // Populate admin fields
-                        const groqInput = document.getElementById('admin-groq-key');
-                        if (groqInput) groqInput.value = configState.groqApiKey || '';
+                        const groqKeyInput = document.getElementById('admin-groq-key');
+                        if (groqKeyInput) groqKeyInput.value = configState.groqApiKey || '';
+                        const groqModelInput = document.getElementById('admin-groq-model');
+                        if (groqModelInput) groqModelInput.value = configState.groqModel || '';
                         const paystackInput = document.getElementById('admin-paystack-key');
                         if (paystackInput) paystackInput.value = configState.paystackKey || '';
                         const regToggle = document.getElementById('admin-registration-toggle');
@@ -3694,7 +3701,7 @@
                     method: "POST",
                     headers: { "Authorization": `Bearer ${GROQ_API_KEY}`, "Content-Type": "application/json" },
                     body: JSON.stringify({
-                        model: GROQ_FAST_MODEL,
+                        model: GROQ_MODEL,
                         messages: [{ role: "system",
                                 content: "You are the BITCAGS LTD Academic Professor AI. Analyze lessons and generate clean, engaging, beautifully structured text-based breakdowns with code analogies, real-world metaphors, and summaries. Respond in Markdown." },
                             { role: "user",
@@ -3745,7 +3752,7 @@
                     method: "POST",
                     headers: { "Authorization": `Bearer ${GROQ_API_KEY}`, "Content-Type": "application/json" },
                     body: JSON.stringify({
-                        model: GROQ_SMART_MODEL,
+                        model: GROQ_MODEL,
                         messages: [{ role: "system",
                                 content: "You are a strict technical school board processor. Output raw valid JSON ONLY, conforming precisely to the requested schema. No preamble, no markdown, no extra text." },
                             { role: "user", content: prompt }],
@@ -3784,7 +3791,6 @@
             const answeredCount = Object.keys(quizAnswersState).length;
             const progress = Math.round((answeredCount / total) * 100);
 
-            // Build options HTML
             const letters = ['A', 'B', 'C', 'D'];
             const optionsHtml = q.options.map((opt, optIndex) => {
                 const letter = letters[optIndex];
@@ -3796,7 +3802,6 @@
                 </button>`;
             }).join('');
 
-            // Build question map (1-30)
             let mapHtml = '';
             for (let i = 0; i < total; i++) {
                 const isActive = i === index;
@@ -3807,37 +3812,26 @@
 
             flowBlock.innerHTML = `
                 <div class="quiz-exam-wrap">
-                    <!-- Progress Bar -->
                     <div class="quiz-progress-bar-wrap">
                         <div class="quiz-progress-track"><div class="fill" style="width:${progress}%"></div></div>
                         <span class="quiz-progress-label">${progress}%</span>
                     </div>
-
-                    <!-- Question -->
                     <div class="quiz-question-text">
                         <span class="q-num">Q${index+1}</span>
                         ${q.question}
                     </div>
-
-                    <!-- Options -->
                     <div class="quiz-options-grid">
                         ${optionsHtml}
                     </div>
-
-                    <!-- Stats -->
                     <div class="quiz-stats-row">
                         <span class="stat">Answered: <strong class="num">${answeredCount}</strong></span>
                         <span class="stat">Remaining: <strong class="num">${total - answeredCount}</strong></span>
                         <span class="stat">Progress: <strong class="num">${progress}%</strong></span>
                     </div>
-
-                    <!-- Question Map -->
                     <div class="quiz-map-wrap">
                         <div class="map-label">Question Map</div>
                         <div class="quiz-map-grid">${mapHtml}</div>
                     </div>
-
-                    <!-- Navigation -->
                     <div class="quiz-nav-row">
                         <button class="btn-nav" onclick="goToQuizQuestion(${index-1})" ${index === 0 ? 'disabled' : ''}><i class="fa-solid fa-chevron-left"></i> Previous</button>
                         <div class="flex gap-2">
@@ -4125,8 +4119,10 @@
         function loadAdminDashboard() {
             document.getElementById('admin-paystack-key').value = configState.paystackKey || "";
             document.getElementById('admin-registration-toggle').checked = configState.registrationOpen !== false;
-            const groqInput = document.getElementById('admin-groq-key');
-            if (groqInput) groqInput.value = configState.groqApiKey || '';
+            const groqKeyInput = document.getElementById('admin-groq-key');
+            if (groqKeyInput) groqKeyInput.value = configState.groqApiKey || '';
+            const groqModelInput = document.getElementById('admin-groq-model');
+            if (groqModelInput) groqModelInput.value = configState.groqModel || '';
             if (configState.ceoSignature) document.getElementById('admin-ceo-signature-preview').src = configState.ceoSignature;
             db.collection(`artifacts/${appId}/public/data/students`).onSnapshot((snap) => {
                 renderAdminStudentsTable(snap.docs.map(d => ({ id: d.id, ...d.data() })));
@@ -4200,7 +4196,7 @@
         }
 
         // =============================================================
-        // ADMIN — STUDENT DETAIL VIEW (Verification)
+        // ADMIN — STUDENT DETAIL VIEW
         // =============================================================
         async function openAdminStudentDetail(appId) {
             try {
@@ -4238,7 +4234,7 @@
         }
 
         // =============================================================
-        // ADMIN — STUDENT ACTIONS (Restrict, Reset Password, Delete, Redownload)
+        // ADMIN — STUDENT ACTIONS
         // =============================================================
         async function adminToggleRestrict(appId) {
             try {
@@ -4274,7 +4270,6 @@
 
         function adminRedownloadDocs() {
             if (!currentAdminStudentDetailId) { showNotification("No student selected.", "error"); return; }
-            // Generate admission letter and certificate links
             const student = allStudentsData.find(s => s.appId === currentAdminStudentDetailId);
             if (!student) { showNotification("Student data not found.", "error"); return; }
             const courses = student.courses || [];
@@ -4282,19 +4277,13 @@
             const courseId = courses[0];
             const course = coursesState.find(c => c.id === courseId);
             if (!course) { showNotification("Course not found.", "error"); return; }
-            // Open admission letter and certificate in new tabs
             showNotification("Generating documents...", "info");
-            // We can't directly generate PDFs, but we can show the admission letter and certificate modals
-            // For now, open the admission letter modal with this student's data
-            // We need to temporarily set currentUserSession to this student for the modal
             const origSession = currentUserSession;
             currentUserSession = student;
             generateAdmissionLetter();
-            // Also open certificate
             setTimeout(() => {
                 openInteractiveCertificate(courseId);
             }, 500);
-            // Restore session after a delay
             setTimeout(() => {
                 currentUserSession = origSession;
             }, 2000);
@@ -4590,13 +4579,14 @@
         }
 
         // =============================================================
-        // ADMIN — CONFIG (with Groq API)
+        // ADMIN — CONFIG (with Groq API + Model)
         // =============================================================
         async function handleSaveConfig(e) {
             e.preventDefault();
             const paystackKey = document.getElementById('admin-paystack-key').value.trim();
             const registrationOpen = document.getElementById('admin-registration-toggle').checked;
             const groqApiKey = document.getElementById('admin-groq-key').value.trim();
+            const groqModel = document.getElementById('admin-groq-model').value.trim();
 
             try {
                 const updateData = { paystackKey, registrationOpen };
@@ -4604,14 +4594,19 @@
                     updateData.groqApiKey = groqApiKey;
                     GROQ_API_KEY = groqApiKey;
                 } else {
-                    // If empty, use default
                     updateData.groqApiKey = DEFAULT_GROQ_KEY;
                     GROQ_API_KEY = DEFAULT_GROQ_KEY;
                 }
+                if (groqModel) {
+                    updateData.groqModel = groqModel;
+                    GROQ_MODEL = groqModel;
+                } else {
+                    updateData.groqModel = DEFAULT_GROQ_MODEL;
+                    GROQ_MODEL = DEFAULT_GROQ_MODEL;
+                }
                 await db.doc(`artifacts/${appId}/public/settings`).set(updateData, { merge: true });
                 configState = { ...configState, ...updateData };
-                showNotification("Configurations saved! Groq API key " + (groqApiKey ? 'updated' : 'set to default') + ".",
-                    "success");
+                showNotification("Configurations saved! Groq API key and model updated.", "success");
             } catch (err) { showNotification("Save failed: " + err.message, "error"); }
         }
 
@@ -4758,7 +4753,7 @@
                     method: "POST",
                     headers: { "Authorization": `Bearer ${GROQ_API_KEY}`, "Content-Type": "application/json" },
                     body: JSON.stringify({
-                        model: GROQ_FAST_MODEL,
+                        model: GROQ_MODEL,
                         messages: [{ role: "system", content: bitcagsSystemPrompt }, { role: "user",
                             content: userQuery }],
                         temperature: 0.7
